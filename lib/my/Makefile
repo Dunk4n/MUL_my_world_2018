@@ -65,24 +65,40 @@ SRC	=	my_showmem.c			\
 		put_color.c			\
 		get_next_line.c
 
-OBJ	=	$(SRC:.c=.o)
+OBJ	=	$(SRC:%.c=$(BUILD_DIR)/%.o)
 
 CFLAGS	+=	-W -Wall -Werror -Wextra -I../../include
 
 NAME	=	libmy.a
 
-all	:	$(NAME)
+BUILD_DIR = build
+
+all	:	options $(NAME)
+
+options:
+	@echo "  CC       $(CC)"
+	@echo "  CFLAGS   $(CFLAGS)"
+	@echo "  LDFLAGS  $(LDFLAGS)"
+
+$(BUILD_DIR)/%.o: %.c $(INC)
+	@mkdir -p $(@D)
+	@echo "  CC       $<"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	@echo "  RM       $(BUILD_DIR)"
+	@rm -rf $(BUILD_DIR)
 
 fclean:	clean
-	rm -f $(NAME)
-	rm -f *~
+	@echo "  RM       $(NAME)"
+	@$(RM) $(NAME) *~
 
-$(NAME)	: $(OBJ)
-	ar rc $(NAME) $(OBJ)
+$(NAME): $(OBJ)
+	@echo "  AR       $@"
+	@$(AR) rc $(NAME) $(OBJ)
 
-re:	fclean $(NAME)
+re:
+	@$(MAKE) fclean --no-print-directory
+	@$(MAKE) all --no-print-directory
 
-.PHONY	:	 all clean fclean re
+.PHONY	:	 all options clean fclean re
