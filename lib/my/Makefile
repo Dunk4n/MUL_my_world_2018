@@ -76,9 +76,9 @@ BUILD_DIR = build
 all	:	options $(NAME)
 
 options:
-	@echo "  CC       $(CC)"
-	@echo "  CFLAGS   $(CFLAGS)"
-	@echo "  LDFLAGS  $(LDFLAGS)"
+	@echo "  LIB  CC       $(CC)"
+	@echo "  LIB  CFLAGS   $(CFLAGS)"
+	@echo "  LIB  LDFLAGS  $(LDFLAGS)"
 
 $(BUILD_DIR)/%.o: %.c $(INC)
 	@mkdir -p $(@D)
