@@ -23,7 +23,7 @@ LDFLAGS	=	-L$(D_LIB) -lmy -l csfml-graphics -l csfml-system -lm
 
 BUILD_DIR = build
 
-all:	options $(NAME)
+all:	$(NAME)
 
 options:
 	@echo "  CC       $(CC)"
@@ -35,9 +35,6 @@ $(BUILD_DIR)/%.o: %.c $(INC)
 	@echo "  CC       $<"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-libmy:
-	@make -C $(D_LIB)
-
 clean:
 	@echo "  RM       $(BUILD_DIR)"
 	@rm -rf $(BUILD_DIR)
@@ -47,8 +44,10 @@ fclean: clean
 	@echo "  RM       $(NAME)"
 	@rm -f $(NAME) *~
 
-$(NAME): $(OBJ)
-	@$(MAKE) -C lib/my --no-print-directory
+libmy:
+	@make -C $(D_LIB) --no-print-directory
+
+$(NAME): libmy options $(OBJ)
 	@echo "  BUILD    $@"
 	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS)
 

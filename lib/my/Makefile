@@ -86,11 +86,11 @@ $(BUILD_DIR)/%.o: %.c $(INC)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "  RM       $(BUILD_DIR)"
+	@echo "  RM       $(BUILD_DIR)    LIB"
 	@rm -rf $(BUILD_DIR)
 
 fclean:	clean
-	@echo "  RM       $(NAME)"
+	@echo "  RM       $(NAME)    LIB"
 	@$(RM) $(NAME) *~
 
 $(NAME): $(OBJ)
