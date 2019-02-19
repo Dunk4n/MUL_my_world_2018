@@ -34,12 +34,17 @@ typedef struct  my_window_s
 
 typedef struct  map_s
 {
-    int update;
-    float roll;
-    float yaw;
-    float pitch;
-    float roll;
+    float       roll;
+    float       yaw;
+    float       pitch;
+    int         center_x;
+    int         center_y;
+    int         zoom;
+    int         update;
+    int         **map_3d;
+    sfVector2f  **map_2d;
 }               map_t;
+
 typedef struct  my_game_s
 {
     my_window_t     *win;
