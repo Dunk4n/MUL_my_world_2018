@@ -10,5 +10,7 @@
 
 int     main(int ac, char **av)
 {
-    return (0);
+    if (ac != 2)
+        return (84);
+    return (window(av[1]));
 }
