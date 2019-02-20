@@ -14,13 +14,15 @@ void    draw_linex(my_framebuff_t *buff, sfVector2f *pos, int r, sfColor color)
     sfVector2f ptr = {pos[0].x, pos[0].y};
     sfVector2i size = {r, r};
 
+    ptr.x += ((ptr.x < pos[1].x) ? 1.0 : -1.0);
+    ptr.y = a * ptr.x + b;
     while ((int)ptr.x != (int)pos[1].x) {
-        ptr.x += ((ptr.x < pos[1].x) ? 1.0 : -1.0);
-        ptr.y = a * ptr.x + b;
         if (r > 1)
             square(buff, ptr, size, color);
         else
             put_pixel(buff, ptr.x, ptr.y, color);
+        ptr.x += ((ptr.x < pos[1].x) ? 1.0 : -1.0);
+        ptr.y = a * ptr.x + b;
     }
 }
 
@@ -31,13 +33,15 @@ void    draw_liney(my_framebuff_t *buff, sfVector2f *pos, int r, sfColor color)
     sfVector2f ptr = {pos[0].x, pos[0].y};
     sfVector2i size = {r, r};
 
+    ptr.y += ((ptr.y < pos[1].y) ? 1.0 : -1.0);
+    ptr.x = a * ptr.y + b;
     while ((int)ptr.y != (int)pos[1].y) {
-        ptr.y += ((ptr.y < pos[1].y) ? 1.0 : -1.0);
-        ptr.x = a * ptr.y + b;
         if (r > 1)
             square(buff, ptr, size, color);
         else
             put_pixel(buff, ptr.x, ptr.y, color);
+        ptr.y += ((ptr.y < pos[1].y) ? 1.0 : -1.0);
+        ptr.x = a * ptr.y + b;
     }
 }
 
@@ -47,4 +51,5 @@ void    draw_line(my_framebuff_t *buff, sfVector2f *pos, int r, sfColor color)
         draw_linex(buff, pos, r, color);
     if ((int)pos[0].y != (int)pos[1].y)
         draw_liney(buff, pos, r, color);
+    printf("\n");
 }

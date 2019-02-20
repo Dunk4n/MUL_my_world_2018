@@ -47,12 +47,43 @@ sfFullscreen, NULL);
     return (win);
 }
 
+void            set_map(map_t **map, char *str)
+{
+    if (!(*map = malloc(sizeof(map_t)))) {
+        *map = NULL;
+        return ;
+    }
+    (*map)->roll = 110;
+    (*map)->yaw = 45;
+    (*map)->pitch = 13;
+    (*map)->center_x = HM / 2;
+    (*map)->center_y = WM / 2;
+    (*map)->tab_size_x = 6;
+    (*map)->tab_size_y = 6;
+    (*map)->zoom = 20;
+    (*map)->update = 1;
+    if (!str)
+        (*map)->map_3d = creat_map_3d(6, 6);
+    else
+        (*map)->map_3d = creat_map_3d_file(*map, str);
+    (*map)->map_2d = NULL;
+    create_2d_map(*map);
+}
+
 my_game_t        *set_game(char *str)
 {
     my_game_t    *game = malloc(sizeof(my_game_t));
 
     if (!game || !(game->win = malloc(sizeof(my_window_t))) ||
 !(game->win = set_window(game->win))) {
+        (game->win) ? free(game->win) : 0;
+        (game) ? free(game) : 0;
+        return (NULL);
+    }
+    set_map(&(game->map), str);
+    if (!game->map->map_2d)
+        game->map = NULL;
+    if (!game->map) {
         (game->win) ? free(game->win) : 0;
         (game) ? free(game) : 0;
         return (NULL);

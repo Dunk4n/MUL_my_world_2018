@@ -10,23 +10,24 @@
 #include "world.h"
 #include "math.h"
 
-void    display_2d_map(my_framebuff_t *buff, sfVector2f **map_2d)
+void    display_2d_map(my_game_t *game)
 {
     sfVector2f pos[2];
     int i = 0;
     int j = 0;
 
-    while (i < TAB_SIZE) {
+    while (i < game->map->tab_size_x) {
         j = 0;
-        while (j < TAB_SIZE && (j + 1 < TAB_SIZE || i + 1 < TAB_SIZE)) {
-            pos[0] = map_2d[i][j];
-            if (j + 1 < TAB_SIZE) {
-                pos[1] = map_2d[i][j + 1];
-                draw_line(buff, pos, 1, sfWhite);
+        while (j < game->map->tab_size_y && (j + 1 < game->map->tab_size_y ||
+i + 1 < game->map->tab_size_x)) {
+            pos[0] = game->map->map_2d[i][j];
+            if (j + 1 < game->map->tab_size_y) {
+                pos[1] = game->map->map_2d[i][j + 1];
+                draw_line(game->win->framebuff, pos, 3, sfWhite);
             }
-            if (i + 1 < TAB_SIZE) {
-                pos[1] = map_2d[i + 1][j];
-                draw_line(buff, pos, 1, sfWhite);
+            if (i + 1 < game->map->tab_size_x) {
+                pos[1] = game->map->map_2d[i + 1][j];
+                draw_line(game->win->framebuff, pos, 3, sfWhite);
             }
             j++;
         }

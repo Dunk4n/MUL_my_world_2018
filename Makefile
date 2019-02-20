@@ -20,6 +20,8 @@ SRC	=	$(D_SRC)main.c			\
 		$(D_SRC)window.c		\
 		$(D_SRC)iso.c			\
 		$(D_SRC)display_2d_map.c	\
+		$(D_SRC)make_map.c		\
+		$(D_SRC)triangle.c		\
 
 OBJ	=	$(SRC:%.c=$(BUILD_DIR)/%.o)
 

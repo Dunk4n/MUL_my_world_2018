@@ -7,7 +7,7 @@
 
 #include "world.h"
 
-void    check(my_game_t *game, int *roll)
+void    check(my_game_t *game)
 {
     while (sfRenderWindow_pollEvent(game->win->window, &(game->win->event))) {
         if ((game->win->event).type == sfEvtClosed) {
@@ -19,48 +19,71 @@ void    check(my_game_t *game, int *roll)
             return ;
         }
         if ((game->win->event).key.code == sfKeyW) {
-            roll[1] -= 10;
-            roll[0] = 1;
+            game->map->center_x -= 10;
+            game->map->update = 1;
             return ;
         }
         if ((game->win->event).key.code == sfKeyS) {
-            roll[1] += 10;
-            roll[0] = 1;
+            game->map->center_x += 10;
+            game->map->update = 1;
             return ;
         }
         if ((game->win->event).key.code == sfKeyD) {
-            roll[2] += 10;
-            roll[0] = 1;
+            game->map->center_y += 10;
+            game->map->update = 1;
             return ;
         }
         if ((game->win->event).key.code == sfKeyA) {
-            roll[2] -= 10;
-            roll[0] = 1;
+            game->map->center_y -= 10;
+            game->map->update = 1;
             return ;
         }
         if ((game->win->event).key.code == sfKeyJ) {
-            roll[3] = (roll[3] + 1) % 360;
-            roll[0] = 1;
+            game->map->roll = (game->map->roll + 1 < 360) ?
+(game->map->roll + 1) : 0;
+            game->map->update = 1;
+            return ;
+        }
+        if ((game->win->event).key.code == sfKeyU) {
+            game->map->roll = (game->map->roll - 1 > 0) ?
+(game->map->roll - 1) : 360;
+            game->map->update = 1;
             return ;
         }
         if ((game->win->event).key.code == sfKeyK) {
-            roll[4] = (roll[4] + 1) % 360;
-            roll[0] = 1;
+            game->map->yaw = (game->map->yaw + 1 < 360) ?
+(game->map->yaw + 1) : 0;
+            game->map->update = 1;
+            return ;
+        }
+        if ((game->win->event).key.code == sfKeyI) {
+            game->map->yaw = (game->map->yaw - 1 > 0) ?
+(game->map->yaw - 1) : 360;
+            game->map->update = 1;
             return ;
         }
         if ((game->win->event).key.code == sfKeyL) {
-            roll[5] = (roll[5] + 1) % 360;
-            roll[0] = 1;
+            game->map->pitch = (game->map->pitch + 1 < 360) ?
+(game->map->pitch + 1) : 0;
+            game->map->update = 1;
+            return ;
+        }
+        if ((game->win->event).key.code == sfKeyO) {
+            game->map->pitch = (game->map->pitch - 1 > 0) ?
+(game->map->pitch - 1) : 360;
+            game->map->update = 1;
             return ;
         }
         if ((game->win->event).key.code == sfKeyE) {
-            roll[6] -= 1;
-            roll[0] = 1;
+            if (game->map->zoom - 1 > 4) {
+                game->map->zoom -= 1;
+                game->map->update = 1;
+            }
             return ;
         }
         if ((game->win->event).key.code == sfKeyQ) {
-            roll[6] += 1;
-            roll[0] = 1;
+            game->map->zoom += 1;
+            game->map->update = 1;
             return ;
         }
     }

@@ -41,6 +41,8 @@ typedef struct  map_s
     int         center_y;
     int         zoom;
     int         update;
+    int         tab_size_x;
+    int         tab_size_y;
     int         **map_3d;
     sfVector2f  **map_2d;
 }               map_t;
@@ -48,6 +50,7 @@ typedef struct  map_s
 typedef struct  my_game_s
 {
     my_window_t     *win;
+    map_t           *map;
     sfClock         *clock;
     sfInt64         fgt;
 }               my_game_t;
@@ -58,17 +61,19 @@ void    draw_circle(my_framebuff_t *buff, sfVector2i cnt, int *tab,
 sfColor color);
 void    draw_line(my_framebuff_t *buff, sfVector2f *pos, int r, sfColor color);
 void    put_pixel(my_framebuff_t *framebuff, int x, int y, sfColor color);
-sfVector2f      **create_2d_map(int **d3_map, int *roll);
-void    display_2d_map(my_framebuff_t *buff, sfVector2f **map_2d);
+void    create_2d_map(map_t *map);
+void    display_2d_map(my_game_t *game);
 my_game_t        *set_game(char *str);
 void    update(my_game_t *game);
-void    check(my_game_t *game, int *roll);
+void    check(my_game_t *game);
 int     window(char *str);
 void    clear_buff(my_framebuff_t *buff);
+int     **creat_map_3d(int xm, int ym);
+int     **creat_map_3d_file(map_t *map, char *str);
+
+void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color);
 
 #define WM 1920
 #define HM 1080
-
-#define TAB_SIZE 6
 
 #endif
