@@ -3,3 +3,4 @@ my_world
 *.o
 *.a
 *.swp
+.clang_complete
