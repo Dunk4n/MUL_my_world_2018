@@ -18,22 +18,22 @@ void    check(my_game_t *game)
             sfRenderWindow_close(game->win->window);
             return ;
         }
-        if ((game->win->event).key.code == sfKeyW) {
+        if ((game->win->event).key.code == sfKeyUp) {
             game->map->center_x -= 10;
             game->map->update = 1;
             return ;
         }
-        if ((game->win->event).key.code == sfKeyS) {
+        if ((game->win->event).key.code == sfKeyDown) {
             game->map->center_x += 10;
             game->map->update = 1;
             return ;
         }
-        if ((game->win->event).key.code == sfKeyD) {
+        if ((game->win->event).key.code == sfKeyRight) {
             game->map->center_y += 10;
             game->map->update = 1;
             return ;
         }
-        if ((game->win->event).key.code == sfKeyA) {
+        if ((game->win->event).key.code == sfKeyLeft) {
             game->map->center_y -= 10;
             game->map->update = 1;
             return ;
