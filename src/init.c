@@ -56,12 +56,13 @@ void            set_map(map_t **map, char *str)
     (*map)->roll = 110;
     (*map)->yaw = 45;
     (*map)->pitch = 13;
-    (*map)->center_x = HM / 2;
-    (*map)->center_y = WM / 2;
+    (*map)->center_x = WM / 2;
+    (*map)->center_y = HM / 2;
     (*map)->tab_size_x = 6;
     (*map)->tab_size_y = 6;
     (*map)->zoom = 20;
     (*map)->update = 1;
+    (*map)->pixel = 16;
     if (!str)
         (*map)->map_3d = creat_map_3d(6, 6);
     else

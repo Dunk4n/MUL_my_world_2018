@@ -43,6 +43,7 @@ typedef struct  map_s
     int         update;
     int         tab_size_x;
     int         tab_size_y;
+    int         pixel;
     int         **map_3d;
     sfVector2f  **map_2d;
 }               map_t;
