@@ -7,6 +7,17 @@
 
 #include "world.h"
 
+void draw_line_horizontal(my_framebuff_t *buff, sfVector3f pos, sfColor color)
+{
+    sfVector2f new_pos[2];
+
+    new_pos[0].x = pos.x;
+    new_pos[0].y = pos.z;
+    new_pos[1].x = pos.y;
+    new_pos[1].y = pos.z;
+    draw_line(buff, new_pos, 1, color);
+}
+
 void    draw_linex(my_framebuff_t *buff, sfVector2f *pos, int r, sfColor color)
 {
     double a = (pos[0].y - pos[1].y) / (pos[0].x - pos[1].x);
@@ -51,5 +62,4 @@ void    draw_line(my_framebuff_t *buff, sfVector2f *pos, int r, sfColor color)
         draw_linex(buff, pos, r, color);
     if ((int)pos[0].y != (int)pos[1].y)
         draw_liney(buff, pos, r, color);
-    printf("\n");
 }

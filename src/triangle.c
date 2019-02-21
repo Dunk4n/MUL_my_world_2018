@@ -30,31 +30,36 @@ void    sort_pos_triangle(sfVector2f *pos)
 
 void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color)
 {
-    sfVector2f A = pos[0];
-    sfVector2f B = pos[1];
-    sfVector2f C = pos[2];
-    sfVector2f E = A;
-    sfVector2f S = A;
+    sfVector2f A;
+    sfVector2f B;
+    sfVector2f C;
+    sfVector2f E;
+    sfVector2f S;
     double dx1;
     double dx2;
     double dx3;
 
     sort_pos_triangle(pos);
+    A = pos[0];
+    B = pos[1];
+    C = pos[2];
+    E = A;
+    S = A;
     dx1 = ((B.y - A.y) > 0) ? (B.x - A.x) / (B.y - A.y) : 0;
     dx2 = ((C.y - A.y) > 0) ? (C.x - A.x) / (C.y - A.y) : 0;
     dx3 = ((C.y - B.y) > 0) ? (C.x - B.x) / (C.y - B.y) : 0;
 
     if (dx1 > dx2) {
         for (; S.y <= B.y; S.y++, E.y++, S.x+=dx2, E.x+=dx1)
-            draw_line(buff, S.x,E.x,S.y, color);
+            draw_line_horizontal(buff, (sfVector3f){S.x, E.x, S.y}, color);
         E = B;
         for(; S.y<=C.y; S.y++, E.y++, S.x+=dx2, E.x+=dx3)
-            draw_line(buff, S.x,E.x,S.y, color);
+            draw_line_horizontal(buff, (sfVector3f){S.x, E.x, S.y}, color);
     } else {
         for(; S.y<=B.y; S.y++, E.y++, S.x+=dx1, E.x+=dx2)
-            draw_line(buff, S.x,E.x,S.y, color);
+            draw_line_horizontal(buff, (sfVector3f){S.x, E.x, S.y}, color);
         S = B;
         for(; S.y<=C.y; S.y++, E.y++, S.x+=dx3, E.x+=dx2)
-            draw_line(buff, S.x,E.x,S.y, color);
+            draw_line_horizontal(buff, (sfVector3f){S.x, E.x, S.y}, color);
     }
 }
