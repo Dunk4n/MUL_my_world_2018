@@ -30,36 +30,33 @@ void    sort_pos_triangle(sfVector2f *pos)
 
 void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color)
 {
-    sfVector2f A;
-    sfVector2f B;
-    sfVector2f C;
-    sfVector2f E;
-    sfVector2f S;
-    double dx1;
-    double dx2;
-    double dx3;
+    sfVector2f arr[5];
+    double dx[3];
 
     sort_pos_triangle(pos);
-    A = pos[0];
-    B = pos[1];
-    C = pos[2];
-    E = A;
-    S = A;
-    dx1 = ((B.y - A.y) > 0) ? (B.x - A.x) / (B.y - A.y) : 0;
-    dx2 = ((C.y - A.y) > 0) ? (C.x - A.x) / (C.y - A.y) : 0;
-    dx3 = ((C.y - B.y) > 0) ? (C.x - B.x) / (C.y - B.y) : 0;
+    arr[0] = pos[0];
+    arr[1] = pos[1];
+    arr[2] = pos[2];
+    arr[3] = arr[0];
+    arr[4] = arr[0];
+    dx[0] = ((arr[1].y - arr[0].y) > 0) ?
+        (arr[1].x - arr[0].x) / (arr[1].y - arr[0].y) : 0;
+    dx[1] = ((arr[2].y - arr[0].y) > 0) ?
+        (arr[2].x - arr[0].x) / (arr[2].y - arr[0].y) : 0;
+    dx[2] = ((arr[2].y - arr[1].y) > 0) ?
+        (arr[2].x - arr[1].x) / (arr[2].y - arr[1].y) : 0;
 
-    if (dx1 > dx2) {
-        for (; S.y <= B.y; S.y++, E.y++, S.x+=dx2, E.x+=dx1)
-            draw_line_horizontal(buff, (sfVector3f){S.x, E.x, S.y}, color);
-        E = B;
-        for(; S.y<=C.y; S.y++, E.y++, S.x+=dx2, E.x+=dx3)
-            draw_line_horizontal(buff, (sfVector3f){S.x, E.x, S.y}, color);
+    if (dx[0] > dx[1]) {
+        for (; arr[4].y <= arr[1].y; arr[4].y++, arr[3].y++, arr[4].x+=dx[1], arr[3].x+=dx[0])
+            draw_line_horizontal(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
+        arr[3] = arr[1];
+        for(; arr[4].y<=arr[2].y; arr[4].y++, arr[3].y++, arr[4].x+=dx[1], arr[3].x+=dx[2])
+            draw_line_horizontal(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
     } else {
-        for(; S.y<=B.y; S.y++, E.y++, S.x+=dx1, E.x+=dx2)
-            draw_line_horizontal(buff, (sfVector3f){S.x, E.x, S.y}, color);
-        S = B;
-        for(; S.y<=C.y; S.y++, E.y++, S.x+=dx3, E.x+=dx2)
-            draw_line_horizontal(buff, (sfVector3f){S.x, E.x, S.y}, color);
+        for(; arr[4].y<=arr[1].y; arr[4].y++, arr[3].y++, arr[4].x+=dx[0], arr[3].x+=dx[1])
+            draw_line_horizontal(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
+        arr[4] = arr[1];
+        for(; arr[4].y<=arr[2].y; arr[4].y++, arr[3].y++, arr[4].x+=dx[2], arr[3].x+=dx[1])
+            draw_line_horizontal(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
     }
 }
