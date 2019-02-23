@@ -13,7 +13,6 @@
 int     window(char *str)
 {
     my_game_t    *game = NULL;
-    int roll[] = {0, HM / 2, WM / 2, 110, 45, 13, 20};
     float a = 0;
 
     if (!(game = set_game(str)))

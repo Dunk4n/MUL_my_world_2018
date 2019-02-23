@@ -15,13 +15,12 @@ void    display_triangle_in_map(my_game_t *game, int i, int j)
     sfVector2f pos[3] = {game->map->map_2d[i][j], game->map->map_2d[i + 1][j],
 game->map->map_2d[i + 1][j + 1]};
     sfColor color[] = {sfGreen, sfRed, sfYellow, sfBlue};
-    int col = rand() % 4;
 
     if (pos[0].x != -1 && pos[1].x != -1 && pos[2].x != -1)
-        draw_triangle(game->win->framebuff, pos, color[col]);
-    pos[2] = game->map->map_2d[i][j + 1];
+        draw_triangle(game->win->framebuff, pos, color[(i + j) % 4]);
+    pos[1] = game->map->map_2d[i][j + 1];
     if (pos[0].x != -1 && pos[1].x != -1 && pos[2].x != -1)
-        draw_triangle(game->win->framebuff, pos, color[col]);
+        draw_triangle(game->win->framebuff, pos, color[(i + j) % 4]);
 }
 
 void    condition_line(my_game_t *game, int i, int j)
@@ -34,12 +33,12 @@ void    condition_line(my_game_t *game, int i, int j)
     if (j + 1 < game->map->tab_size_y && pos[0].x != -1 &&
 game->map->map_2d[i][j + 1].x != -1) {
         pos[1] = game->map->map_2d[i][j + 1];
-        draw_line(game->win->framebuff, pos, 1, sfWhite);
+        draw_line(game->win->framebuff, pos, 1, sfBlack);
     }
     if (i + 1 < game->map->tab_size_x && pos[0].x != -1 &&
 game->map->map_2d[i + 1][j].x != -1) {
         pos[1] = game->map->map_2d[i + 1][j];
-        draw_line(game->win->framebuff, pos, 1, sfWhite);
+        draw_line(game->win->framebuff, pos, 1, sfBlack);
     }
 }
 

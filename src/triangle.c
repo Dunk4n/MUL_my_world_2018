@@ -67,10 +67,11 @@ void    triangle_filler(double *dx, sfVector2f *arr, sfColor color,
 
 void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color)
 {
+    sfVector2f cp_pos[] = {pos[0], pos[1], pos[2]};
     sfVector2f arr[5];
     double dx[3];
 
-    sort_pos_triangle(pos);
-    set_coordinates(arr, dx, pos);
+    sort_pos_triangle(cp_pos);
+    set_coordinates(arr, dx, cp_pos);
     triangle_filler(dx, arr, color, buff);
 }
