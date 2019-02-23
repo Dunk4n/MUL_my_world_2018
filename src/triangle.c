@@ -28,12 +28,8 @@ void    sort_pos_triangle(sfVector2f *pos)
     }
 }
 
-void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color)
+void    set_coordinates(sfVector2f *arr, double *dx, sfVector2f *pos)
 {
-    sfVector2f arr[5];
-    double dx[3];
-
-    sort_pos_triangle(pos);
     arr[0] = pos[0];
     arr[1] = pos[1];
     arr[2] = pos[2];
@@ -45,7 +41,15 @@ void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color)
         (arr[2].x - arr[0].x) / (arr[2].y - arr[0].y) : 0;
     dx[2] = ((arr[2].y - arr[1].y) > 0) ?
         (arr[2].x - arr[1].x) / (arr[2].y - arr[1].y) : 0;
+}
 
+void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color)
+{
+    sfVector2f arr[5];
+    double dx[3];
+
+    sort_pos_triangle(pos);
+    set_coordinates(arr, dx, pos);
     if (dx[0] > dx[1]) {
         for (; arr[4].y <= arr[1].y; arr[4].y++, arr[3].y++, arr[4].x+=dx[1], arr[3].x+=dx[0])
             draw_line_horizontal(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
