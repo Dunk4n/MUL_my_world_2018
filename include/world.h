@@ -61,7 +61,7 @@ sfColor color);
 void    draw_circle(my_framebuff_t *buff, sfVector2i cnt, int *tab,
 sfColor color);
 void    draw_line(my_framebuff_t *buff, sfVector2f *pos, int r, sfColor color);
-void draw_line_horizontal(my_framebuff_t *buff, sfVector3f pos, sfColor color);
+void horz_line(my_framebuff_t *buff, sfVector3f pos, sfColor color);
 void    put_pixel(my_framebuff_t *framebuff, int x, int y, sfColor color);
 void    create_2d_map(map_t *map);
 void    display_2d_map(my_game_t *game);

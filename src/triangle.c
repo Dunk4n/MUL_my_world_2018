@@ -47,17 +47,21 @@ void    triangle_filler(double *dx, sfVector2f *arr, sfColor color,
         my_framebuff_t *buff)
 {
     if (dx[0] > dx[1]) {
-        for (; arr[4].y <= arr[1].y; arr[4].y++, arr[3].y++, arr[4].x+=dx[1], arr[3].x+=dx[0])
-            draw_line_horizontal(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
+        for (; arr[4].y <= arr[1].y; arr[4].y++, arr[3].y++, arr[4].x += dx[1],
+                arr[3].x += dx[0])
+            horz_line(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
         arr[3] = arr[1];
-        for(; arr[4].y<=arr[2].y; arr[4].y++, arr[3].y++, arr[4].x+=dx[1], arr[3].x+=dx[2])
-            draw_line_horizontal(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
+        for (; arr[4].y <= arr[2].y; arr[4].y++, arr[3].y++, arr[4].x += dx[1],
+                arr[3].x += dx[2])
+            horz_line(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
     } else {
-        for(; arr[4].y<=arr[1].y; arr[4].y++, arr[3].y++, arr[4].x+=dx[0], arr[3].x+=dx[1])
-            draw_line_horizontal(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
+        for (; arr[4].y <= arr[1].y; arr[4].y++, arr[3].y++, arr[4].x += dx[0],
+                arr[3].x += dx[1])
+            horz_line(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
         arr[4] = arr[1];
-        for(; arr[4].y<=arr[2].y; arr[4].y++, arr[3].y++, arr[4].x+=dx[2], arr[3].x+=dx[1])
-            draw_line_horizontal(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
+        for (; arr[4].y <= arr[2].y; arr[4].y++, arr[3].y++, arr[4].x += dx[2],
+                arr[3].x += dx[1])
+            horz_line(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
     }
 }
 

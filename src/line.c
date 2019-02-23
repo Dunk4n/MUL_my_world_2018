@@ -7,7 +7,7 @@
 
 #include "world.h"
 
-void draw_line_horizontal(my_framebuff_t *buff, sfVector3f pos, sfColor color)
+void horz_line(my_framebuff_t *buff, sfVector3f pos, sfColor color)
 {
     sfVector2f new_pos[2];
 
