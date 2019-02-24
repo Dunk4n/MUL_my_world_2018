@@ -25,8 +25,8 @@ void    check_key(my_game_t *game)
         (game->map->pitch + 1 < 360) ? (game->map->pitch + 1) : 0 : 0;
     ((game->win->event).key.code == sfKeyO) ? game->map->pitch =
         (game->map->pitch - 1 > 0) ? (game->map->pitch - 1) : 360 : 0;
-    if ((game->win->event).key.code == sfKeyE)
-        (game->map->zoom - 1 > 4) ? game->map->zoom -= 1 : 0;
+    ((game->win->event).key.code == sfKeyE) ? game->map->zoom =
+        (game->map->zoom - 1 > 4) ? game->map->zoom - 1 : game->map->zoom : 0;
     ((game->win->event).key.code == sfKeyQ) ? game->map->zoom += 1 : 0;
 }
 
