@@ -44,6 +44,7 @@ sfFullscreen, NULL);
     sfRenderWindow_setFramerateLimit(win->window, 60);
     if ((win->framebuff = my_framebuff_create(WM, HM)) == NULL)
         return (NULL);
+    win->z_buff = malloc(sizeof(double) * WM * HM);
     return (win);
 }
 

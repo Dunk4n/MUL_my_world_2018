@@ -29,6 +29,7 @@ typedef struct  my_window_s
     sfTexture           *texture;
     sfSprite            *sprite;
     my_framebuff_t      *framebuff;
+    double              *z_buff;
     sfVector2u          pos;
 }               my_window_t;
 
