@@ -8,7 +8,21 @@
 #include "my.h"
 #include "world.h"
 
-void    put_pixel(my_framebuff_t *framebuff, int x, int y, sfColor color)
+void    put_pixel3d(my_window_t *win, sfVector3f cord, sfColor color)
+{
+    if (x >= win->framebuff->width || x < 0 ||
+y >= win->framebuff->height || y < 0)
+        return ;
+    if ((cord.z > win->z_buff[WM * y + x] || cord.z < 0) && cord.z != -42)
+        return ;
+    win->z_buff[win->framebuff->width * y + x] = cord.z;
+    framebuff->pixels[(win->framebuff->width * y + x) * 4] = color.r;
+    framebuff->pixels[(win->framebuff->width * y + x) * 4 + 1] = color.g;
+    framebuff->pixels[(win->framebuff->width * y + x) * 4 + 2] = color.b;
+    framebuff->pixels[(win->framebuff->width * y + x) * 4 + 3] = color.a;
+}
+
+void    put_pixel(my_framebuff_t *buff, int x, int y, sfColor color)
 {
     if (x >= framebuff->width || x < 0 || y >= framebuff->height || y < 0)
         return ;
