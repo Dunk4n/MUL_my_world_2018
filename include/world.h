@@ -75,6 +75,7 @@ int     **creat_map_3d(int xm, int ym);
 int     **creat_map_3d_file(map_t *map, char *str);
 void    put_pixel3d(my_window_t *win, sfVector3f cord, sfColor color);
 void    clear_z_buff(double *z_buff);
+sfVector3f      pube_to_screen(const sfVector3f vec);
 
 void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color);
 
