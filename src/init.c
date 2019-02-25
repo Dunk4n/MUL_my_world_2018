@@ -45,6 +45,7 @@ sfFullscreen, NULL);
     if ((win->framebuff = my_framebuff_create(WM, HM)) == NULL)
         return (NULL);
     win->z_buff = malloc(sizeof(double) * WM * HM);
+    clear_z_buff(win->z_buff);
     return (win);
 }
 
