@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include "world.h"
-#include "math.h"
 
 sfVector2f      project_iso_point(double *cord, int *arg)
 {

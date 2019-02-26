@@ -22,6 +22,13 @@ typedef struct  my_framebuff_s
     sfUint8     *pixels;
 }               my_framebuff_t;
 
+typedef struct  trangle_s
+{
+    sfVector3f  space[3];
+    sfVector3f  plane[3];
+    sfColor     color;
+}               triangle_t;
+
 typedef struct  my_window_s
 {
     sfRenderWindow      *window;
@@ -47,6 +54,7 @@ typedef struct  map_s
     int         pixel;
     int         **map_3d;
     sfVector2f  **map_2d;
+    triangle_t  **triangle;
 }               map_t;
 
 typedef struct  my_game_s
@@ -76,6 +84,8 @@ int     **creat_map_3d_file(map_t *map, char *str);
 void    put_pixel3d(my_window_t *win, sfVector3f cord, sfColor color);
 void    clear_z_buff(double *z_buff);
 sfVector3f      pube_to_screen(const sfVector3f vec);
+void    transform_to_2d(map_t *map);
+void    display(my_game_t *game);
 
 void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color);
 

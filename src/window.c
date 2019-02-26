@@ -25,8 +25,8 @@ int     window(char *str)
             //printf("%d, %d, %d\n\n", roll[3], roll[4], roll[5]);
             game->map->update = 0;
             clear_buff(game->win->framebuff);
-            create_2d_map(game->map);
-            display_2d_map(game);
+            transform_to_2d(game->map);
+            //display_2d_map(game);
         }
         a++;
         if (a >= 360)

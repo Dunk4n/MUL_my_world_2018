@@ -23,6 +23,8 @@ SRC	=	$(D_SRC)main.c			\
 		$(D_SRC)make_map.c		\
 		$(D_SRC)triangle.c		\
 		$(D_SRC)z_buff.c		\
+		$(D_SRC)display.c		\
+		$(D_SRC)transform.c		\
 
 OBJ	=	$(SRC:%.c=$(BUILD_DIR)/%.o)
 
