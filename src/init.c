@@ -49,28 +49,24 @@ sfFullscreen, NULL);
     return (win);
 }
 
-void            set_map(map_t **map, char *str)
+void            set_map(map_t **map)
 {
     if (!(*map = malloc(sizeof(map_t)))) {
         *map = NULL;
         return ;
     }
-    (*map)->roll = 110;
-    (*map)->yaw = 45;
-    (*map)->pitch = 13;
-    (*map)->center_x = WM / 2;
-    (*map)->center_y = HM / 2;
-    (*map)->tab_size_x = 6;
-    (*map)->tab_size_y = 6;
-    (*map)->zoom = 20;
+    (*map)->roll = 0;
+    (*map)->yaw = 0;
+    (*map)->pitch = 0;
+    (*map)->move_point_x = 0;
+    (*map)->move_point_y = 0;
+    (*map)->tab_size_x = 10;
+    (*map)->tab_size_y = 10;
+    (*map)->zoom = 6.0;
     (*map)->update = 1;
     (*map)->pixel = 16;
-    if (!str)
-        (*map)->map_3d = creat_map_3d(6, 6);
-    else
-        (*map)->map_3d = creat_map_3d_file(*map, str);
-    (*map)->map_2d = NULL;
-    create_2d_map(*map);
+    (*map)->map_2d = malloc(sizeof(sfVector3f) *
+(*map)->tab_size_x * (*map)->tab_size_y);
 }
 
 my_game_t        *set_game(char *str)
@@ -83,13 +79,14 @@ my_game_t        *set_game(char *str)
         (game) ? free(game) : 0;
         return (NULL);
     }
-    set_map(&(game->map), str);
-    if (!game->map->map_2d)
-        game->map = NULL;
+    set_map(&(game->map));
     if (!game->map) {
         (game->win) ? free(game->win) : 0;
         (game) ? free(game) : 0;
         return (NULL);
     }
+    set_map(&(game->map));
+    set_map(&(game->map));
+    set_3d_map(&(game->map), str);
     return (game);
 }

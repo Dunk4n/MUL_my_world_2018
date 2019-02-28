@@ -45,15 +45,15 @@ typedef struct  map_s
     float       roll;
     float       yaw;
     float       pitch;
-    int         center_x;
-    int         center_y;
-    int         zoom;
     int         update;
     int         tab_size_x;
     int         tab_size_y;
     int         pixel;
-    int         **map_3d;
-    sfVector2f  **map_2d;
+    double      move_point_x;
+    double      move_point_y;
+    double      zoom;
+    sfVector3f  *map_3d;
+    sfVector3f  *map_2d;
     triangle_t  **triangle;
 }               map_t;
 
@@ -79,13 +79,15 @@ void    update(my_game_t *game);
 void    check(my_game_t *game);
 int     window(char *str);
 void    clear_buff(my_framebuff_t *buff);
-int     **creat_map_3d(int xm, int ym);
-int     **creat_map_3d_file(map_t *map, char *str);
 void    put_pixel3d(my_window_t *win, sfVector3f cord, sfColor color);
 void    clear_z_buff(double *z_buff);
 sfVector3f      pube_to_screen(const sfVector3f vec);
 void    transform_to_2d(map_t *map);
 void    display(my_game_t *game);
+void    set_3d_map(map_t **map, char *str);
+void    rotation(map_t *map);
+void    to_2d(map_t *map);
+void    transform_move(map_t *map);
 
 void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color);
 

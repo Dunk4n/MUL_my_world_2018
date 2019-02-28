@@ -10,7 +10,7 @@
 #include "world.h"
 #include "math.h"
 
-void    display_triangle_in_map(my_game_t *game, int i, int j)
+/*void    display_triangle_in_map(my_game_t *game, int i, int j)
 {
     sfVector2f pos[3] = {game->map->map_2d[i][j], game->map->map_2d[i + 1][j],
 game->map->map_2d[i + 1][j + 1]};
@@ -56,4 +56,4 @@ i + 1 < game->map->tab_size_x)) {
         }
         i++;
     }
-}
+}*/

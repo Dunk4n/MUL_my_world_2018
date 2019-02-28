@@ -8,59 +8,48 @@
 #include <stdlib.h>
 #include <math.h>
 #include "world.h"
+#include "my.h"
 
-sfVector2f      project_iso_point(double *cord, int *arg)
+void    rotation(map_t *map)
 {
-    sfVector2f pos = {-1, -1};
-    double xx = cord[0];
-    double yy = cord[1];
+    int i = 0;
+    float sr = sin(map->roll * M_PI / 180);
+    float cr = cos(map->roll * M_PI / 180);
+    float sy = sin(map->yaw * M_PI / 180);
+    float cy = cos(map->yaw * M_PI / 180);
+    float sp = sin(map->pitch * M_PI / 180);
+    float cp = cos(map->pitch * M_PI / 180);
+    double tmp[2];
 
-    cord[2] = cord[2] / 6;
-    yy = (cos(cord[3]) * cord[1]) - (sin(cord[3]) * cord[2]);
-    cord[2] = (sin(cord[3]) * cord[1]) + (cos(cord[3]) * cord[2]);
-
-    xx = (cos(cord[4]) * cord[0]) + (sin(cord[4]) * cord[2]);
-    cord[2] = -(sin(cord[4]) * cord[0]) + (cos(cord[4]) * cord[2]);
-
-    cord[0] = (cos(cord[5]) * xx) - (sin(cord[5]) * yy);
-    cord[1] = (sin(cord[5]) * xx) + (cos(cord[5]) * yy);
-
-    if (-cord[2] <= arg[3] - 2) {
-        pos.x = arg[1] + ((cord[0] * arg[0] * 20) / (cord[2] + arg[3]));
-        pos.y = arg[2] + ((cord[1] * arg[0] * 20) / (cord[2] + arg[3]));
+    while (i < map->tab_size_x * map->tab_size_y) {
+        tmp[1] = map->map_3d[i].z;
+        map->map_3d[i].z = (sr * map->map_3d[i].y) + (cr * tmp[1]);
+        map->map_3d[i].y = (cr * map->map_3d[i].y) - (sr * tmp[1]);
+        tmp[0] = map->map_3d[i].x;
+        map->map_3d[i].x = (cy * tmp[0]) + (sy * map->map_3d[i].z);
+        map->map_3d[i].z = -(sy * tmp[0]) + (cy * map->map_3d[i].z);
+        tmp[0] = map->map_3d[i].x;
+        map->map_3d[i].x = (cp * tmp[0]) - (sp * map->map_3d[i].y);
+        map->map_3d[i].y = (sp * tmp[0]) + (cp * map->map_3d[i].y);
+        i++;
     }
-    return (pos);
 }
 
-void    assign(map_t *map, double *cord, int i, int j)
+void    to_2d(map_t *map)
 {
-    cord[0] = (double)i - map->tab_size_x
-/ 2.0 + ((!(map->tab_size_x % 2)) ? 0.5 : 0);
-    cord[1] = (double)j - map->tab_size_y / 2.0
-+ ((!(map->tab_size_y % 2)) ? 0.5 : 0);
-    cord[2] = (double)map->map_3d[i][j];
-}
+    int     i = 0;
+    double  width_d2 = WM / 2;
+    double  height_d2 = HM / 2;
+    double  height_width = (double)HM / (double)WM;
+    float   prospect;
 
-void            create_2d_map(map_t *map)
-{
-    int         i = 0;
-    int         j = 0;
-    double      cord[] = {0, 0, 0, map->roll * M_PI / 180, map->yaw * M_PI /
-180, map->pitch * M_PI / 180};
-    int         arg[] = {map->pixel, map->center_x, map->center_y, map->zoom};
-
-    if (!(map->map_3d) ||
-!(map->map_2d = malloc(sizeof(sfVector2f*) * map->tab_size_y)))
-        return ;
-    while (i < map->tab_size_y) {
-        if (!((map->map_2d)[i] = malloc(sizeof(sfVector2f) * map->tab_size_x)))
-            return ;
-        j = 0;
-        while (j < map->tab_size_x) {
-            assign(map, cord, i, j);
-            (map->map_2d)[i][j] = project_iso_point(cord, arg);
-            j++;
-        }
+    while (i < map->tab_size_x * map->tab_size_y) {
+        prospect = (map->map_3d[i].z + map->zoom == 0) ? 1 :
+1.0 / (map->map_3d[i].z + map->zoom);
+        map->map_2d[i].x = (map->map_3d[i].x * prospect) *
+(width_d2) * (height_width) + (width_d2);
+        map->map_2d[i].y = (-(map->map_3d[i].y) * prospect + 1) * (height_d2);
+        map->map_2d[i].z = map->map_3d[i].z + map->zoom;
         i++;
     }
 }
