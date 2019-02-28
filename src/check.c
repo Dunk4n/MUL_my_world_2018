@@ -29,7 +29,6 @@ void    check_key(my_game_t *game)
 
 void    check(my_game_t *game)
 {
-
     while (sfRenderWindow_pollEvent(game->win->window, &(game->win->event))) {
         if (((game->win->event).type == sfEvtClosed) ||
                 ((game->win->event).key.code == sfKeyEscape)) {
