@@ -7,15 +7,18 @@
 
 #include "world.h"
 
-void horz_line(my_framebuff_t *buff, sfVector3f pos, sfColor color)
+void horz_line(my_window_t *win, sfVector3f pos, vector4f_t nor, sfColor color)
 {
-    sfVector2f new_pos[2];
+    int x = pos.x;
+    int y = pos.z;
 
-    new_pos[0].x = pos.x;
-    new_pos[0].y = pos.z;
-    new_pos[1].x = pos.y;
-    new_pos[1].y = pos.z;
-    draw_line(buff, new_pos, 1, color);
+    if (pos.x > pos.y)
+        x = pos.y;
+    while (x <= pos.y) {
+        put_pixel3d(win, (sfVector3f){x, y, (nor.t - (nor.x * (double)x) -
+(nor.y * (double)y)) / ((nor.z == 0) ? 1 : nor.z)}, color);
+        x++;
+    }
 }
 
 void    draw_linex(my_framebuff_t *buff, sfVector2f *pos, int r, sfColor color)

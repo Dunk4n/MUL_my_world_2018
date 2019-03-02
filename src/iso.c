@@ -44,10 +44,10 @@ void    to_2d(map_t *map)
     float   prospect;
 
     while (i < map->tab_size_x * map->tab_size_y) {
-        prospect = (map->map_3d[i].z + map->zoom == 0) ? 1 :
-1.0 / (map->map_3d[i].z + map->zoom);
-        map->map_2d[i].x = (map->map_3d[i].x * prospect) *
-(width_d2) * (height_width) + (width_d2);
+        prospect = (map->map_3d[i].z + map->zoom == 0) ? 1 : 1.0 /
+(map->map_3d[i].z + map->zoom);
+        map->map_2d[i].x = (map->map_3d[i].x * prospect) * (width_d2) *
+(height_width) + (width_d2);
         map->map_2d[i].y = (-(map->map_3d[i].y) * prospect + 1) * (height_d2);
         map->map_2d[i].z = map->map_3d[i].z + map->zoom;
         i++;

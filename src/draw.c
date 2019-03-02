@@ -13,18 +13,18 @@ void    put_pixel3d(my_window_t *win, sfVector3f cord, sfColor color)
     if (cord.x >= win->framebuff->width || cord.x < 0 ||
 cord.y >= win->framebuff->height || cord.y < 0)
         return ;
-    if ((cord.z > (win->z_buff)[(int)(WM * cord.y + cord.x)] || cord.z < 0)
-&& cord.z != -42)
+    if ((cord.z >= (win->z_buff)[(int)(WM * cord.y + cord.x)] || cord.z < 0)
+&& (win->z_buff)[(int)(WM * cord.y + cord.x)] != -42)
         return ;
     win->z_buff[(int)(win->framebuff->width * cord.y + cord.x)] = cord.z;
-    win->framebuff->pixels[(int)((win->framebuff->width * cord.y + cord.x) * 4)]
-= color.r;
-    win->framebuff->pixels[(int)((win->framebuff->width * cord.y + cord.x) * 4
-+ 1)] = color.g;
-    win->framebuff->pixels[(int)((win->framebuff->width * cord.y + cord.x) * 4
-+ 2)] = color.b;
-    win->framebuff->pixels[(int)((win->framebuff->width * cord.y + cord.x) * 4
-+ 3)] = color.a;
+    win->framebuff->pixels[(int)((win->framebuff->width * (int)cord.y +
+(int)cord.x) * 4)] = color.r;
+    win->framebuff->pixels[(int)((win->framebuff->width * (int)cord.y +
+(int)cord.x) * 4 + 1)] = color.g;
+    win->framebuff->pixels[(int)((win->framebuff->width * (int)cord.y +
+(int)cord.x) * 4 + 2)] = color.b;
+    win->framebuff->pixels[(int)((win->framebuff->width * (int)cord.y +
+(int)cord.x) * 4 + 3)] = color.a;
 }
 
 void    put_pixel(my_framebuff_t *framebuff, int x, int y, sfColor color)

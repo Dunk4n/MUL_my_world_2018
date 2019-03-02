@@ -15,19 +15,20 @@
 #include <SFML/System/Time.h>
 #include <SFML/System/Types.h>
 
+typedef struct  vector4f_s
+{
+    double x;
+    double y;
+    double z;
+    double t;
+}               vector4f_t;
+
 typedef struct  my_framebuff_s
 {
     int         width;
     int         height;
     sfUint8     *pixels;
 }               my_framebuff_t;
-
-typedef struct  trangle_s
-{
-    sfVector3f  space[3];
-    sfVector3f  plane[3];
-    sfColor     color;
-}               triangle_t;
 
 typedef struct  my_window_s
 {
@@ -48,13 +49,13 @@ typedef struct  map_s
     int         update;
     int         tab_size_x;
     int         tab_size_y;
-    int         pixel;
     double      move_point_x;
     double      move_point_y;
+    double      center_x;
+    double      center_y;
     double      zoom;
     sfVector3f  *map_3d;
     sfVector3f  *map_2d;
-    triangle_t  **triangle;
 }               map_t;
 
 typedef struct  my_game_s
@@ -70,7 +71,7 @@ sfColor color);
 void    draw_circle(my_framebuff_t *buff, sfVector2i cnt, int *tab,
 sfColor color);
 void    draw_line(my_framebuff_t *buff, sfVector2f *pos, int r, sfColor color);
-void horz_line(my_framebuff_t *buff, sfVector3f pos, sfColor color);
+void horz_line(my_window_t *win, sfVector3f pos, vector4f_t nor, sfColor color);
 void    put_pixel(my_framebuff_t *framebuff, int x, int y, sfColor color);
 void    create_2d_map(map_t *map);
 void    display_2d_map(my_game_t *game);
@@ -89,7 +90,7 @@ void    rotation(map_t *map);
 void    to_2d(map_t *map);
 void    transform_move(map_t *map);
 
-void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color);
+void    draw_triangle(my_window_t *win, sfVector3f *pos, sfColor color);
 
 #define WM 1920
 #define HM 1080

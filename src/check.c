@@ -36,5 +36,7 @@ void    check(my_game_t *game)
         }
         (sfEvtKeyPressed) ? game->map->update = 1 : 0;
         check_key(game);
+        game->map->center_x += game->map->move_point_x;
+        game->map->center_y += game->map->move_point_y;
     }
 }

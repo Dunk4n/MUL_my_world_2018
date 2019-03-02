@@ -19,11 +19,13 @@ void    set_white_map(map_t **map)
         j = 0;
         while (j < (*map)->tab_size_y) {
             (*map)->map_3d[i * (*map)->tab_size_x + j].x = ((double)(i) -
-(double)((*map)->tab_size_x) / 2.0) + (((*map)->tab_size_x % 2) ? 0 : 0.5) / (*map)->zoom;
+(double)((*map)->tab_size_x) / 2.0) + (((*map)->tab_size_x % 2) ? 0 : 0.5) /
+(*map)->zoom;
             (*map)->map_3d[i * (*map)->tab_size_x + j].y = ((double)(j) -
-(double)((*map)->tab_size_y) / 2.0) + (((*map)->tab_size_y % 2) ? 0 : 0.5) / (*map)->zoom;
+(double)((*map)->tab_size_y) / 2.0) + (((*map)->tab_size_y % 2) ? 0 : 0.5) /
+(*map)->zoom;
             if (i != 0 && j != 0 && i + 1 != (*map)->tab_size_x && j + 1 != (*map)->tab_size_y)
-                (*map)->map_3d[i * (*map)->tab_size_x + j].z = (double)(-(rand() % 5)) / 6.0;
+                (*map)->map_3d[i * (*map)->tab_size_x + j].z = (double)(-(rand() % 10)) / 6.0;
             else
                 (*map)->map_3d[i * (*map)->tab_size_x + j].z = 0;
             j++;

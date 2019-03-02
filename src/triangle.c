@@ -7,9 +7,9 @@
 
 #include "world.h"
 
-void    sort_pos_triangle(sfVector2f *pos)
+void    sort_pos_triangle(sfVector3f *pos)
 {
-    sfVector2f tmp;
+    sfVector3f tmp;
 
     if (pos[0].y > pos[1].y) {
         tmp = pos[0];
@@ -28,50 +28,72 @@ void    sort_pos_triangle(sfVector2f *pos)
     }
 }
 
-void    set_coordinates(sfVector2f *arr, double *dx, sfVector2f *pos)
+void    set_coordinates(sfVector2f *arr, sfVector3f *pos)
 {
-    arr[0] = pos[0];
-    arr[1] = pos[1];
-    arr[2] = pos[2];
+    arr[0].x = pos[0].x;
+    arr[0].y = pos[0].y;
+    arr[1].x = pos[1].x;
+    arr[1].y = pos[1].y;
+    arr[2].x = pos[2].x;
+    arr[2].y = pos[2].y;
     arr[3] = arr[0];
     arr[4] = arr[0];
-    dx[0] = ((arr[1].y - arr[0].y) > 0) ?
+    pos[3].x = ((arr[1].y - arr[0].y) > 0) ?
         (arr[1].x - arr[0].x) / (arr[1].y - arr[0].y) : 0;
-    dx[1] = ((arr[2].y - arr[0].y) > 0) ?
+    pos[3].y = ((arr[2].y - arr[0].y) > 0) ?
         (arr[2].x - arr[0].x) / (arr[2].y - arr[0].y) : 0;
-    dx[2] = ((arr[2].y - arr[1].y) > 0) ?
+    pos[3].z = ((arr[2].y - arr[1].y) > 0) ?
         (arr[2].x - arr[1].x) / (arr[2].y - arr[1].y) : 0;
 }
 
-void    triangle_filler(double *dx, sfVector2f *arr, sfColor color,
-        my_framebuff_t *buff)
+vector4f_t      calc_normal(sfVector3f *pos)
 {
-    if (dx[0] > dx[1]) {
-        for (; arr[4].y <= arr[1].y; arr[4].y++, arr[3].y++, arr[4].x += dx[1],
-                arr[3].x += dx[0])
-            horz_line(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
+    sfVector3f v1 = {pos[1].x - pos[0].x, pos[1].y -
+pos[0].y, pos[1].z - pos[0].z};
+    sfVector3f v2 = {pos[1].x - pos[2].x, pos[1].y -
+pos[2].y, pos[1].z - pos[2].z};
+    vector4f_t nor = {v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z,
+v1.x * v2.y - v1.y * v2.x, 0};
+
+    nor.t = -(-(nor.x * pos[1].x) - nor.y * pos[1].y - nor.z * pos[1].z);
+    return (nor);
+}
+
+void    triangle_filler(sfVector3f *pos, sfVector2f *arr, sfColor color,
+my_window_t *win)
+{
+    vector4f_t  nor = calc_normal(pos);
+
+    if (pos[3].x > pos[3].y) {
+        for (; arr[4].y <= arr[1].y; arr[4].y++, arr[3].y++,
+arr[4].x += pos[3].y, arr[3].x += pos[3].x)
+            horz_line(win, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, nor,
+color);
         arr[3] = arr[1];
-        for (; arr[4].y <= arr[2].y; arr[4].y++, arr[3].y++, arr[4].x += dx[1],
-                arr[3].x += dx[2])
-            horz_line(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
-    } else {
-        for (; arr[4].y <= arr[1].y; arr[4].y++, arr[3].y++, arr[4].x += dx[0],
-                arr[3].x += dx[1])
-            horz_line(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
+        for (; arr[4].y <= arr[2].y; arr[4].y++, arr[3].y++,
+arr[4].x += pos[3].y, arr[3].x += pos[3].z)
+            horz_line(win, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, nor,
+color);
+    }
+    else {
+        for (; arr[4].y <= arr[1].y; arr[4].y++, arr[3].y++,
+arr[4].x += pos[3].x, arr[3].x += pos[3].y)
+            horz_line(win, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, nor,
+color);
         arr[4] = arr[1];
-        for (; arr[4].y <= arr[2].y; arr[4].y++, arr[3].y++, arr[4].x += dx[2],
-                arr[3].x += dx[1])
-            horz_line(buff, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, color);
+        for (; arr[4].y <= arr[2].y; arr[4].y++, arr[3].y++,
+arr[4].x += pos[3].z, arr[3].x += pos[3].y)
+            horz_line(win, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, nor,
+color);
     }
 }
 
-void    draw_triangle(my_framebuff_t *buff, sfVector2f *pos, sfColor color)
+void    draw_triangle(my_window_t *win, sfVector3f *pos, sfColor color)
 {
-    sfVector2f cp_pos[] = {pos[0], pos[1], pos[2]};
+    sfVector3f cp_pos[] = {pos[0], pos[1], pos[2], pos[0]};
     sfVector2f arr[5];
-    double dx[3];
 
     sort_pos_triangle(cp_pos);
-    set_coordinates(arr, dx, cp_pos);
-    triangle_filler(dx, arr, color, buff);
+    set_coordinates(arr, cp_pos);
+    triangle_filler(cp_pos, arr, color, win);
 }
