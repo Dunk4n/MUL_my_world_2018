@@ -22,7 +22,7 @@ void    clear_buff(my_framebuff_t *buff)
 
 void    update(my_game_t *game)
 {
-    sfRenderWindow_clear(game->win->window, sfWhite);
+    sfRenderWindow_clear(game->win->window, sfBlack);
     sfTexture_updateFromPixels(game->win->texture, game->win->framebuff->pixels,
 WM, HM, 0, 0);
     sfRenderWindow_drawSprite(game->win->window, game->win->sprite, NULL);

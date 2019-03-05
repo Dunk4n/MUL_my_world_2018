@@ -17,12 +17,12 @@ void    check_key(my_game_t *game)
 += 0.1 : 0;
     ((game->win->event).key.code == sfKeyLeft) ? game->map->move_point_x
 -= 0.1 : 0;
-    ((game->win->event).key.code == sfKeyJ) ? game->map->roll = 1 : 0;
-    ((game->win->event).key.code == sfKeyU) ? game->map->roll = -1 : 0;
-    ((game->win->event).key.code == sfKeyK) ? game->map->yaw = 1 : 0;
-    ((game->win->event).key.code == sfKeyI) ? game->map->yaw = -1 : 0;
-    ((game->win->event).key.code == sfKeyL) ? game->map->pitch = 1 : 0;
-    ((game->win->event).key.code == sfKeyO) ? game->map->pitch = -1 : 0;
+    ((game->win->event).key.code == sfKeyJ) ? game->map->roll_fg = 1 : 0;
+    ((game->win->event).key.code == sfKeyU) ? game->map->roll_fg = -1 : 0;
+    ((game->win->event).key.code == sfKeyK) ? game->map->yaw_fg = 1 : 0;
+    ((game->win->event).key.code == sfKeyI) ? game->map->yaw_fg = -1 : 0;
+    ((game->win->event).key.code == sfKeyL) ? game->map->pitch_fg = 1 : 0;
+    ((game->win->event).key.code == sfKeyO) ? game->map->pitch_fg = -1 : 0;
     ((game->win->event).key.code == sfKeyE) ? game->map->zoom -= 0.5 : 0;
     ((game->win->event).key.code == sfKeyQ) ? game->map->zoom += 0.5 : 0;
 }

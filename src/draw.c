@@ -5,26 +5,44 @@
 ** xkcd.com/378
 */
 
+#include <math.h>
 #include "my.h"
 #include "world.h"
 
-void    put_pixel3d(my_window_t *win, sfVector3f cord, sfColor color)
+double glob;
+
+sfColor get_real_z(my_game_t *game, sfVector3f cord, sfColor color)
 {
-    if (cord.x >= win->framebuff->width || cord.x < 0 ||
-cord.y >= win->framebuff->height || cord.y < 0)
+    double res = glob;
+
+    res = (5 / cord.z);
+    if (res > 1)
+        res = 1;
+    color.r *= res;
+    color.g *= res;
+    color.b *= res;
+    return (color);
+}
+
+void    put_pixel3d(my_game_t *game, sfVector3f cord, sfColor color)
+{
+    if (cord.x >= game->win->framebuff->width || cord.x < 0 ||
+cord.y >= game->win->framebuff->height || cord.y < 0)
         return ;
-    if ((cord.z >= (win->z_buff)[(int)(WM * cord.y + cord.x)] || cord.z < 0)
-&& (win->z_buff)[(int)(WM * cord.y + cord.x)] != -42)
+    if ((cord.z >= (game->win->z_buff)[(int)(WM * cord.y + cord.x)] ||
+cord.z < 0) && (game->win->z_buff)[(int)(WM * cord.y + cord.x)] != -42)
         return ;
-    win->z_buff[(int)(win->framebuff->width * cord.y + cord.x)] = cord.z;
-    win->framebuff->pixels[(int)((win->framebuff->width * (int)cord.y +
-(int)cord.x) * 4)] = color.r;
-    win->framebuff->pixels[(int)((win->framebuff->width * (int)cord.y +
-(int)cord.x) * 4 + 1)] = color.g;
-    win->framebuff->pixels[(int)((win->framebuff->width * (int)cord.y +
-(int)cord.x) * 4 + 2)] = color.b;
-    win->framebuff->pixels[(int)((win->framebuff->width * (int)cord.y +
-(int)cord.x) * 4 + 3)] = color.a;
+    color = get_real_z(game, cord, color);
+    game->win->z_buff[(int)(game->win->framebuff->width * cord.y + cord.x)] =
+cord.z;
+    game->win->framebuff->pixels[(int)((game->win->framebuff->width *
+(int)cord.y + (int)cord.x) * 4)] = color.r;
+    game->win->framebuff->pixels[(int)((game->win->framebuff->width *
+(int)cord.y + (int)cord.x) * 4 + 1)] = color.g;
+    game->win->framebuff->pixels[(int)((game->win->framebuff->width *
+(int)cord.y + (int)cord.x) * 4 + 2)] = color.b;
+    game->win->framebuff->pixels[(int)((game->win->framebuff->width *
+(int)cord.y + (int)cord.x) * 4 + 3)] = color.a;
 }
 
 void    put_pixel(my_framebuff_t *framebuff, int x, int y, sfColor color)

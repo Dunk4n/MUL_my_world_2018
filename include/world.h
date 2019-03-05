@@ -43,6 +43,9 @@ typedef struct  my_window_s
 
 typedef struct  map_s
 {
+    float       roll_fg;
+    float       yaw_fg;
+    float       pitch_fg;
     float       roll;
     float       yaw;
     float       pitch;
@@ -56,6 +59,8 @@ typedef struct  map_s
     double      zoom;
     sfVector3f  *map_3d;
     sfVector3f  *map_2d;
+    sfVector3f  sun;
+    sfVector3f  sun_2d;
 }               map_t;
 
 typedef struct  my_game_s
@@ -71,7 +76,7 @@ sfColor color);
 void    draw_circle(my_framebuff_t *buff, sfVector2i cnt, int *tab,
 sfColor color);
 void    draw_line(my_framebuff_t *buff, sfVector2f *pos, int r, sfColor color);
-void horz_line(my_window_t *win, sfVector3f pos, vector4f_t nor, sfColor color);
+void horz_line(my_game_t *game, sfVector3f pos, vector4f_t nor, sfColor color);
 void    put_pixel(my_framebuff_t *framebuff, int x, int y, sfColor color);
 void    create_2d_map(map_t *map);
 void    display_2d_map(my_game_t *game);
@@ -80,17 +85,18 @@ void    update(my_game_t *game);
 void    check(my_game_t *game);
 int     window(char *str);
 void    clear_buff(my_framebuff_t *buff);
-void    put_pixel3d(my_window_t *win, sfVector3f cord, sfColor color);
+void    put_pixel3d(my_game_t *game, sfVector3f cord, sfColor color);
 void    clear_z_buff(double *z_buff);
 sfVector3f      pube_to_screen(const sfVector3f vec);
 void    transform_to_2d(map_t *map);
 void    display(my_game_t *game);
 void    set_3d_map(map_t **map, char *str);
 void    rotation(map_t *map);
-void    to_2d(map_t *map);
-void    transform_move(map_t *map);
+void    to_2d(my_game_t *game);
+void    transform_move(my_game_t *game);
+void    rotation_one_point(my_game_t *game);
 
-void    draw_triangle(my_window_t *win, sfVector3f *pos, sfColor color);
+void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color);
 
 #define WM 1920
 #define HM 1080
