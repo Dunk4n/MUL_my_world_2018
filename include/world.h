@@ -41,6 +41,12 @@ typedef struct  my_window_s
     sfVector2u          pos;
 }               my_window_t;
 
+typedef struct  triangle_s
+{
+    sfVector3f  *point_3d[3];
+    sfVector3f  *point_2d[3];
+}               triangle_t;
+
 typedef struct  map_s
 {
     float       roll_fg;
@@ -59,8 +65,7 @@ typedef struct  map_s
     double      zoom;
     sfVector3f  *map_3d;
     sfVector3f  *map_2d;
-    sfVector3f  sun;
-    sfVector3f  sun_2d;
+    triangle_t  *triangle;
 }               map_t;
 
 typedef struct  my_game_s

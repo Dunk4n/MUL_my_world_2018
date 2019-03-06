@@ -15,7 +15,7 @@ sfColor get_real_z(my_game_t *game, sfVector3f cord, sfColor color)
 {
     double res = glob;
 
-    res = (5 / cord.z);
+    res *= (3 / cord.z);
     if (res > 1)
         res = 1;
     color.r *= res;

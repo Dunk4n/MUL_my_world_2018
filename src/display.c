@@ -43,13 +43,7 @@ pos[0].z > 0 && pos[1].z > 0 && pos[1].z > 0) {
         if (res < 0)
             res *= -1;
         glob = res;
-        //res = (5 / (game->map->map_3d[i * game->map->tab_size_x + j].z + game->map->zoom)) * res;
-        //if (res > 1)
-        //    res = 1;
         sfColor col = sfWhite;
-        //col.r *= res;
-        //col.g *= res;
-        //col.b *= res;
         draw_triangle(game, pos, col);
     }
     pos[0] = game->map->map_2d[(i + 1) * game->map->tab_size_x + j + 1];
@@ -64,13 +58,7 @@ pos[0].z > 0 && pos[1].z > 0 && pos[1].z > 0) {
         if (res < 0)
             res *= -1;
         glob = res;
-        //res = (5 / (game->map->map_3d[i * game->map->tab_size_x + j].z + game->map->zoom)) * res;
-        //if (res > 1)
-        //    res = 1;
         sfColor col = sfWhite;
-        //col.r *= res;
-        //col.g *= res;
-        //col.b *= res;
         draw_triangle(game, pos, col);
     }
 }
