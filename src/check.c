@@ -35,6 +35,10 @@ void    check(my_game_t *game)
             sfRenderWindow_close(game->win->window);
         }
         (sfEvtKeyPressed) ? game->map->update = 1 : 0;
+        if ((game->win->event).type == sfEvtMouseWheelScrolled) {
+            game->map->update = 1;
+            game->map->zoom += 0.5;
+        }
         check_key(game);
         game->map->center_x += game->map->move_point_x;
         game->map->center_y += game->map->move_point_y;
