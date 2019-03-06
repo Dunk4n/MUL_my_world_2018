@@ -24,7 +24,6 @@ int     window(char *str)
             game->map->update = 0;
             clear_buff(game->win->framebuff);
             transform_move(game);
-            rotation_one_point(game);
             rotation(game->map);
             game->map->roll += game->map->roll_fg;
             game->map->yaw += game->map->yaw_fg;

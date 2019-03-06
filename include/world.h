@@ -41,6 +41,14 @@ typedef struct  my_window_s
     sfVector2u          pos;
 }               my_window_t;
 
+typedef struct  triangle_s
+{
+    sfVector3f  point_3d[3];
+    sfVector3f  point_2d[3];
+//    sfVector2f  tex_pos[3];
+//    sfVector2f  tex_uv;
+}               triangle_t;
+
 typedef struct  map_s
 {
     float       roll_fg;
@@ -57,10 +65,7 @@ typedef struct  map_s
     double      center_x;
     double      center_y;
     double      zoom;
-    sfVector3f  *map_3d;
-    sfVector3f  *map_2d;
-    sfVector3f  sun;
-    sfVector3f  sun_2d;
+    triangle_t  *triangle;
 }               map_t;
 
 typedef struct  my_game_s
@@ -94,7 +99,9 @@ void    set_3d_map(map_t **map, char *str);
 void    rotation(map_t *map);
 void    to_2d(my_game_t *game);
 void    transform_move(my_game_t *game);
-void    rotation_one_point(my_game_t *game);
+void    to_2d_point(my_game_t *game, triangle_t *tri);
+void    rotation_one_point(my_game_t *game, triangle_t *tri);
+void    transform_move_point(my_game_t *game, sfVector3f *point);
 
 void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color);
 

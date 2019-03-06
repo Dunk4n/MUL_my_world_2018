@@ -12,9 +12,6 @@ double glob;
 
 sfVector3f      normal_vec(sfVector3f a, sfVector3f b, sfVector3f c)
 {
-    //printf("a = %f, %f, %f\n", a.x, a.y, a.z);
-    //printf("b = %f, %f, %f\n", b.x, b.y, b.z);
-    //printf("c = %f, %f, %f\n", c.x, c.y, c.z);
     sfVector3f ab = {b.x - a.x, b.y - a.y, b.z - a.z};
     sfVector3f ac = {c.x - a.x, c.y - a.y, c.z - a.z};
 
@@ -23,7 +20,19 @@ sfVector3f      normal_vec(sfVector3f a, sfVector3f b, sfVector3f c)
                          ab.x * ac.y - ab.y * ac.x});
 }
 
-void    display_triangle_in_map(my_game_t *game, int i, int j)
+int     is_drawable(triangle_t *tri)
+{
+    if (tri->point_2d[0].z < 0 || tri->point_2d[1].z < 0 || tri->point_2d[2].z
+< 0 || ((tri->point_2d[0].x < 0 || tri->point_2d[0].x >= WM) &&
+(tri->point_2d[0].y < 0 || tri->point_2d[0].y >= HM) && (tri->point_2d[1].x < 0
+|| tri->point_2d[1].x >= WM) && (tri->point_2d[1].y < 0 || tri->point_2d[1].y >=
+HM) && (tri->point_2d[2].x < 0 || tri->point_2d[2].x >= WM) &&
+(tri->point_2d[2].y < 0 || tri->point_2d[2].y >= HM)))
+        return (0);
+    return (1);
+}
+
+/*void    display_triangle_in_map(my_game_t *game, int i, int j)
 {
     sfVector3f lum = {0, 0, 1};
     double res;
@@ -32,10 +41,10 @@ void    display_triangle_in_map(my_game_t *game, int i, int j)
 game->map->map_2d[i * game->map->tab_size_x + j + 1],
 game->map->map_2d[(i + 1) * game->map->tab_size_x + j]};
 
-    if (((pos[0].x >= 0 && pos[0].x < WM && pos[0].y >= 0 && pos[0].y < HM) ||
-(pos[1].x >= 0 && pos[1].x < WM && pos[1].y >= 0 && pos[1].y < HM) ||
+    if (((pos[0].x >= 0 && pos[0].x < WM && pos[0].y >= 0 && pos[0].y < HM) &&
+(pos[1].x >= 0 && pos[1].x < WM && pos[1].y >= 0 && pos[1].y < HM) &&
 (pos[2].x >= 0 && pos[2].x < WM && pos[2].y >= 0 && pos[2].y < HM)) &&
-pos[0].z > 0 && pos[1].z > 0 && pos[1].z > 0) {
+pos[0].z > 0 && pos[1].z > 0 && pos[2].z > 0) {
         normal = normal_vec(game->map->map_3d[i * game->map->tab_size_x + j],
                 game->map->map_3d[i * game->map->tab_size_x + j + 1],
                 game->map->map_3d[(i + 1) * game->map->tab_size_x + j]);
@@ -43,20 +52,14 @@ pos[0].z > 0 && pos[1].z > 0 && pos[1].z > 0) {
         if (res < 0)
             res *= -1;
         glob = res;
-        //res = (5 / (game->map->map_3d[i * game->map->tab_size_x + j].z + game->map->zoom)) * res;
-        //if (res > 1)
-        //    res = 1;
         sfColor col = sfWhite;
-        //col.r *= res;
-        //col.g *= res;
-        //col.b *= res;
         draw_triangle(game, pos, col);
     }
     pos[0] = game->map->map_2d[(i + 1) * game->map->tab_size_x + j + 1];
-    if (((pos[0].x >= 0 && pos[0].x < WM && pos[0].y >= 0 && pos[0].y < HM) ||
-(pos[1].x >= 0 && pos[1].x < WM && pos[1].y >= 0 && pos[1].y < HM) ||
+    if (((pos[0].x >= 0 && pos[0].x < WM && pos[0].y >= 0 && pos[0].y < HM) &&
+(pos[1].x >= 0 && pos[1].x < WM && pos[1].y >= 0 && pos[1].y < HM) &&
 (pos[2].x >= 0 && pos[2].x < WM && pos[2].y >= 0 && pos[2].y < HM)) &&
-pos[0].z > 0 && pos[1].z > 0 && pos[1].z > 0) {
+pos[0].z > 0 && pos[1].z > 0 && pos[2].z > 0) {
         normal = normal_vec(game->map->map_3d[(i + 1) * game->map->tab_size_x + j + 1],
                 game->map->map_3d[i * game->map->tab_size_x + j + 1],
                 game->map->map_3d[(i + 1) * game->map->tab_size_x + j]);
@@ -64,18 +67,25 @@ pos[0].z > 0 && pos[1].z > 0 && pos[1].z > 0) {
         if (res < 0)
             res *= -1;
         glob = res;
-        //res = (5 / (game->map->map_3d[i * game->map->tab_size_x + j].z + game->map->zoom)) * res;
-        //if (res > 1)
-        //    res = 1;
         sfColor col = sfWhite;
-        //col.r *= res;
-        //col.g *= res;
-        //col.b *= res;
         draw_triangle(game, pos, col);
     }
+}*/
+
+static void     display_triangle_in_map(my_game_t *game, triangle_t *tri)
+{
+    double res;
+    sfVector3f normal = normal_vec(tri->point_3d[0], tri->point_3d[1],
+tri->point_3d[2]);
+
+    res = normal.z;
+    if (res < 0)
+        res *= -1;
+    glob = res;
+    draw_triangle(game, tri->point_2d, sfWhite);
 }
 
-void    condition_line(my_game_t *game, int i, int j)
+/*void    condition_line(my_game_t *game, int i, int j)
 {
     sfVector2f pos[2] = {{game->map->map_2d[i * game->map->tab_size_x + j].x,
 game->map->map_2d[i * game->map->tab_size_x + j].y}, {0, 0}};
@@ -107,20 +117,15 @@ game->map->map_2d[(i + 1) * game->map->tab_size_x + j].y < HM)) &&
         pos[1].y = game->map->map_2d[(i + 1) * game->map->tab_size_x + j].y;
         draw_line(game->win->framebuff, pos, 1, sfWhite);
     }
-}
+}*/
 
 void    display(my_game_t *game)
 {
     int i = 0;
-    int j = 0;
 
-    while (i < game->map->tab_size_x) {
-        j = 0;
-        while (j < game->map->tab_size_y && (j + 1 < game->map->tab_size_y ||
-i + 1 < game->map->tab_size_x)) {
-            condition_line(game, i, j);
-            j++;
-        }
+    while (i < game->map->tab_size_x * 2 * game->map->tab_size_y) {
+        if (is_drawable(&(game->map->triangle[i])))
+            display_triangle_in_map(game, &(game->map->triangle[i]));
         i++;
     }
 }

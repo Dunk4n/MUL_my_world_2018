@@ -69,11 +69,7 @@ void            set_map(map_t **map)
     (*map)->tab_size_y = 10;
     (*map)->zoom = 6.0;
     (*map)->update = 1;
-    (*map)->sun.x = 0;
-    (*map)->sun.y = 0;
-    (*map)->sun.z = 10;
-    (*map)->map_2d = malloc(sizeof(sfVector3f) *
-(*map)->tab_size_x * (*map)->tab_size_y);
+    (*map)->triangle = NULL;
 }
 
 my_game_t        *set_game(char *str)
@@ -92,8 +88,8 @@ my_game_t        *set_game(char *str)
         (game) ? free(game) : 0;
         return (NULL);
     }
-    set_map(&(game->map));
-    set_map(&(game->map));
+    //set_map(&(game->map));
+    //set_map(&(game->map));
     set_3d_map(&(game->map), str);
     return (game);
 }
