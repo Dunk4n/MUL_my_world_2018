@@ -5,6 +5,7 @@
 ** try not to segfault, good luck :)
 */
 
+#include <stdlib.h>
 #include "world.h"
 
 void    clear_z_buff(double *z_buff)
@@ -17,13 +18,12 @@ void    clear_z_buff(double *z_buff)
     }
 }
 
-sfVector3f      pube_to_screen(const sfVector3f vec)
+void    clear_t_buff(triangle_t **t_buff)
 {
-    sfVector3f res = vec;
-    float per = (vec.z == 0) ? 1 : 1.0 / (vec.z + 2);
+    int i = 0;
 
-    res.x = (vec.x * per + 1) * (WM / 2);
-    res.y = (-vec.y * per + 1) * (HM / 2);
-    res.z = vec.z;
-    return (res);
+    while (i < WM * HM) {
+        t_buff[i] = NULL;
+        i++;
+    }
 }

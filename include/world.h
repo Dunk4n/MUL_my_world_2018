@@ -30,6 +30,16 @@ typedef struct  my_framebuff_s
     sfUint8     *pixels;
 }               my_framebuff_t;
 
+typedef struct  triangle_s
+{
+    sfVector3f  *point_3d[3];
+    sfVector3f  *point_2d[3];
+    sfColor     color;
+    void        *square_part;
+//    sfVector2f  tex_pos[3];
+//    sfVector2f  tex_uv;
+}               triangle_t;
+
 typedef struct  my_window_s
 {
     sfRenderWindow      *window;
@@ -38,16 +48,9 @@ typedef struct  my_window_s
     sfSprite            *sprite;
     my_framebuff_t      *framebuff;
     double              *z_buff;
+    triangle_t          **t_buff;
     sfVector2u          pos;
 }               my_window_t;
-
-typedef struct  triangle_s
-{
-    sfVector3f  *point_3d[3];
-    sfVector3f  *point_2d[3];
-//    sfVector2f  tex_pos[3];
-//    sfVector2f  tex_uv;
-}               triangle_t;
 
 typedef struct  map_s
 {
@@ -94,6 +97,7 @@ int     window(char *str);
 void    clear_buff(my_framebuff_t *buff);
 void    put_pixel3d(my_game_t *game, sfVector3f cord, sfColor color);
 void    clear_z_buff(double *z_buff);
+void    clear_t_buff(triangle_t **t_buff);
 sfVector3f      pube_to_screen(const sfVector3f vec);
 void    transform_to_2d(map_t *map);
 void    display(my_game_t *game);
@@ -101,9 +105,6 @@ void    set_3d_map(map_t **map, char *str);
 void    rotation(map_t *map);
 void    to_2d(my_game_t *game);
 void    transform_move(my_game_t *game);
-void    to_2d_point(my_game_t *game, triangle_t *tri);
-void    rotation_one_point(my_game_t *game, triangle_t *tri);
-void    transform_move_point(my_game_t *game, sfVector3f *point);
 
 void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color);
 

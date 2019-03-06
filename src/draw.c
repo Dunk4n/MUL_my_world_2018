@@ -10,6 +10,7 @@
 #include "world.h"
 
 double glob;
+triangle_t *fraude;
 
 sfColor get_real_z(my_game_t *game, sfVector3f cord, sfColor color)
 {
@@ -33,6 +34,7 @@ cord.y >= game->win->framebuff->height || cord.y < 0)
 cord.z < 0) && (game->win->z_buff)[(int)(WM * cord.y + cord.x)] != -42)
         return ;
     color = get_real_z(game, cord, color);
+    game->win->t_buff[(int)(WM * cord.y + cord.x)] = fraude;
     game->win->z_buff[(int)(game->win->framebuff->width * cord.y + cord.x)] =
 cord.z;
     game->win->framebuff->pixels[(int)((game->win->framebuff->width *

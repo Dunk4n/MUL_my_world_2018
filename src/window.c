@@ -21,6 +21,8 @@ int     window(char *str)
             game->map->update = 0;
 
             clear_buff(game->win->framebuff);
+            clear_z_buff(game->win->z_buff);
+            clear_t_buff(game->win->t_buff);
 
             transform_move(game);
             rotation(game->map);

@@ -5,6 +5,7 @@
 ** don't forget to free at the end
 */
 
+#include <stdlib.h>
 #include "world.h"
 
 void    check_key(my_game_t *game)
@@ -17,7 +18,7 @@ void    check_key(my_game_t *game)
 += 0.1 : 0;
     ((game->win->event).key.code == sfKeyLeft) ? game->map->move_point_x
 -= 0.1 : 0;
-    ((game->win->event).key.code == sfKeyJ) ? game->map->roll_fg = 1 : 0;
+    ((game->win->event).key.code == sfKeyJ) ? game->map->roll_fg = 1: 0;
     ((game->win->event).key.code == sfKeyU) ? game->map->roll_fg = -1 : 0;
     ((game->win->event).key.code == sfKeyK) ? game->map->yaw_fg = 1 : 0;
     ((game->win->event).key.code == sfKeyI) ? game->map->yaw_fg = -1 : 0;
@@ -29,6 +30,9 @@ void    check_key(my_game_t *game)
 
 void    check(my_game_t *game)
 {
+    int rnd = 0;
+    sfColor col[5] = {sfRed, sfGreen, sfBlue, sfYellow, sfMagenta};
+
     while (sfRenderWindow_pollEvent(game->win->window, &(game->win->event))) {
         if (((game->win->event).type == sfEvtClosed) ||
                 ((game->win->event).key.code == sfKeyEscape)) {
@@ -38,6 +42,15 @@ void    check(my_game_t *game)
         if ((game->win->event).type == sfEvtMouseWheelScrolled) {
             game->map->update = 1;
             game->map->zoom += 0.5;
+        }
+        if (game->win->event.type == sfEvtMouseButtonPressed &&
+game->win->t_buff[WM * game->win->event.mouseButton.y +
+game->win->event.mouseButton.x] != NULL) {
+            rnd = rand() % 5;
+            game->win->t_buff[WM * game->win->event.mouseButton.y +
+game->win->event.mouseButton.x]->color = col[rnd];
+            ((triangle_t*)(game->win->t_buff[WM * game->win->event.mouseButton.y
++ game->win->event.mouseButton.x]->square_part))->color = col[rnd];
         }
         check_key(game);
         game->map->center_x += game->map->move_point_x;

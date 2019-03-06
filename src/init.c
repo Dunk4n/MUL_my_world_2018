@@ -45,7 +45,7 @@ sfFullscreen, NULL);
     if ((win->framebuff = my_framebuff_create(WM, HM)) == NULL)
         return (NULL);
     win->z_buff = malloc(sizeof(double) * WM * HM);
-    clear_z_buff(win->z_buff);
+    win->t_buff = malloc(sizeof(triangle_t*) * WM * HM);
     return (win);
 }
 
@@ -65,8 +65,8 @@ void            set_map(map_t **map)
     (*map)->move_point_y = 0;
     (*map)->center_x = 0;
     (*map)->center_y = 0;
-    (*map)->tab_size_x = 1;
-    (*map)->tab_size_y = 1;
+    (*map)->tab_size_x = 10;
+    (*map)->tab_size_y = 10;
     (*map)->zoom = 6;
     (*map)->update = 1;
     (*map)->triangle = NULL;
