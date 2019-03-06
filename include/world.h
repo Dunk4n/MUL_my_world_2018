@@ -43,8 +43,8 @@ typedef struct  my_window_s
 
 typedef struct  triangle_s
 {
-    sfVector3f  point_3d[3];
-    sfVector3f  point_2d[3];
+    sfVector3f  *point_3d[3];
+    sfVector3f  *point_2d[3];
 //    sfVector2f  tex_pos[3];
 //    sfVector2f  tex_uv;
 }               triangle_t;
@@ -65,6 +65,8 @@ typedef struct  map_s
     double      center_x;
     double      center_y;
     double      zoom;
+    sfVector3f  *map_3d;
+    sfVector3f  *map_2d;
     triangle_t  *triangle;
 }               map_t;
 

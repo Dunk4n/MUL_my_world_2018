@@ -13,16 +13,15 @@
 int     window(char *str)
 {
     my_game_t    *game = NULL;
-    float a = 0;
 
     if (!(game = set_game(str)))
         return (84);
     while (sfRenderWindow_isOpen(game->win->window)) {
-        //printf("%f\n", a);
         if (game->map->update == 1) {
-            //printf("%d, %d, %d\n\n", roll[3], roll[4], roll[5]);
             game->map->update = 0;
+
             clear_buff(game->win->framebuff);
+
             transform_move(game);
             rotation(game->map);
             game->map->roll += game->map->roll_fg;
@@ -49,9 +48,6 @@ int     window(char *str)
             display(game);
             clear_z_buff(game->win->z_buff);
         }
-        a++;
-        if (a >= 360)
-            a = 0;
         update(game);
         check(game);
     }
