@@ -93,6 +93,10 @@ void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color)
     sfVector3f cp_pos[] = {pos[0], pos[1], pos[2], pos[0]};
     sfVector2f arr[5];
 
+    if (cp_pos[0].y == cp_pos[2].y || cp_pos[1].y == cp_pos[2].y)
+        cp_pos[2].y += 0.01;
+    if (cp_pos[0].y == cp_pos[1].y)
+        cp_pos[1].y += 0.01;
     sort_pos_triangle(cp_pos);
     set_coordinates(arr, cp_pos);
     triangle_filler(cp_pos, arr, color, game);

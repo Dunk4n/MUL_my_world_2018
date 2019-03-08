@@ -70,8 +70,6 @@ void            set_map(map_t **map)
     (*map)->zoom = 6;
     (*map)->update = 1;
     (*map)->triangle = NULL;
-    (*map)->map_2d = malloc(sizeof(sfVector3f) *
-((*map)->tab_size_x + 1) * ((*map)->tab_size_y + 1));
 }
 
 my_game_t        *set_game(char *str)
@@ -90,6 +88,8 @@ my_game_t        *set_game(char *str)
         (game) ? free(game) : 0;
         return (NULL);
     }
+    game->map->map_2d = malloc(sizeof(sfVector3f) *
+(game->map->tab_size_x + 1) * (game->map->tab_size_y + 1));
     set_3d_map(&(game->map), str);
     return (game);
 }

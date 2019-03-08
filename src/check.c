@@ -6,6 +6,8 @@
 */
 
 #include <stdlib.h>
+#include <math.h>
+#include "my.h"
 #include "world.h"
 
 void    check_key(my_game_t *game)
@@ -18,14 +20,38 @@ void    check_key(my_game_t *game)
 += 0.1 : 0;
     ((game->win->event).key.code == sfKeyLeft) ? game->map->move_point_x
 -= 0.1 : 0;
-    ((game->win->event).key.code == sfKeyJ) ? game->map->roll_fg = 1: 0;
-    ((game->win->event).key.code == sfKeyU) ? game->map->roll_fg = -1 : 0;
-    ((game->win->event).key.code == sfKeyK) ? game->map->yaw_fg = 1 : 0;
-    ((game->win->event).key.code == sfKeyI) ? game->map->yaw_fg = -1 : 0;
-    ((game->win->event).key.code == sfKeyL) ? game->map->pitch_fg = 1 : 0;
-    ((game->win->event).key.code == sfKeyO) ? game->map->pitch_fg = -1 : 0;
+    ((game->win->event).key.code == sfKeyJ) ? game->map->roll_fg = 2: 0;
+    ((game->win->event).key.code == sfKeyU) ? game->map->roll_fg = -2 : 0;
+    ((game->win->event).key.code == sfKeyK) ? game->map->yaw_fg = 2 : 0;
+    ((game->win->event).key.code == sfKeyI) ? game->map->yaw_fg = -2 : 0;
+    ((game->win->event).key.code == sfKeyL) ? game->map->pitch_fg = 2 : 0;
+    ((game->win->event).key.code == sfKeyO) ? game->map->pitch_fg = -2 : 0;
     ((game->win->event).key.code == sfKeyE) ? game->map->zoom -= 0.5 : 0;
     ((game->win->event).key.code == sfKeyQ) ? game->map->zoom += 0.5 : 0;
+}
+
+sfVector3f      *get_nearest_point(my_game_t *game, triangle_t *tri)
+{
+    int i = 0;
+    int j = 0;
+    double tmp;
+    double res = pow(game->win->event.mouseButton.y -
+((triangle_t*)(tri->square_part))->point_2d[0]->y, 2) +
+pow(game->win->event.mouseButton.x -
+((triangle_t*)(tri->square_part))->point_2d[0]->x, 2);
+
+    while (i < 3) {
+        tmp = pow(game->win->event.mouseButton.y - tri->point_2d[i]->y, 2) +
+            pow(game->win->event.mouseButton.x - tri->point_2d[i]->x, 2);
+        if (tmp < res) {
+            j = i + 1;
+            res = tmp;
+        }
+        i++;
+    }
+    if (j == 0)
+        return (((triangle_t*)(tri->square_part))->point_3d[0]);
+    return (tri->point_3d[j - 1]);
 }
 
 void    check(my_game_t *game)

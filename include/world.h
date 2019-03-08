@@ -105,6 +105,8 @@ void    set_3d_map(map_t **map, char *str);
 void    rotation(map_t *map);
 void    to_2d(my_game_t *game);
 void    transform_move(my_game_t *game);
+sfVector3f      normal_vec(sfVector3f a, sfVector3f b, sfVector3f c);
+void    set_map(map_t **map);
 
 void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color);
 

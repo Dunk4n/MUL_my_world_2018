@@ -33,46 +33,6 @@ HM) && (tri->point_2d[2]->x < 0 || tri->point_2d[2]->x >= WM) &&
     return (1);
 }
 
-/*void    display_triangle_in_map(my_game_t *game, int i, int j)
-{
-    sfVector3f lum = {0, 0, 1};
-    double res;
-    sfVector3f normal;
-    sfVector3f pos[] = {game->map->map_2d[i * game->map->tab_size_x + j],
-game->map->map_2d[i * game->map->tab_size_x + j + 1],
-game->map->map_2d[(i + 1) * game->map->tab_size_x + j]};
-
-    if (((pos[0].x >= 0 && pos[0].x < WM && pos[0].y >= 0 && pos[0].y < HM) &&
-(pos[1].x >= 0 && pos[1].x < WM && pos[1].y >= 0 && pos[1].y < HM) &&
-(pos[2].x >= 0 && pos[2].x < WM && pos[2].y >= 0 && pos[2].y < HM)) &&
-pos[0].z > 0 && pos[1].z > 0 && pos[2].z > 0) {
-        normal = normal_vec(game->map->map_3d[i * game->map->tab_size_x + j],
-                game->map->map_3d[i * game->map->tab_size_x + j + 1],
-                game->map->map_3d[(i + 1) * game->map->tab_size_x + j]);
-        res = lum.x * normal.x + lum.y * normal.y + lum.z * normal.z;
-        if (res < 0)
-            res *= -1;
-        glob = res;
-        sfColor col = sfWhite;
-        draw_triangle(game, pos, col);
-    }
-    pos[0] = game->map->map_2d[(i + 1) * game->map->tab_size_x + j + 1];
-    if (((pos[0].x >= 0 && pos[0].x < WM && pos[0].y >= 0 && pos[0].y < HM) &&
-(pos[1].x >= 0 && pos[1].x < WM && pos[1].y >= 0 && pos[1].y < HM) &&
-(pos[2].x >= 0 && pos[2].x < WM && pos[2].y >= 0 && pos[2].y < HM)) &&
-pos[0].z > 0 && pos[1].z > 0 && pos[2].z > 0) {
-        normal = normal_vec(game->map->map_3d[(i + 1) * game->map->tab_size_x + j + 1],
-                game->map->map_3d[i * game->map->tab_size_x + j + 1],
-                game->map->map_3d[(i + 1) * game->map->tab_size_x + j]);
-        res = lum.x * normal.x + lum.y * normal.y + lum.z * normal.z;
-        if (res < 0)
-            res *= -1;
-        glob = res;
-        sfColor col = sfWhite;
-        draw_triangle(game, pos, col);
-    }
-}*/
-
 static void     display_triangle_in_map(my_game_t *game, triangle_t *tri)
 {
     double res;

@@ -20,9 +20,9 @@ int     window(char *str)
         if (game->map->update == 1) {
             game->map->update = 0;
 
-            clear_buff(game->win->framebuff);
             clear_z_buff(game->win->z_buff);
             clear_t_buff(game->win->t_buff);
+            clear_buff(game->win->framebuff);
 
             transform_move(game);
             rotation(game->map);
@@ -48,7 +48,6 @@ int     window(char *str)
             game->map->move_point_y = 0;
             to_2d(game);
             display(game);
-            clear_z_buff(game->win->z_buff);
         }
         update(game);
         check(game);
