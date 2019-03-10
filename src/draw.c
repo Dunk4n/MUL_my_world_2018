@@ -9,14 +9,11 @@
 #include "my.h"
 #include "world.h"
 
-double glob;
-triangle_t *fraude;
-
 sfColor get_real_z(my_game_t *game, sfVector3f cord, sfColor color)
 {
-    double res = glob;
+    double res = game->map->lum;
 
-    res *= (3 / cord.z);
+    res *= (5.0 / cord.z);
     if (res > 1)
         res = 1;
     color.r *= res;
@@ -30,11 +27,11 @@ void    put_pixel3d(my_game_t *game, sfVector3f cord, sfColor color)
     if (cord.x >= game->win->framebuff->width || cord.x < 0 ||
 cord.y >= game->win->framebuff->height || cord.y < 0)
         return ;
-    if ((cord.z >= (game->win->z_buff)[(int)(WM * cord.y + cord.x)] ||
-cord.z < 0) && (game->win->z_buff)[(int)(WM * cord.y + cord.x)] != -42)
+    if ((cord.z >= (game->win->z_buff)[(int)(WM * cord.y + cord.x)] &&
+(game->win->z_buff)[(int)(WM * cord.y + cord.x)] != -42) || cord.z < 0)
         return ;
     color = get_real_z(game, cord, color);
-    game->win->t_buff[(int)(WM * cord.y + cord.x)] = fraude;
+    game->win->t_buff[(int)(WM * cord.y + cord.x)] = game->map->ptr_tri;
     game->win->z_buff[(int)(game->win->framebuff->width * cord.y + cord.x)] =
 cord.z;
     game->win->framebuff->pixels[(int)((game->win->framebuff->width *

@@ -67,9 +67,10 @@ void            set_map(map_t **map)
     (*map)->center_y = 0;
     (*map)->tab_size_x = 10;
     (*map)->tab_size_y = 10;
-    (*map)->zoom = 6;
+    (*map)->zoom = 5;
     (*map)->update = 1;
     (*map)->triangle = NULL;
+    (*map)->obj = NULL;
 }
 
 my_game_t        *set_game(char *str)
@@ -88,8 +89,12 @@ my_game_t        *set_game(char *str)
         (game) ? free(game) : 0;
         return (NULL);
     }
-    game->map->map_2d = malloc(sizeof(sfVector3f) *
-(game->map->tab_size_x + 1) * (game->map->tab_size_y + 1));
-    set_3d_map(&(game->map), str);
+    if (str) {
+        if (!(game->map->obj = open_file_obj(str)))
+            return (NULL);
+    }
+    else
+        return (NULL);
+    set_img(game);
     return (game);
 }

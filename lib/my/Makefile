@@ -59,7 +59,6 @@ SRC	=	my_showmem.c			\
 		my_apply_on_nodes.c		\
 		my_apply_on_matching_nodes.c	\
 		my_add_in_sorted_list.c		\
-		my_getfloat.c			\
 		my_int_tobase.c			\
 		my_itoa.c			\
 		put_color.c			\

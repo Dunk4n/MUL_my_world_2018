@@ -15,12 +15,23 @@
 #include <SFML/System/Time.h>
 #include <SFML/System/Types.h>
 
+const char      *img_name[8];
+
 typedef struct  vector4f_s
 {
     double x;
     double y;
     double z;
     double t;
+    double bcy;
+    double cbx;
+    double cay;
+    double acx;
+    double div;
+    sfVector3f c_point;
+    sfVector3f a_uv;
+    sfVector3f b_uv;
+    sfVector3f c_uv;
 }               vector4f_t;
 
 typedef struct  my_framebuff_s
@@ -32,12 +43,12 @@ typedef struct  my_framebuff_s
 
 typedef struct  triangle_s
 {
+    int         texture;
     sfVector3f  *point_3d[3];
     sfVector3f  *point_2d[3];
+    sfVector3f  *point_tx[3];
     sfColor     color;
     void        *square_part;
-//    sfVector2f  tex_pos[3];
-//    sfVector2f  tex_uv;
 }               triangle_t;
 
 typedef struct  my_window_s
@@ -51,6 +62,17 @@ typedef struct  my_window_s
     triangle_t          **t_buff;
     sfVector2u          pos;
 }               my_window_t;
+
+typedef struct  obj_s
+{
+    int         nb_point;
+    int         nb_tr;
+    int         nb_tx;
+    sfVector3f  *point_3d;
+    sfVector3f  *point_2d;
+    sfVector3f  *point_tx;
+    triangle_t  *triangle;
+}               obj_t;
 
 typedef struct  map_s
 {
@@ -68,15 +90,20 @@ typedef struct  map_s
     double      center_x;
     double      center_y;
     double      zoom;
+    double      lum;
+    triangle_t  *ptr_tri;
     sfVector3f  *map_3d;
     sfVector3f  *map_2d;
     triangle_t  *triangle;
+    obj_t       *obj;
 }               map_t;
 
 typedef struct  my_game_s
 {
     my_window_t     *win;
     map_t           *map;
+    sfImage         **img;
+    int             nb_img;
     sfClock         *clock;
     sfInt64         fgt;
 }               my_game_t;
@@ -107,7 +134,18 @@ void    to_2d(my_game_t *game);
 void    transform_move(my_game_t *game);
 sfVector3f      normal_vec(sfVector3f a, sfVector3f b, sfVector3f c);
 void    set_map(map_t **map);
+obj_t   *open_file_obj(char *name);
+void    free_array(char **array);
+obj_t   *init_obj(void);
+int     get_nbr_arg(obj_t *obj, char *name);
+int     set_obj(obj_t *obj, char *name);
+double  my_getfloat(char *str);
+void    set_img(my_game_t *game);
+void    set_point_tx(obj_t *obj, char **array);
+void    horz_line_tx(my_game_t *game, sfVector3f pos, vector4f_t nor,
+sfColor color);
 
+void    draw_triangle_tx(my_game_t *game, sfVector3f *pos, sfColor color);
 void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color);
 
 #define WM 1920

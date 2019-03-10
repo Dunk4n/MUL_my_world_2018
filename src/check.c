@@ -20,14 +20,14 @@ void    check_key(my_game_t *game)
 += 0.1 : 0;
     ((game->win->event).key.code == sfKeyLeft) ? game->map->move_point_x
 -= 0.1 : 0;
-    ((game->win->event).key.code == sfKeyJ) ? game->map->roll_fg = 2: 0;
+    ((game->win->event).key.code == sfKeyJ) ? game->map->roll_fg = 2 : 0;
     ((game->win->event).key.code == sfKeyU) ? game->map->roll_fg = -2 : 0;
     ((game->win->event).key.code == sfKeyK) ? game->map->yaw_fg = 2 : 0;
     ((game->win->event).key.code == sfKeyI) ? game->map->yaw_fg = -2 : 0;
     ((game->win->event).key.code == sfKeyL) ? game->map->pitch_fg = 2 : 0;
     ((game->win->event).key.code == sfKeyO) ? game->map->pitch_fg = -2 : 0;
-    ((game->win->event).key.code == sfKeyE) ? game->map->zoom -= 0.5 : 0;
-    ((game->win->event).key.code == sfKeyQ) ? game->map->zoom += 0.5 : 0;
+    ((game->win->event).key.code == sfKeyE) ? game->map->zoom -= 0.05 : 0;
+    ((game->win->event).key.code == sfKeyQ) ? game->map->zoom += 0.05 : 0;
 }
 
 sfVector3f      *get_nearest_point(my_game_t *game, triangle_t *tri)
@@ -75,6 +75,8 @@ game->win->event.mouseButton.x] != NULL) {
             rnd = rand() % 5;
             game->win->t_buff[WM * game->win->event.mouseButton.y +
 game->win->event.mouseButton.x]->color = col[rnd];
+            if (game->win->t_buff[WM * game->win->event.mouseButton.y
++ game->win->event.mouseButton.x]->square_part)
             ((triangle_t*)(game->win->t_buff[WM * game->win->event.mouseButton.y
 + game->win->event.mouseButton.x]->square_part))->color = col[rnd];
         }

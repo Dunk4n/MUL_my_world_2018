@@ -1,0 +1,19 @@
+# OBJ file created by ply_to_obj.c
+#
+g Object001
+
+v  1  0  0
+v  0  -1  0
+v  -1  0  0
+v  0  1  0
+v  0  0  1
+v  0  0  -1
+
+f  2  1  5 # RED
+f  3  2  5 # BLUE
+f  4  3  5 # GREEN
+f  1  4  5 # YELLOW
+f  1  2  6 # MAGENTA
+f  2  3  6 # CYAN
+f  3  4  6 # WHITE
+f  4  1  6 # BLACK

@@ -6,6 +6,7 @@
 */
 
 #include "world.h"
+#include "my.h"
 
 void horz_line(my_game_t *game, sfVector3f pos, vector4f_t nor, sfColor color)
 {
@@ -17,6 +18,36 @@ void horz_line(my_game_t *game, sfVector3f pos, vector4f_t nor, sfColor color)
     while (x <= pos.y) {
         put_pixel3d(game, (sfVector3f){x, y, (nor.t - (nor.x * (double)x) -
 (nor.y * (double)y)) / ((nor.z == 0) ? 1 : nor.z)}, color);
+        x++;
+    }
+}
+
+void horz_line_tx(my_game_t *game, sfVector3f pos, vector4f_t nor,
+sfColor color)
+{
+    int x = pos.x;
+    int y = pos.z;
+    double bary_a;
+    double bary_b;
+    double bary_c;
+    double z;
+    sfVector2u lim = sfImage_getSize(game->img[game->map->ptr_tri->texture]);
+
+    if (pos.x > pos.y)
+        x = pos.y;
+    while (x <= pos.y) {
+        bary_a = (nor.bcy * (x - nor.c_point.x) +
+        (nor.cbx * (y - nor.c_point.y))) * nor.div;
+        bary_b = (nor.cay * (x - nor.c_point.x) +
+        (nor.acx * (y - nor.c_point.y))) * nor.div;
+        bary_c = 1.0 - bary_a - bary_b;
+        z = (nor.t - (nor.x * (double)x) -
+(nor.y * (double)y)) / ((nor.z == 0) ? 1 : nor.z);
+        //printf("z = %f\n", z - game->map->zoom);
+        color = sfImage_getPixel(game->img[game->map->ptr_tri->texture],
+(int)(bary_a * nor.a_uv.x + bary_b * nor.b_uv.x + bary_c * nor.c_uv.x) % lim.x,
+(int)(bary_a * nor.a_uv.y + bary_b * nor.b_uv.y + bary_c * nor.c_uv.y) % lim.y);
+        put_pixel3d(game, (sfVector3f){x, y, z}, color);
         x++;
     }
 }

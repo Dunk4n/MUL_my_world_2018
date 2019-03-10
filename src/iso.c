@@ -21,16 +21,16 @@ void    rotation(map_t *map)
     float cp = cos(map->pitch_fg * M_PI / 180);
     double tmp;
 
-    while (i < (map->tab_size_x + 1) * (map->tab_size_y + 1)) {
-        tmp = map->map_3d[i].z;
-        map->map_3d[i].z = (sr * map->map_3d[i].y) + (cr * tmp);
-        map->map_3d[i].y = (cr * map->map_3d[i].y) - (sr * tmp);
-        tmp = map->map_3d[i].x;
-        map->map_3d[i].x = (cy * tmp) + (sy * map->map_3d[i].z);
-        map->map_3d[i].z = -(sy * tmp) + (cy * map->map_3d[i].z);
-        tmp = map->map_3d[i].x;
-        map->map_3d[i].x = (cp * tmp) - (sp * map->map_3d[i].y);
-        map->map_3d[i].y = (sp * tmp) + (cp * map->map_3d[i].y);
+    while (i < map->obj->nb_point) {
+        tmp = map->obj->point_3d[i].z;
+        map->obj->point_3d[i].z = (sr * map->obj->point_3d[i].y) + (cr * tmp);
+        map->obj->point_3d[i].y = (cr * map->obj->point_3d[i].y) - (sr * tmp);
+        tmp = map->obj->point_3d[i].x;
+        map->obj->point_3d[i].x = (cy * tmp) + (sy * map->obj->point_3d[i].z);
+        map->obj->point_3d[i].z = -(sy * tmp) + (cy * map->obj->point_3d[i].z);
+        tmp = map->obj->point_3d[i].x;
+        map->obj->point_3d[i].x = (cp * tmp) - (sp * map->obj->point_3d[i].y);
+        map->obj->point_3d[i].y = (sp * tmp) + (cp * map->obj->point_3d[i].y);
         i++;
     }
 }
@@ -43,14 +43,15 @@ void    to_2d(my_game_t *game)
     double  height_width = (double)HM / (double)WM;
     float   prospect;
 
-    while (i < (game->map->tab_size_x + 1) * (game->map->tab_size_y + 1)) {
-        prospect = (game->map->map_3d[i].z + game->map->zoom == 0) ? 1 : 1.0 /
-(game->map->map_3d[i].z + game->map->zoom);
-        game->map->map_2d[i].x = (game->map->map_3d[i].x * prospect) *
-(width_d2) * (height_width) + (width_d2);
-        game->map->map_2d[i].y = (-(game->map->map_3d[i].y) * prospect + 1) *
-(height_d2);
-        game->map->map_2d[i].z = game->map->map_3d[i].z + game->map->zoom;
+    while (i < game->map->obj->nb_point) {
+        prospect = (game->map->obj->point_3d[i].z + game->map->zoom == 0) ?
+1 : 1.0 / (game->map->obj->point_3d[i].z + game->map->zoom);
+        game->map->obj->point_2d[i].x = (game->map->obj->point_3d[i].x *
+prospect) * (width_d2) * (height_width) + (width_d2);
+        game->map->obj->point_2d[i].y = (-(game->map->obj->point_3d[i].y)
+* prospect + 1) * (height_d2);
+        game->map->obj->point_2d[i].z = game->map->obj->point_3d[i].z +
+game->map->zoom;
         i++;
     }
 }

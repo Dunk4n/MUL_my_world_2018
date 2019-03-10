@@ -11,9 +11,9 @@ void    transform_move(my_game_t *game)
 {
     int i = 0;
 
-    while (i < (game->map->tab_size_x + 1) * (game->map->tab_size_y + 1)) {
-        game->map->map_3d[i].x += game->map->move_point_x;
-        game->map->map_3d[i].y += game->map->move_point_y;
+    while (i < game->map->obj->nb_point) {
+        game->map->obj->point_3d[i].x += game->map->move_point_x;
+        game->map->obj->point_3d[i].y += game->map->move_point_y;
         i++;
     }
 }

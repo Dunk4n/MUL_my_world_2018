@@ -21,10 +21,16 @@ SRC	=	$(D_SRC)main.c			\
 		$(D_SRC)iso.c			\
 		$(D_SRC)display_2d_map.c	\
 		$(D_SRC)triangle.c		\
+		$(D_SRC)triangle_tx.c		\
 		$(D_SRC)z_buff.c		\
 		$(D_SRC)display.c		\
 		$(D_SRC)transform.c		\
 		$(D_SRC)set_3d_map.c		\
+		$(D_SRC)file_obj.c		\
+		$(D_SRC)init_obj.c		\
+		$(D_SRC)set_obj.c		\
+		$(D_SRC)my_getfloat.c		\
+		$(D_SRC)init_img.c		\
 
 OBJ	=	$(SRC:%.c=$(BUILD_DIR)/%.o)
 
