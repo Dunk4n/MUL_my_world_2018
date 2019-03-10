@@ -67,7 +67,7 @@ void            set_map(map_t **map)
     (*map)->center_y = 0;
     (*map)->tab_size_x = 10;
     (*map)->tab_size_y = 10;
-    (*map)->zoom = 5;
+    (*map)->zoom = 10;
     (*map)->update = 1;
     (*map)->triangle = NULL;
     (*map)->obj = NULL;

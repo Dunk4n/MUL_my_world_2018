@@ -15,7 +15,7 @@
 #include <SFML/System/Time.h>
 #include <SFML/System/Types.h>
 
-const char      *img_name[8];
+const char      *img_name[10];
 
 typedef struct  vector4f_s
 {
