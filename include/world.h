@@ -87,6 +87,7 @@ typedef struct  map_s
     int         tab_size_y;
     double      move_point_x;
     double      move_point_y;
+    double      enlargement;
     double      center_x;
     double      center_y;
     double      zoom;
@@ -144,6 +145,7 @@ void    set_img(my_game_t *game);
 void    set_point_tx(obj_t *obj, char **array);
 void    horz_line_tx(my_game_t *game, sfVector3f pos, vector4f_t nor,
 sfColor color);
+void    transform_lower(my_game_t *game);
 
 void    draw_triangle_tx(my_game_t *game, sfVector3f *pos, sfColor color);
 void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color);

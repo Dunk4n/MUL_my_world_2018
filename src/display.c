@@ -37,9 +37,10 @@ tri->point_2d[2]->y >= HM)))*/
 static void     display_triangle_in_map(my_game_t *game, triangle_t *tri)
 {
     double res;
-    sfVector3f pos[6] = {*(tri->point_2d[0]), *(tri->point_2d[1]),
+    sfVector3f pos[] = {*(tri->point_2d[0]), *(tri->point_2d[1]),
 *(tri->point_2d[2]), *(tri->point_2d[0]), *(tri->point_2d[0]),
-*(tri->point_2d[0])};
+*(tri->point_2d[0]), *(tri->point_3d[0]), *(tri->point_3d[1]),
+*(tri->point_3d[2])};
     sfVector3f normal = normal_vec(*(tri->point_3d[0]), *(tri->point_3d[1]),
 *(tri->point_3d[2]));
     sfVector2u lim;

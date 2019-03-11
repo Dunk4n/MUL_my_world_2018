@@ -10,7 +10,7 @@
 #include "world.h"
 #include "my.h"
 
-void    rotation(map_t *map)
+static void    rotation_cond(map_t *map)
 {
     int i = 0;
     float sr = sin(map->roll_fg * M_PI / 180);
@@ -33,6 +33,13 @@ void    rotation(map_t *map)
         map->obj->point_3d[i].y = (sp * tmp) + (cp * map->obj->point_3d[i].y);
         i++;
     }
+}
+
+void    rotation(map_t *map)
+{
+    if (map->roll_fg == 0 && map->yaw_fg == 0 && map->pitch_fg == 0)
+        return ;
+    rotation_cond(map);
 }
 
 void    to_2d(my_game_t *game)

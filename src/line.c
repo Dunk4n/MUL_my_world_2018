@@ -31,18 +31,19 @@ sfColor color)
     double bary_b;
     double bary_c;
     double z;
+    double iz;
     sfVector2u lim = sfImage_getSize(game->img[game->map->ptr_tri->texture]);
 
     if (pos.x > pos.y)
         x = pos.y;
     while (x <= pos.y) {
+        z = (nor.t - (nor.x * (double)x) -
+(nor.y * (double)y)) / ((nor.z == 0) ? 1 : nor.z);
         bary_a = (nor.bcy * (x - nor.c_point.x) +
         (nor.cbx * (y - nor.c_point.y))) * nor.div;
         bary_b = (nor.cay * (x - nor.c_point.x) +
         (nor.acx * (y - nor.c_point.y))) * nor.div;
         bary_c = 1.0 - bary_a - bary_b;
-        z = (nor.t - (nor.x * (double)x) -
-(nor.y * (double)y)) / ((nor.z == 0) ? 1 : nor.z);
         //printf("z = %f\n", z - game->map->zoom);
         color = sfImage_getPixel(game->img[game->map->ptr_tri->texture],
 (int)(bary_a * nor.a_uv.x + bary_b * nor.b_uv.x + bary_c * nor.c_uv.x) % lim.x,

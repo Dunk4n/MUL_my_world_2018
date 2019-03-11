@@ -10,31 +10,21 @@
 void    sort_pos_triangle(sfVector3f *pos)
 {
     sfVector3f tmp;
-    sfVector3f tmp_tex;
 
     if (pos[0].y > pos[1].y) {
         tmp = pos[0];
         pos[0] = pos[1];
         pos[1] = tmp;
-        tmp_tex = pos[4];
-        pos[4] = pos[5];
-        pos[5] = tmp_tex;
     }
     if (pos[1].y > pos[2].y) {
         tmp = pos[1];
         pos[1] = pos[2];
         pos[2] = tmp;
-        tmp_tex = pos[5];
-        pos[5] = pos[6];
-        pos[6] = tmp_tex;
     }
     if (pos[0].y > pos[1].y) {
         tmp = pos[0];
         pos[0] = pos[1];
         pos[1] = tmp;
-        tmp_tex = pos[4];
-        pos[4] = pos[5];
-        pos[5] = tmp_tex;
     }
 }
 

@@ -25,6 +25,7 @@ int     window(char *str)
             clear_buff(game->win->framebuff);
 
             transform_move(game);
+            transform_lower(game);
             rotation(game->map);
             game->map->roll += game->map->roll_fg;
             game->map->yaw += game->map->yaw_fg;
@@ -46,6 +47,7 @@ int     window(char *str)
             game->map->pitch_fg = 0;
             game->map->move_point_x = 0;
             game->map->move_point_y = 0;
+            game->map->enlargement = 1;
             to_2d(game);
             display(game);
         }

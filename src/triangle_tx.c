@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** src/triangle
+** src/triangle_tx
 ** File description:
 ** don't forget to free at the end
 */
@@ -10,31 +10,39 @@
 static void     sort_pos_triangle(sfVector3f *pos)
 {
     sfVector3f tmp;
-    sfVector3f tmp_tex;
 
     if (pos[0].y > pos[1].y) {
         tmp = pos[0];
         pos[0] = pos[1];
         pos[1] = tmp;
-        tmp_tex = pos[4];
+        tmp = pos[4];
         pos[4] = pos[5];
-        pos[5] = tmp_tex;
+        pos[5] = tmp;
+        tmp = pos[7];
+        pos[7] = pos[8];
+        pos[8] = tmp;
     }
     if (pos[1].y > pos[2].y) {
         tmp = pos[1];
         pos[1] = pos[2];
         pos[2] = tmp;
-        tmp_tex = pos[5];
+        tmp = pos[5];
         pos[5] = pos[6];
-        pos[6] = tmp_tex;
+        pos[6] = tmp;
+        tmp = pos[8];
+        pos[8] = pos[9];
+        pos[9] = tmp;
     }
     if (pos[0].y > pos[1].y) {
         tmp = pos[0];
         pos[0] = pos[1];
         pos[1] = tmp;
-        tmp_tex = pos[4];
+        tmp = pos[4];
         pos[4] = pos[5];
-        pos[5] = tmp_tex;
+        pos[5] = tmp;
+        tmp = pos[7];
+        pos[7] = pos[8];
+        pos[8] = tmp;
     }
 }
 
@@ -67,6 +75,9 @@ v1.x * v2.y - v1.y * v2.x, 0, pos[1].y - pos[2].y, pos[2].x - pos[1].x,
 pos[2].y - pos[0].y, pos[0].x - pos[2].x, 1 / (nor.bcy * nor.acx + nor.cbx *
 (pos[0].y - pos[2].y)), pos[2], pos[4], pos[5], pos[6]};
 
+//pos[1].y - pos[2].y, pos[2].x - pos[1].x,
+//pos[2].y - pos[0].y, pos[0].x - pos[2].x, 1 / (nor.bcy * nor.acx + nor.cbx *
+//(pos[0].y - pos[2].y))
     nor.t = -(-(nor.x * pos[1].x) - nor.y * pos[1].y - nor.z * pos[1].z);
     return (nor);
 }
@@ -103,7 +114,7 @@ color);
 void    draw_triangle_tx(my_game_t *game, sfVector3f *pos, sfColor color)
 {
     sfVector3f cp_pos[] = {pos[0], pos[1], pos[2], pos[0],
-pos[3], pos[4], pos[5]};
+pos[3], pos[4], pos[5], pos[6], pos[7], pos[8]};
     sfVector2f arr[5];
 
     if (cp_pos[0].y == cp_pos[2].y || cp_pos[1].y == cp_pos[2].y)

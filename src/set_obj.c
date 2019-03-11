@@ -28,13 +28,13 @@ static sfColor  indice_color(char *str)
 {
     int i = 0;
     sfColor color[] =
-{sfWhite, sfBlack, sfRed, sfGreen, sfBlue, sfYellow, sfCyan, sfMagenta};
+{sfWhite, sfBlack, sfRed, sfGreen, sfBlue, sfYellow, sfCyan, sfMagenta, (sfColor){96, 64, 32, 255}, (sfColor){51, 102, 0, 255}};
     char *ref[] =
-{"WHITE", "BLACK", "RED", "GREEN", "BLUE", "YELLOW", "CYAN", "MAGENTA"};
+{"WHITE", "BLACK", "RED", "GREEN", "BLUE", "YELLOW", "CYAN", "MAGENTA", "BROWN", "PINEGREEN"};
 
     if (!str)
-        return (color[rand() % 8]);
-    while (i < 8) {
+        return (color[rand() % 10]);
+    while (i < 10) {
         if (!my_strcmp(ref[i], str))
             return (color[i]);
         i++;
