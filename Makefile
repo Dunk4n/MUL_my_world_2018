@@ -11,26 +11,29 @@ D_SRC	=	./src/
 D_INC	=	./include/
 D_LIB	=	./lib/my/
 
-SRC	=	$(D_SRC)main.c			\
-		$(D_SRC)check.c			\
-		$(D_SRC)draw.c			\
-		$(D_SRC)init.c			\
-		$(D_SRC)line.c			\
-		$(D_SRC)update.c		\
-		$(D_SRC)window.c		\
-		$(D_SRC)iso.c			\
-		$(D_SRC)display_2d_map.c	\
-		$(D_SRC)triangle.c		\
-		$(D_SRC)triangle_tx.c		\
-		$(D_SRC)z_buff.c		\
-		$(D_SRC)display.c		\
-		$(D_SRC)transform.c		\
-		$(D_SRC)set_3d_map.c		\
-		$(D_SRC)file_obj.c		\
-		$(D_SRC)init_obj.c		\
-		$(D_SRC)set_obj.c		\
-		$(D_SRC)my_getfloat.c		\
-		$(D_SRC)init_img.c		\
+SRC	=	$(D_SRC)main.c				\
+		$(D_SRC)check.c				\
+		$(D_SRC)draw.c				\
+		$(D_SRC)init.c				\
+		$(D_SRC)line.c				\
+		$(D_SRC)update.c			\
+		$(D_SRC)window.c			\
+		$(D_SRC)iso.c				\
+		$(D_SRC)display_2d_map.c		\
+		$(D_SRC)triangle.c			\
+		$(D_SRC)triangle_tx.c			\
+		$(D_SRC)z_buff.c			\
+		$(D_SRC)display.c			\
+		$(D_SRC)transform.c			\
+		$(D_SRC)set_3d_map.c			\
+		$(D_SRC)file_obj.c			\
+		$(D_SRC)init_obj.c			\
+		$(D_SRC)set_obj.c			\
+		$(D_SRC)my_getfloat.c			\
+		$(D_SRC)init_img.c			\
+		$(D_SRC)draw_poly.c			\
+		$(D_SRC)draw_poly_interpolation.c	\
+		$(D_SRC)draw_poly_init.c		\
 
 OBJ	=	$(SRC:%.c=$(BUILD_DIR)/%.o)
 

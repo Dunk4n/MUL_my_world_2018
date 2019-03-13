@@ -73,11 +73,30 @@ pos[2].y, pos[1].z - pos[2].z};
     vector4f_t nor = {v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z,
 v1.x * v2.y - v1.y * v2.x, 0, pos[1].y - pos[2].y, pos[2].x - pos[1].x,
 pos[2].y - pos[0].y, pos[0].x - pos[2].x, 1 / (nor.bcy * nor.acx + nor.cbx *
-(pos[0].y - pos[2].y)), pos[2], pos[4], pos[5], pos[6]};
+(pos[0].y - pos[2].y)), pos[2], pos[4], pos[5], pos[6], pos[0], pos[1], pos[2]};
 
 //pos[1].y - pos[2].y, pos[2].x - pos[1].x,
 //pos[2].y - pos[0].y, pos[0].x - pos[2].x, 1 / (nor.bcy * nor.acx + nor.cbx *
 //(pos[0].y - pos[2].y))
+
+//    sfVector3f bp = pos[0];
+    sfVector3f up = {pos[0].x - pos[1].x, pos[0].y - pos[1].y, pos[0].z - pos[1].z};
+    sfVector3f vp = {pos[0].x - pos[2].x, pos[0].y - pos[2].y, pos[0].z - pos[2].z};
+/*
+    nor.sz.x = up.y * vp.z - vp.y * up.z;
+    nor.sz.y = vp.x * up.z - up.x * vp.z;
+    nor.sz.z = up.x * vp.y - vp.x * up.y;
+
+    nor.su.x = vp.y * bp.z - bp.y * vp.z;
+    nor.su.y = bp.x * vp.z - vp.x * bp.y;
+    nor.su.z = vp.x * bp.y - bp.x * vp.y;
+
+    nor.sv.x = bp.y * up.z - up.y * bp.z;
+    nor.sv.y = up.x * bp.z - bp.x * up.z;
+    nor.sv.z = bp.x * up.y - up.x * bp.y;
+    printf("%f, %f, %f\n", nor.sv.x, nor.sv.y, nor.sv.z);
+*/
+    nor.div = 1.0 / magnitude(cross_product(up, vp));
     nor.t = -(-(nor.x * pos[1].x) - nor.y * pos[1].y - nor.z * pos[1].z);
     return (nor);
 }

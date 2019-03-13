@@ -17,6 +17,28 @@
 
 const char      *img_name[10];
 
+typedef struct  arg_interpolation_s
+{
+    double iza;
+    double uiza;
+    double viza;
+    double dizdx;
+    double duizdx;
+    double dvizdx;
+    double xa;
+    double xb;
+    double dxdya;
+    double dxdyb;
+    double dizdya;
+    double duizdya;
+    double dvizdya;
+    int y1;
+    int y2;
+    int y1i;
+    int y2i;
+    int y3i;
+}               arg_interpolation_t;
+
 typedef struct  vector4f_s
 {
     double x;
@@ -32,7 +54,10 @@ typedef struct  vector4f_s
     sfVector3f a_uv;
     sfVector3f b_uv;
     sfVector3f c_uv;
-}               vector4f_t;
+    sfVector3f sz;
+    sfVector3f su;
+    sfVector3f sv;
+}             vector4f_t;
 
 typedef struct  my_framebuff_s
 {
@@ -146,6 +171,17 @@ void    set_point_tx(obj_t *obj, char **array);
 void    horz_line_tx(my_game_t *game, sfVector3f pos, vector4f_t nor,
 sfColor color);
 void    transform_lower(my_game_t *game);
+double  magnitude(sfVector3f v);
+sfVector3f      cross_product(sfVector3f a, sfVector3f b);
+void    draw_poly(my_game_t *game, triangle_t *tri);
+void    init_arg(arg_interpolation_t *arg, double *tab);
+int     calc_side(double *tab);
+int     cond_inter(double *tab, int y1i, int y2i, int y3i);
+void    swap_float(double *a, double *b);
+void    draw_poly_interpolation(my_game_t *game, triangle_t *tri,
+arg_interpolation_t *arg);
+void    init_draw_poly(triangle_t *tri, double *tab);
+void    sort_ordone(double *tab);
 
 void    draw_triangle_tx(my_game_t *game, sfVector3f *pos, sfColor color);
 void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color);

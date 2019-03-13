@@ -54,7 +54,7 @@ pos[0].y, pos[1].z - pos[0].z};
 pos[2].y, pos[1].z - pos[2].z};
     vector4f_t nor = {v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z,
 v1.x * v2.y - v1.y * v2.x, 0, 0, 0,
-0, 0, 0, pos[2], pos[4], pos[5], pos[6]};
+0, 0, 0, pos[2], pos[4], pos[5], pos[6], pos[0], pos[0], pos[0]};
 
     nor.t = -(-(nor.x * pos[1].x) - nor.y * pos[1].y - nor.z * pos[1].z);
     return (nor);

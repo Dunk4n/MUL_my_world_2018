@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <math.h>
 #include "world.h"
 
 sfVector3f      normal_vec(sfVector3f a, sfVector3f b, sfVector3f c)
@@ -18,6 +19,17 @@ sfVector3f      normal_vec(sfVector3f a, sfVector3f b, sfVector3f c)
                          ab.x * ac.y - ab.y * ac.x});
 }
 
+sfVector3f      cross_product(sfVector3f a, sfVector3f b)
+{
+    return ((sfVector3f){a.y * b.z - a.z * b.y,
+                         a.z * b.x - a.z * b.z,
+                         a.x * b.y - a.y * b.x});
+}
+
+double  magnitude(sfVector3f v)
+{
+    return (sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)));
+}
 int     is_drawable(triangle_t *tri)
 {
     /*if (tri->point_2d[0]->z <= 0 || tri->point_2d[1]->z <= 0 ||
@@ -39,8 +51,7 @@ static void     display_triangle_in_map(my_game_t *game, triangle_t *tri)
     double res;
     sfVector3f pos[] = {*(tri->point_2d[0]), *(tri->point_2d[1]),
 *(tri->point_2d[2]), *(tri->point_2d[0]), *(tri->point_2d[0]),
-*(tri->point_2d[0]), *(tri->point_3d[0]), *(tri->point_3d[1]),
-*(tri->point_3d[2])};
+*(tri->point_2d[0])};
     sfVector3f normal = normal_vec(*(tri->point_3d[0]), *(tri->point_3d[1]),
 *(tri->point_3d[2]));
     sfVector2u lim;
@@ -54,7 +65,7 @@ static void     display_triangle_in_map(my_game_t *game, triangle_t *tri)
         draw_triangle(game, pos, tri->color);
         return ;
     }
-    lim = sfImage_getSize(game->img[tri->texture]);
+    /*lim = sfImage_getSize(game->img[tri->texture]);
     pos[3].x = tri->point_tx[0]->x * lim.x;
     pos[3].y = tri->point_tx[0]->y * lim.y;
     pos[3].z = tri->point_tx[0]->z;
@@ -65,6 +76,8 @@ static void     display_triangle_in_map(my_game_t *game, triangle_t *tri)
     pos[5].y = tri->point_tx[2]->y * lim.y;
     pos[5].z = tri->point_tx[2]->z;
     draw_triangle_tx(game, pos, tri->color);
+    */
+    draw_poly(game, tri);
 }
 
 /*void    condition_line(my_game_t *game, int i, int j)
