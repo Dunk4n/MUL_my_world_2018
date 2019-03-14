@@ -56,9 +56,6 @@ pow(game->win->event.mouseButton.x -
 
 void    check(my_game_t *game)
 {
-    int rnd = 0;
-    sfColor col[5] = {sfRed, sfGreen, sfBlue, sfYellow, sfMagenta};
-
     while (sfRenderWindow_pollEvent(game->win->window, &(game->win->event))) {
         if (((game->win->event).type == sfEvtClosed) ||
 sfKeyboard_isKeyPressed(sfKeyEscape))

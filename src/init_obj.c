@@ -32,7 +32,9 @@ static void     set_nb_of_obj(obj_t *obj, char *line)
 
     while (array[i])
         i++;
-    if (i < 4) {
+    if (i > 0 && my_strcmp("vt", array[0]) && i < 4)
+        i = 0;
+    if (i < 3) {
         free_array(array);
         return ;
     }

@@ -13,7 +13,7 @@ sfColor get_real_z(my_game_t *game, sfVector3f cord, sfColor color)
 {
     double res = game->map->lum;
 
-    res *= (5.0 / cord.z);
+    res *= (200.0 / cord.z);
     if (res > 1)
         res = 1;
     color.r *= res;

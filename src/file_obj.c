@@ -16,11 +16,12 @@ void    set_point_tx(obj_t *obj, char **array)
 
     while (array[i])
         i++;
-    if (i < 4)
+    if (i < 3)
         return ;
     obj->point_tx[obj->nb_tx].x = my_getfloat(array[1]);
     obj->point_tx[obj->nb_tx].y = my_getfloat(array[2]);
-    obj->point_tx[obj->nb_tx].z = my_getfloat(array[3]);
+    if (i >= 4)
+        obj->point_tx[obj->nb_tx].z = my_getfloat(array[3]);
     obj->nb_tx++;
 }
 

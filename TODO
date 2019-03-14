@@ -2,6 +2,7 @@ modifs sur la map en jeu
 load / save fichiers dans le jeu
 bouttons (load / save)
 changer textures en jeu
+make -h
 modeles (maisons, sapins, etc)
 clipping
 backface culling

@@ -10,6 +10,13 @@
 #include "world.h"
 #include "my.h"
 
+const sfColor   color[10] =
+{(sfColor){255, 255, 255, 255}, (sfColor){0, 0, 0, 255},
+(sfColor){255, 0, 0, 255}, (sfColor){0, 255, 0, 255}, (sfColor){0, 0, 255, 255},
+(sfColor){255, 255, 0, 255}, (sfColor){0, 255, 255, 255},
+(sfColor){255, 0, 255, 255}, (sfColor){96, 64, 32, 255},
+(sfColor){51, 102, 0, 255}};
+
 static void    set_point(obj_t *obj, char **array)
 {
     int i = 0;
@@ -27,10 +34,8 @@ static void    set_point(obj_t *obj, char **array)
 static sfColor  indice_color(char *str)
 {
     int i = 0;
-    sfColor color[] =
-{sfWhite, sfBlack, sfRed, sfGreen, sfBlue, sfYellow, sfCyan, sfMagenta, (sfColor){96, 64, 32, 255}, (sfColor){51, 102, 0, 255}};
-    char *ref[] =
-{"WHITE", "BLACK", "RED", "GREEN", "BLUE", "YELLOW", "CYAN", "MAGENTA", "BROWN", "PINEGREEN"};
+    char *ref[] = {"WHITE", "BLACK", "RED", "GREEN", "BLUE", "YELLOW",
+"CYAN", "MAGENTA", "BROWN", "PINEGREEN"};
 
     if (!str)
         return (color[rand() % 10]);
@@ -55,7 +60,8 @@ static void     set_triangle_texture(obj_t *obj, char **array)
     }
     if (i >= 6 && !my_strcmp(array[4], "#"))
         obj->triangle[obj->nb_tr].color = indice_color(array[5]);
-    if (i >= 6 && !my_strcmp(array[4], "#T"))
+    if (i >= 6 && !my_strcmp(array[4], "#T") && my_getnbr(array[5]) > 0 &&
+my_getnbr(array[5]) <= 11)
         obj->triangle[obj->nb_tr].texture = my_getnbr(array[5]) - 1;
 }
 
@@ -70,7 +76,7 @@ static void     set_triangle_tx(obj_t *obj, char **array)
             i++;
         if (array[k][i] == '/')
             obj->triangle[obj->nb_tr].point_tx[k - 1] = ((my_getnbr(array[k] +
-i + 1) - 1 == -1)) ? NULL : &(obj->point_tx[(my_getnbr(array[k] + i + 1) - 1)]);
+i + 1) - 1 < 0)) ? NULL : &(obj->point_tx[(my_getnbr(array[k] + i + 1) - 1)]);
         k++;
     }
     set_triangle_texture(obj, array);

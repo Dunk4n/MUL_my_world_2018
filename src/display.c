@@ -34,10 +34,14 @@ WM) && (tri->point_2d[0]->y < 0 || tri->point_2d[0]->y >= HM) &&
 (tri->point_2d[1]->x < 0 || tri->point_2d[1]->x >= WM) && (tri->point_2d[1]->y <
 0 || tri->point_2d[1]->y >= HM) && (tri->point_2d[2]->x < 0
 || tri->point_2d[2]->x >= WM) && (tri->point_2d[2]->y < 0 ||
-tri->point_2d[2]->y >= HM)))*/
-    if (tri->point_2d[0]->z < 0 || tri->point_2d[0]->y < 0 || tri->point_2d[0]->y >= HM || tri->point_2d[0]->x < 0 || tri->point_2d[0]->x >= WM ||
-        tri->point_2d[1]->z < 0 || tri->point_2d[1]->y < 0 || tri->point_2d[1]->y >= HM || tri->point_2d[1]->x < 0 || tri->point_2d[1]->x >= WM ||
-        tri->point_2d[2]->z < 0 || tri->point_2d[2]->y < 0 || tri->point_2d[2]->y >= HM || tri->point_2d[2]->x < 0 || tri->point_2d[2]->x >= WM)
+tri->point_2d[2]->y >= HM)))
+        return (0);*/
+    if (tri->point_2d[0]->z < 0 || tri->point_2d[0]->y < 0 ||
+tri->point_2d[0]->y >= HM || tri->point_2d[0]->x < 0 || tri->point_2d[0]->x >=
+WM || tri->point_2d[1]->z < 0 || tri->point_2d[1]->y < 0 || tri->point_2d[1]->y
+>= HM || tri->point_2d[1]->x < 0 || tri->point_2d[1]->x >= WM ||
+tri->point_2d[2]->z < 0 || tri->point_2d[2]->y < 0 || tri->point_2d[2]->y >= HM
+|| tri->point_2d[2]->x < 0 || tri->point_2d[2]->x >= WM)
         return (0);
     return (1);
 }
@@ -56,6 +60,9 @@ static void     display_triangle_in_map(my_game_t *game, triangle_t *tri)
         res *= -1;
     game->map->lum = res;
     game->map->ptr_tri = tri;
+    if (tri->point_tx[0] == NULL || tri->point_tx[1] == NULL ||
+tri->point_tx[2] == NULL)
+        tri->texture = -1;
     if (tri->texture == -1) {
         draw_triangle(game, pos, tri->color);
         return ;

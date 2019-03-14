@@ -15,8 +15,9 @@
 #include <SFML/System/Time.h>
 #include <SFML/System/Types.h>
 
-const char      *img_name[10];
+const char      *img_name[11];
 const char      *img_button[13];
+const sfColor   color[10];
 
 typedef struct  arg_interpolation_s
 {
@@ -138,10 +139,10 @@ typedef struct  my_game_s
     my_window_t     *win;
     map_t           *map;
     sfImage         **img;
-    int             nb_img;
     button_t        *button;
-    sfClock         *clock;
-    sfInt64         fgt;
+    sfTexture       *tx_button;
+    sfSprite        *sp_button;
+    sfIntRect       rect_button;
     int             select[3];
     int             save_fg;
     int             load_fg;
@@ -149,6 +150,8 @@ typedef struct  my_game_s
     int             face_fg;
     int             t_or_c_fg;
     int             tex_col_fg;
+    int             nb_img;
+    int             nb_col_max;
 }               my_game_t;
 
 void    square(my_framebuff_t *buff, sfVector2f pos, sfVector2i size,
@@ -202,6 +205,7 @@ void    init_draw_poly(my_game_t *game, triangle_t *tri, double *tab);
 void    init_button(my_game_t *game);
 void    display_button(my_game_t *game);
 void    check_button(my_game_t *game);
+void    make_button_texture(my_game_t *game);
 
 void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color);
 

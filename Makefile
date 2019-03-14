@@ -34,6 +34,7 @@ SRC	=	$(D_SRC)main.c				\
 		$(D_SRC)draw_poly_interpolation.c	\
 		$(D_SRC)draw_poly_init.c		\
 		$(D_SRC)init_button.c			\
+		$(D_SRC)make_button.c			\
 
 OBJ	=	$(SRC:%.c=$(BUILD_DIR)/%.o)
 
