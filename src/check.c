@@ -12,24 +12,20 @@
 
 void    check_key(my_game_t *game)
 {
-    ((game->win->event).key.code == sfKeyUp) ? game->map->move_point_y
-+= 0.1 : 0;
-    ((game->win->event).key.code == sfKeyDown) ? game->map->move_point_y
--= 0.1 : 0;
-    ((game->win->event).key.code == sfKeyRight) ? game->map->move_point_x
-+= 0.1 : 0;
-    ((game->win->event).key.code == sfKeyLeft) ? game->map->move_point_x
--= 0.1 : 0;
-    ((game->win->event).key.code == sfKeyJ) ? game->map->roll_fg = 4 : 0;
-    ((game->win->event).key.code == sfKeyU) ? game->map->roll_fg = -4 : 0;
-    ((game->win->event).key.code == sfKeyK) ? game->map->yaw_fg = 4 : 0;
-    ((game->win->event).key.code == sfKeyI) ? game->map->yaw_fg = -4 : 0;
-    ((game->win->event).key.code == sfKeyL) ? game->map->pitch_fg = 4 : 0;
-    ((game->win->event).key.code == sfKeyO) ? game->map->pitch_fg = -4 : 0;
-    ((game->win->event).key.code == sfKeyE) ? game->map->zoom -= 0.05 : 0;
-    ((game->win->event).key.code == sfKeyQ) ? game->map->zoom += 0.05 : 0;
-    ((game->win->event).key.code == sfKeyZ) ? game->map->enlargement = 1.01 : 1;
-    ((game->win->event).key.code == sfKeyX) ? game->map->enlargement = 0.99 : 1;
+    (sfKeyboard_isKeyPressed(sfKeyUp)) ? game->map->move_point_y += 0.1 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyDown)) ? game->map->move_point_y -= 0.1 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyRight)) ? game->map->move_point_x += 0.1 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyLeft)) ? game->map->move_point_x -= 0.1 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyJ)) ? game->map->roll_fg = 4 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyU)) ? game->map->roll_fg = -4 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyK)) ? game->map->yaw_fg = 4 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyI)) ? game->map->yaw_fg = -4 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyL)) ? game->map->pitch_fg = 4 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyO)) ? game->map->pitch_fg = -4 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyE)) ? game->map->zoom -= 0.05 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyQ)) ? game->map->zoom += 0.05 : 0;
+    (sfKeyboard_isKeyPressed(sfKeyZ)) ? game->map->enlargement = 1.01 : 1;
+    (sfKeyboard_isKeyPressed(sfKeyX)) ? game->map->enlargement = 0.99 : 1;
     //((game->win->event).key.code == sfKeyPageUp) ? 1 : 0;
     //((game->win->event).key.code == sfKeyPageDown) ? -1 : 0;
 }
@@ -65,10 +61,9 @@ void    check(my_game_t *game)
 
     while (sfRenderWindow_pollEvent(game->win->window, &(game->win->event))) {
         if (((game->win->event).type == sfEvtClosed) ||
-                ((game->win->event).key.code == sfKeyEscape)) {
+sfKeyboard_isKeyPressed(sfKeyEscape))
             sfRenderWindow_close(game->win->window);
-        }
-        (sfEvtKeyPressed) ? game->map->update = 1 : 0;
+        ((game->win->event).type == sfEvtKeyPressed) ? game->map->update = 1 : 0;
         if ((game->win->event).type == sfEvtMouseWheelScrolled) {
             if (game->win->event.mouseWheelScroll.delta < 0)
                 game->map->zoom += 0.5;

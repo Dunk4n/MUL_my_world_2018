@@ -41,7 +41,7 @@ NAME	=	my_world
 
 CFLAGS	=	-W -Wall -Wextra -I$(D_INC)
 
-LDFLAGS	=	-L$(D_LIB) -lmy -l csfml-graphics -l csfml-system -lm
+LDFLAGS	=	-L$(D_LIB) -lmy -l csfml-graphics -l csfml-system  -l csfml-window -lm
 
 BUILD_DIR = build
 
