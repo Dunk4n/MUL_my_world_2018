@@ -61,10 +61,12 @@ game->button[i].rect.height && game->win->event.mouseButton.x >=
 game->button[i].rect.left && game->win->event.mouseButton.x <
 game->button[i].rect.left + game->button[i].rect.width) {
             printf("A %d\n", i);
-            (i == 6) ? game->map->move_point_x += 1 : 0;
-            (i == 7) ? game->map->move_point_x -= 1 : 0;
-            (i == 8) ? game->map->move_point_y += 1 : 0;
-            (i == 9) ? game->map->move_point_y -= 1 : 0;
+            (i == 4) ? game->map->pitch_fg = -4 : 0;
+            (i == 5) ? game->map->pitch_fg = 4 : 0;
+            (i == 6) ? game->map->yaw_fg = -4 : 0;
+            (i == 7) ? game->map->yaw_fg = 4 : 0;
+            (i == 8) ? game->map->roll_fg = 4 : 0;
+            (i == 9) ? game->map->roll_fg = -4 : 0;
             (i == 11) ? game->map->zoom -= 1 : 0;
             (i == 12) ? game->map->zoom += 1 : 0;
             game->map->update = 1;
