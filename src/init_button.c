@@ -60,8 +60,14 @@ void    check_button(my_game_t *game)
 game->win->event.mouseButton.y < game->button[i].rect.top +
 game->button[i].rect.height && game->win->event.mouseButton.x >=
 game->button[i].rect.left && game->win->event.mouseButton.x <
-game->button[i].rect.left + game->button[i].rect.width)
+game->button[i].rect.left + game->button[i].rect.width) {
             printf("A %d\n", i);
+            (i == 6) ? game->map->move_point_x += 0.1 : 0;
+            (i == 7) ? game->map->move_point_x -= 0.1 : 0;
+            (i == 8) ? game->map->move_point_y += 0.1 : 0;
+            (i == 9) ? game->map->move_point_y -= 0.1 : 0;
+            game->map->update = 1;
+        }
         i++;
     }
 }
