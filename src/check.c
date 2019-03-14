@@ -26,10 +26,12 @@ void    check_key(my_game_t *game)
     ((game->win->event).key.code == sfKeyI) ? game->map->yaw_fg = -4 : 0;
     ((game->win->event).key.code == sfKeyL) ? game->map->pitch_fg = 4 : 0;
     ((game->win->event).key.code == sfKeyO) ? game->map->pitch_fg = -4 : 0;
-    ((game->win->event).key.code == sfKeyE) ? game->map->zoom -= 0.5 : 0;
-    ((game->win->event).key.code == sfKeyQ) ? game->map->zoom += 0.5 : 0;
+    ((game->win->event).key.code == sfKeyE) ? game->map->zoom -= 0.05 : 0;
+    ((game->win->event).key.code == sfKeyQ) ? game->map->zoom += 0.05 : 0;
     ((game->win->event).key.code == sfKeyZ) ? game->map->enlargement = 1.01 : 1;
     ((game->win->event).key.code == sfKeyX) ? game->map->enlargement = 0.99 : 1;
+    //((game->win->event).key.code == sfKeyPageUp) ? 1 : 0;
+    //((game->win->event).key.code == sfKeyPageDown) ? -1 : 0;
 }
 
 sfVector3f      *get_nearest_point(my_game_t *game, triangle_t *tri)

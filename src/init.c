@@ -90,12 +90,11 @@ my_game_t        *set_game(char *str)
         (game) ? free(game) : 0;
         return (NULL);
     }
-    if (str) {
-        if (!(game->map->obj = open_file_obj(str)))
-            return (NULL);
-    }
-    else
+    if (!str)
+        return (NULL);
+    if (!(game->map->obj = open_file_obj(str)))
         return (NULL);
     set_img(game);
+    init_button(game);
     return (game);
 }

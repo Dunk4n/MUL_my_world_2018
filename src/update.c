@@ -26,5 +26,6 @@ void    update(my_game_t *game)
     sfTexture_updateFromPixels(game->win->texture, game->win->framebuff->pixels,
 WM, HM, 0, 0);
     sfRenderWindow_drawSprite(game->win->window, game->win->sprite, NULL);
+    display_button(game);
     sfRenderWindow_display(game->win->window);
 }

@@ -91,8 +91,10 @@ void    draw_poly(my_game_t *game, triangle_t *tri)
 
     if (!(arg = malloc(sizeof(arg_interpolation_t))))
         return ;
-    init_draw_poly(tri, tab);
-    sort_ordone(tab);
+    init_draw_poly(game, tri, tab);
+    ((int)tab[1] == (int)tab[3]) ? tab[3] += 1 : 0;
+    ((int)tab[3] == (int)tab[5]) ? tab[5] += 1 : 0;
+    ((int)tab[1] == (int)tab[5]) ? tab[1] += 1 : 0;
     arg->y1i = tab[1];
     arg->y2i = tab[3];
     arg->y3i = tab[5];

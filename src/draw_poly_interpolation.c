@@ -35,7 +35,7 @@ arg_interpolation_t *arg, double *tab)
         cord.y = arg->y1;
         cord.z = tab[0];
         put_pixel3d(game, cord, sfImage_getPixel(game->img[tri->texture],
-(int)(tab[1] * tab[7]) % (int)tab[7], (int)(tab[2] * tab[8]) % (int)tab[8]));
+(int)(tab[1]), (int)(tab[2])));
         tab[4] += arg->dizdx;
         tab[5] += arg->duizdx;
         tab[6] += arg->dvizdx;
@@ -45,11 +45,8 @@ arg_interpolation_t *arg, double *tab)
 void    draw_poly_interpolation(my_game_t *game, triangle_t *tri,
 arg_interpolation_t *arg)
 {
-    sfVector2u lim = sfImage_getSize(game->img[tri->texture]);
-    double tab[9];
+    double tab[7];
 
-    tab[7] = lim.x;
-    tab[8] = lim.y;
     while (arg->y1 < arg->y2) {
         poly_horizontal_line(game, tri, arg, tab);
         arg->xa += arg->dxdya;
@@ -59,25 +56,6 @@ arg_interpolation_t *arg)
         arg->viza += arg->dvizdya;
         arg->y1++;
     }
-}
-
-void    init_draw_poly(triangle_t *tri, double *tab)
-{
-    tab[0] = tri->point_2d[0]->x + 0.5;
-    tab[1] = tri->point_2d[0]->y + 0.5;
-    tab[2] = tri->point_2d[1]->x + 0.5;
-    tab[3] = tri->point_2d[1]->y + 0.5;
-    tab[4] = tri->point_2d[2]->x + 0.5;
-    tab[5] = tri->point_2d[2]->y + 0.5;
-    tab[6] = 1.0 / tri->point_2d[0]->z;
-    tab[7] = 1.0 / tri->point_2d[1]->z;
-    tab[8] = 1.0 / tri->point_2d[2]->z;
-    tab[9] = tri->point_tx[0]->x * tab[6];
-    tab[10] = tri->point_tx[0]->y * tab[6];
-    tab[11] = tri->point_tx[1]->x * tab[7];
-    tab[12] = tri->point_tx[1]->y * tab[7];
-    tab[13] = tri->point_tx[2]->x * tab[8];
-    tab[14] = tri->point_tx[2]->y * tab[8];
 }
 
 void    sort_ordone(double *tab)
@@ -103,4 +81,26 @@ void    sort_ordone(double *tab)
         swap_float(&(tab[11]), &(tab[13]));
         swap_float(&(tab[12]), &(tab[14]));
     }
+}
+
+void    init_draw_poly(my_game_t *game, triangle_t *tri, double *tab)
+{
+    sfVector2u lim = sfImage_getSize(game->img[tri->texture]);
+
+    tab[0] = tri->point_2d[0]->x + 0.5;
+    tab[1] = tri->point_2d[0]->y + 0.5;
+    tab[2] = tri->point_2d[1]->x + 0.5;
+    tab[3] = tri->point_2d[1]->y + 0.5;
+    tab[4] = tri->point_2d[2]->x + 0.5;
+    tab[5] = tri->point_2d[2]->y + 0.5;
+    tab[6] = 1.0 / tri->point_2d[0]->z;
+    tab[7] = 1.0 / tri->point_2d[1]->z;
+    tab[8] = 1.0 / tri->point_2d[2]->z;
+    tab[9] = tri->point_tx[0]->x * tab[6] * (lim.x - 1);
+    tab[10] = tri->point_tx[0]->y * tab[6] * (lim.y - 1);
+    tab[11] = tri->point_tx[1]->x * tab[7] * (lim.x - 1);
+    tab[12] = tri->point_tx[1]->y * tab[7] * (lim.y - 1);
+    tab[13] = tri->point_tx[2]->x * tab[8] * (lim.x - 1);
+    tab[14] = tri->point_tx[2]->y * tab[8] * (lim.y - 1);
+    sort_ordone(tab);
 }

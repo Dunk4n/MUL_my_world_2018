@@ -26,10 +26,6 @@ sfVector3f      cross_product(sfVector3f a, sfVector3f b)
                          a.x * b.y - a.y * b.x});
 }
 
-double  magnitude(sfVector3f v)
-{
-    return (sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)));
-}
 int     is_drawable(triangle_t *tri)
 {
     /*if (tri->point_2d[0]->z <= 0 || tri->point_2d[1]->z <= 0 ||
@@ -54,7 +50,6 @@ static void     display_triangle_in_map(my_game_t *game, triangle_t *tri)
 *(tri->point_2d[0])};
     sfVector3f normal = normal_vec(*(tri->point_3d[0]), *(tri->point_3d[1]),
 *(tri->point_3d[2]));
-    sfVector2u lim;
 
     res = normal.z;
     if (res < 0)
@@ -65,18 +60,6 @@ static void     display_triangle_in_map(my_game_t *game, triangle_t *tri)
         draw_triangle(game, pos, tri->color);
         return ;
     }
-    /*lim = sfImage_getSize(game->img[tri->texture]);
-    pos[3].x = tri->point_tx[0]->x * lim.x;
-    pos[3].y = tri->point_tx[0]->y * lim.y;
-    pos[3].z = tri->point_tx[0]->z;
-    pos[4].x = tri->point_tx[1]->x * lim.x;
-    pos[4].y = tri->point_tx[1]->y * lim.y;
-    pos[4].z = tri->point_tx[1]->z;
-    pos[5].x = tri->point_tx[2]->x * lim.x;
-    pos[5].y = tri->point_tx[2]->y * lim.y;
-    pos[5].z = tri->point_tx[2]->z;
-    draw_triangle_tx(game, pos, tri->color);
-    */
     draw_poly(game, tri);
 }
 

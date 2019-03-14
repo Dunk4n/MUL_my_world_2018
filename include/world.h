@@ -16,6 +16,7 @@
 #include <SFML/System/Types.h>
 
 const char      *img_name[10];
+const char      *img_button[11];
 
 typedef struct  arg_interpolation_s
 {
@@ -124,14 +125,29 @@ typedef struct  map_s
     obj_t       *obj;
 }               map_t;
 
+typedef struct  button_s
+{
+    sfTexture           *tx;
+    sfSprite            *sp;
+    int                 fg;
+}               button_t;
+
 typedef struct  my_game_s
 {
     my_window_t     *win;
     map_t           *map;
     sfImage         **img;
     int             nb_img;
+    button_t        *button;
     sfClock         *clock;
     sfInt64         fgt;
+    int             select[3];
+    int             save_fg;
+    int             load_fg;
+    int             point_fg;
+    int             face_fg;
+    int             t_or_c_fg;
+    int             tex_col_fg;
 }               my_game_t;
 
 void    square(my_framebuff_t *buff, sfVector2f pos, sfVector2i size,
@@ -180,10 +196,11 @@ int     cond_inter(double *tab, int y1i, int y2i, int y3i);
 void    swap_float(double *a, double *b);
 void    draw_poly_interpolation(my_game_t *game, triangle_t *tri,
 arg_interpolation_t *arg);
-void    init_draw_poly(triangle_t *tri, double *tab);
 void    sort_ordone(double *tab);
+void    init_draw_poly(my_game_t *game, triangle_t *tri, double *tab);
+void    init_button(my_game_t *game);
+void    display_button(my_game_t *game);
 
-void    draw_triangle_tx(my_game_t *game, sfVector3f *pos, sfColor color);
 void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color);
 
 #define WM 1920
