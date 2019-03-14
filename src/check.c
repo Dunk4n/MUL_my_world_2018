@@ -65,6 +65,7 @@ sfKeyboard_isKeyPressed(sfKeyEscape))
             sfRenderWindow_close(game->win->window);
         ((game->win->event).type == sfEvtKeyPressed) ? game->map->update = 1 : 0;
         if ((game->win->event).type == sfEvtMouseWheelScrolled) {
+            game->map->update = 1;
             if (game->win->event.mouseWheelScroll.delta < 0)
                 game->map->zoom += 0.5;
             else

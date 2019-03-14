@@ -129,6 +129,7 @@ typedef struct  button_s
 {
     sfTexture           *tx;
     sfSprite            *sp;
+    sfIntRect           rect;
     int                 fg;
 }               button_t;
 
