@@ -16,7 +16,7 @@
 #include <SFML/System/Types.h>
 
 const char      *img_name[10];
-const char      *img_button[11];
+const char      *img_button[13];
 
 typedef struct  arg_interpolation_s
 {
