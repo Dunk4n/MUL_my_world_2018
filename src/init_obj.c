@@ -23,26 +23,33 @@ void    free_array(char **array)
     free(array);
 }
 
+static void     nb_obj_cond(int i, int j, char **array, int *val)
+{
+    if (j == 1 && i > 4 && array[4][0] != '#')
+        (*val)++;
+}
+
 static void     set_nb_of_obj(obj_t *obj, char *line)
 {
     char    *ref[3] = {"v", "f", "vt"};
     int     *val[3] = {&(obj->nb_point), &(obj->nb_tr), &(obj->nb_tx)};
     char    **array = my_str_to_word_array(line, " \t");
     int     i = 0;
+    int     j = 0;
 
     while (array[i])
         i++;
-    if (i > 0 && my_strcmp("vt", array[0]) && i < 4)
-        i = 0;
+    (i > 0 && my_strcmp("vt", array[0]) && i < 4) ? i = 0 : 0;
     if (i < 3) {
         free_array(array);
         return ;
     }
-    i = 0;
-    while (i < 3) {
-        if (!my_strcmp(ref[i], array[0]))
-            (*(val[i]))++;
-        i++;
+    while (j < 3) {
+        if (!my_strcmp(ref[j], array[0])) {
+            nb_obj_cond(i, j, array, val[j]);
+            (*(val[j]))++;
+        }
+        j++;
     }
     free_array(array);
 }
