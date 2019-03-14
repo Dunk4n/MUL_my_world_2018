@@ -39,13 +39,29 @@ void    init_button(my_game_t *game)
         game->button[i].sp = sfSprite_create();
         sfSprite_setTexture(game->button[i].sp, game->button[i].tx, sfTrue);
         sfSprite_setPosition(game->button[i].sp,
-(sfVector2f){pos[i][0], pos[i][1]});
+                (sfVector2f){pos[i][0], pos[i][1]});
         sfSprite_setTextureRect(game->button[i].sp,
 (sfIntRect){0, 0, width, height});
+        game->button[i].rect = (sfIntRect){pos[i][0], pos[i][1], width, height};
         i++;
         (i >= 4) ? width = 50 : 0;
         (i >= 4) ? height = 80 : 0;
         (i == 10) ? width = 100 : 0;
         (i == 10) ? height = 100 : 0;
+    }
+}
+
+void    check_button(my_game_t *game)
+{
+    int i = 0;
+
+    while (i < 11) {
+        if (game->win->event.mouseButton.y >= game->button[i].rect.top &&
+game->win->event.mouseButton.y < game->button[i].rect.top +
+game->button[i].rect.height && game->win->event.mouseButton.x >=
+game->button[i].rect.left && game->win->event.mouseButton.x <
+game->button[i].rect.left + game->button[i].rect.width)
+            printf("A %d\n", i);
+        i++;
     }
 }

@@ -71,7 +71,9 @@ sfKeyboard_isKeyPressed(sfKeyEscape))
             else
                 game->map->zoom -= 0.5;
         }
-        if (game->win->event.type == sfEvtMouseButtonPressed &&
+        if (game->win->event.type == sfEvtMouseButtonPressed)
+            check_button(game);
+        /*if (game->win->event.type == sfEvtMouseButtonPressed &&
 game->win->t_buff[WM * game->win->event.mouseButton.y +
 game->win->event.mouseButton.x] != NULL) {
             rnd = rand() % 10;
@@ -82,6 +84,7 @@ game->win->event.mouseButton.x]->texture = rnd;
             ((triangle_t*)(game->win->t_buff[WM * game->win->event.mouseButton.y
 + game->win->event.mouseButton.x]->square_part))->texture = rnd;
         }
+        */
         check_key(game);
         game->map->center_x += game->map->move_point_x;
         game->map->center_y += game->map->move_point_y;

@@ -201,6 +201,7 @@ void    sort_ordone(double *tab);
 void    init_draw_poly(my_game_t *game, triangle_t *tri, double *tab);
 void    init_button(my_game_t *game);
 void    display_button(my_game_t *game);
+void    check_button(my_game_t *game);
 
 void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color);
 
