@@ -8,11 +8,12 @@
 #include <stdlib.h>
 #include "world.h"
 
-const char      *img_button[11] = {"img/diamant.jpg", "img/grass.png",
-"img/diamant.jpg", "img/diamant.jpg", "img/grass.png", "img/grass.png",
-"img/grass.png", "img/grass.png", "img/grass.png", "img/grass.png",
-"img/grass.png"};
-const int       pos[11][2] = {{10, 10}, {220, 10}, {1710, 10}, {1610, 970},
+const char      *img_button[11] = {"button/save.png", "button/load.png",
+"button/select-point.png", "img/diamant.jpg", "button/arrow-turn-right.png",
+"button/arrow-turn-left.png", "button/arrow-right.png",
+"button/arrow-left.png", "button/arrow-up.png", "button/arrow-down.png",
+"button/button-color.png"};
+const int       pos[11][2] = {{10, 10}, {240, 10}, {1710, 10}, {1610, 970},
 {10, 810}, {70, 810}, {10, 900}, {70, 900}, {10, 990}, {70, 990}, {1810, 970}};
 
 void    display_button(my_game_t *game)
