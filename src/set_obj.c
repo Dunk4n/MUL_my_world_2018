@@ -58,11 +58,16 @@ static void     set_triangle_texture(obj_t *obj, char **array, int nb)
         obj->triangle[obj->nb_tr].color = indice_color(NULL);
         return ;
     }
-    if (i >= 6 + nb && !my_strcmp(array[4 + nb], "#"))
+    if (!my_strcmp(array[4 + nb], "#"))
         obj->triangle[obj->nb_tr].color = indice_color(array[5 + nb]);
-    if (i >= 6 + nb && !my_strcmp(array[4 + nb], "#T") &&
+    if (!my_strcmp(array[5 + nb], "#"))
+        obj->triangle[obj->nb_tr].color = indice_color(array[6 + nb]);
+    if (!my_strcmp(array[4 + nb], "#T") &&
 my_getnbr(array[5 + nb]) > 0 && my_getnbr(array[5 + nb]) <= 11)
         obj->triangle[obj->nb_tr].texture = my_getnbr(array[5 + nb]) - 1;
+    if (!my_strcmp(array[5 + nb], "#T") &&
+my_getnbr(array[6 + nb]) > 0 && my_getnbr(array[6 + nb]) <= 11)
+        obj->triangle[obj->nb_tr].texture = my_getnbr(array[6 + nb]) - 1;
 }
 
 static void     set_triangle_tx(obj_t *obj, char **array, int nb)
@@ -72,9 +77,10 @@ static void     set_triangle_tx(obj_t *obj, char **array, int nb)
 
     while (k <= 3) {
         i = 0;
-        while (array[k][i] && array[k][i] != '/')
+        while (array[k + ((k > 1) ? nb : 0)][i] &&
+array[k + ((k > 1) ? nb : 0)][i] != '/')
             i++;
-        if (array[k][i] == '/')
+        if (array[k + ((k > 1) ? nb : 0)][i] == '/')
             obj->triangle[obj->nb_tr].point_tx[k - 1] = ((my_getnbr(array[k +
 ((k > 1) ? nb : 0)] + i + 1) - 1 < 0)) ? NULL :
 &(obj->point_tx[(my_getnbr(array[k + ((k > 1) ? nb : 0)] + i + 1) - 1)]);
