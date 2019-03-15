@@ -61,17 +61,17 @@ void            set_map(map_t **map)
     (*map)->roll = 0;
     (*map)->yaw = 0;
     (*map)->pitch = 0;
+    (*map)->update = 1;
     (*map)->move_point_x = 0;
     (*map)->move_point_y = 0;
+    (*map)->move_point_z = 0;
+    (*map)->enlargement = 1;
     (*map)->center_x = 0;
     (*map)->center_y = 0;
-    (*map)->tab_size_x = 10;
-    (*map)->tab_size_y = 10;
     (*map)->zoom = 10;
-    (*map)->enlargement = 1;
-    (*map)->update = 1;
-    (*map)->triangle = NULL;
-    (*map)->obj = NULL;
+    (*map)->lum = 0;
+    (*map)->ptr_tri = NULL;
+    (*map)->map_3d = NULL;
 }
 
 my_game_t        *set_game(char *str)
@@ -90,6 +90,7 @@ my_game_t        *set_game(char *str)
         (game) ? free(game) : 0;
         return (NULL);
     }
+    set_value_game(game);
     if (!str)
         return (NULL);
     if (!(game->map->obj = open_file_obj(str)))

@@ -28,11 +28,9 @@ void    set_point_tx(obj_t *obj, char **array)
 int     alloc_obj(obj_t *obj)
 {
     if (obj->nb_point <= 0 ||
-    !(obj->point_3d = malloc(sizeof(sfVector3f) * obj->nb_point)))
-        return (0);
-    if (obj->nb_point <= 0 ||
-    !(obj->point_2d = malloc(sizeof(sfVector3f) * obj->nb_point))) {
-        free(obj->point_3d);
+!(obj->point_3d = malloc(sizeof(sfVector3f) * obj->nb_point)) ||
+!(obj->point_2d = malloc(sizeof(sfVector3f) * obj->nb_point))) {
+        (obj->point_3d) ? free(obj->point_3d) : 0;
         return (0);
     }
     if (obj->nb_tr <= 0 ||
@@ -42,9 +40,8 @@ int     alloc_obj(obj_t *obj)
         return (0);
     }
     obj->point_tx = NULL;
-    if (obj->nb_tx <= 0)
-        return (1);
-    if (!(obj->point_tx = malloc(sizeof(sfVector3f) * obj->nb_tx))) {
+    if (obj->nb_tx > 0 &&
+!(obj->point_tx = malloc(sizeof(sfVector3f) * obj->nb_tx))) {
         free(obj->point_3d);
         free(obj->point_2d);
         free(obj->triangle);

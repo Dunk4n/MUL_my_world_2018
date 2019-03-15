@@ -19,12 +19,10 @@ SRC	=	$(D_SRC)main.c				\
 		$(D_SRC)update.c			\
 		$(D_SRC)window.c			\
 		$(D_SRC)iso.c				\
-		$(D_SRC)display_2d_map.c		\
 		$(D_SRC)triangle.c			\
 		$(D_SRC)z_buff.c			\
 		$(D_SRC)display.c			\
 		$(D_SRC)transform.c			\
-		$(D_SRC)set_3d_map.c			\
 		$(D_SRC)file_obj.c			\
 		$(D_SRC)init_obj.c			\
 		$(D_SRC)set_obj.c			\
@@ -35,6 +33,7 @@ SRC	=	$(D_SRC)main.c				\
 		$(D_SRC)draw_poly_init.c		\
 		$(D_SRC)init_button.c			\
 		$(D_SRC)make_button.c			\
+		$(D_SRC)action_on_obj.c			\
 
 OBJ	=	$(SRC:%.c=$(BUILD_DIR)/%.o)
 

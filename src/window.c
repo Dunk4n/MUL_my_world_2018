@@ -26,6 +26,7 @@ void increment_variables(my_game_t *game)
     game->map->pitch_fg = 0;
     game->map->move_point_x = 0;
     game->map->move_point_y = 0;
+    game->map->move_point_z = 0;
     game->map->enlargement = 1;
 }
 

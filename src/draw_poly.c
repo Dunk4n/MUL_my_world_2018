@@ -85,7 +85,7 @@ arg_interpolation_t *arg)
 
 void    draw_poly(my_game_t *game, triangle_t *tri)
 {
-    double tab[23];
+    double tab[23] = {0};
     arg_interpolation_t *arg;
     int side;
 

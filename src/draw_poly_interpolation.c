@@ -20,22 +20,22 @@ void    poly_horizontal_line(my_game_t *game, triangle_t *tri,
 arg_interpolation_t *arg, double *tab)
 {
     sfVector3f cord;
-    int x1 = arg->xa;
-    int x2 = arg->xb;
+    sfVector2u lim = sfImage_getSize(game->img[tri->texture]);
+    int x12[2] = {arg->xa, arg->xb};
 
-    tab[3] = 1 - (arg->xa - x1);
+    tab[3] = 1 - (arg->xa - x12[0]);
     tab[4] = arg->iza + tab[3] * arg->dizdx;
     tab[5] = arg->uiza + tab[3] * arg->duizdx;
     tab[6] = arg->viza + tab[3] * arg->dvizdx;
-    while (x1++ < x2) {
+    while (x12[0]++ < x12[1]) {
         tab[0] = 1 / tab[4];
         tab[1] = tab[5] * tab[0];
         tab[2] = tab[6] * tab[0];
-        cord.x = x1;
+        cord.x = x12[0];
         cord.y = arg->y1;
         cord.z = tab[0];
         put_pixel3d(game, cord, sfImage_getPixel(game->img[tri->texture],
-(int)(tab[1]), (int)(tab[2])));
+(int)(tab[1]) % lim.x, (int)(tab[2]) % lim.y));
         tab[4] += arg->dizdx;
         tab[5] += arg->duizdx;
         tab[6] += arg->dvizdx;

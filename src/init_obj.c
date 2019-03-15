@@ -79,8 +79,10 @@ obj_t   *init_obj(void)
         return (NULL);
     obj->nb_point = 0;
     obj->nb_tr = 0;
+    obj->nb_tx = 0;
     obj->point_3d = NULL;
     obj->point_2d = NULL;
+    obj->point_tx = NULL;
     obj->triangle = NULL;
     return (obj);
 }

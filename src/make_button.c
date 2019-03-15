@@ -22,3 +22,18 @@ sfTexture_createFromImage(game->img[game->tex_col_fg],
 &((sfIntRect){0, 0, game->button[3].rect.width, game->button[3].rect.height})),
 sfTrue);
 }
+
+void    point_or_face(my_game_t *game)
+{
+    if (game->point_or_face_fg == 0) {
+        game->button[2].tx =
+sfTexture_createFromFile("button/select-triangle.png", NULL);
+sfSprite_setTexture(game->button[2].sp, game->button[2].tx, sfTrue);
+        game->point_or_face_fg = 1;
+        return ;
+    }
+    game->button[2].tx =
+sfTexture_createFromFile("button/select-point.png", NULL);
+    sfSprite_setTexture(game->button[2].sp, game->button[2].tx, sfTrue);
+    game->point_or_face_fg = 0;
+}

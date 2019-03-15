@@ -27,3 +27,18 @@ void    set_img(my_game_t *game)
         i++;
     }
 }
+
+void    set_value_game(my_game_t *game)
+{
+    game->map->map_2d = NULL;
+    game->map->triangle = NULL;
+    game->map->obj = NULL;
+    game->select = NULL;
+    game->save_fg = 0;
+    game->load_fg = 0;
+    game->point_or_face_fg = 0;
+    game->t_or_c_fg = 0;
+    game->tex_col_fg = 0;
+    game->nb_img = 0;
+    game->nb_col_max = 0;
+}
