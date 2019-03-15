@@ -85,9 +85,9 @@ char    **my_str_to_word_array(char const *str, char *ch)
     char **tab = malloc(sizeof(char*) * (nbword(str, ch) + 1));
 
     while (i < nbword(str, ch)) {
-        tab[i] = malloc(sizeof(char) * (nbchar(str, i + 1, ch) + 1));
+        tab[i] = malloc(sizeof(char) * (nbchar(str, i + 1, ch) + 2));
         j = 0;
-        while (j < nbchar(str, i + 1, ch)) {
+        while (j < nbchar(str, i + 1, ch) + 1) {
             tab[i][j] = charword(str, i + 1, j + 1, ch);
             j++;
         }
