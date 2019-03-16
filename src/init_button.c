@@ -85,7 +85,6 @@ game->win->event.mouseButton.y < game->button[i].rect.top +
 game->button[i].rect.height && game->win->event.mouseButton.x >=
 game->button[i].rect.left && game->win->event.mouseButton.x <
 game->button[i].rect.left + game->button[i].rect.width) {
-            printf("A %d\n", i);
             make_button(game, i);
             game->map->update = 1;
             return ;
