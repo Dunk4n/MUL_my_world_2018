@@ -62,6 +62,7 @@ sfTexture_createFromFile("button/button-color.png", NULL);
 
 void    make_button(my_game_t *game, int i)
 {
+    (i == 0) ? game->save_fg = 1 : 0;
     (i == 2) ? point_or_face(game) : 0;
     (i == 3) ? make_button_texture(game) : 0;
     (i == 4) ? game->map->pitch_fg = -4 : 0;

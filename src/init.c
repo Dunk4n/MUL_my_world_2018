@@ -66,8 +66,6 @@ void            set_map(map_t **map)
     (*map)->move_point_y = 0;
     (*map)->move_point_z = 0;
     (*map)->enlargement = 1;
-    (*map)->center_x = 0;
-    (*map)->center_y = 0;
     (*map)->zoom = 10;
     (*map)->lum = 0;
     (*map)->ptr_tri = NULL;
@@ -90,12 +88,7 @@ my_game_t        *set_game(char *str)
         (game) ? free(game) : 0;
         return (NULL);
     }
-    set_value_game(game);
-    if (!str)
+    if (init_all_game(str, game) == 84)
         return (NULL);
-    if (!(game->map->obj = open_file_obj(str)))
-        return (NULL);
-    set_img(game);
-    init_button(game);
     return (game);
 }

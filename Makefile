@@ -34,6 +34,10 @@ SRC	=	$(D_SRC)main.c				\
 		$(D_SRC)init_button.c			\
 		$(D_SRC)make_button.c			\
 		$(D_SRC)action_on_obj.c			\
+		$(D_SRC)save_file.c			\
+		$(D_SRC)init_text.c			\
+		$(D_SRC)get_text.c			\
+		$(D_SRC)save_write.c			\
 
 OBJ	=	$(SRC:%.c=$(BUILD_DIR)/%.o)
 

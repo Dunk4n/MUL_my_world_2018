@@ -75,6 +75,8 @@ typedef struct  triangle_s
     sfVector3f  *point_2d[3];
     sfVector3f  *point_tx[3];
     sfColor     color;
+    int         indice_point[3];
+    int         indice_texture[3];
     void        *square_part;
 }               triangle_t;
 
@@ -114,8 +116,6 @@ typedef struct  map_s
     double      move_point_y;
     double      move_point_z;
     double      enlargement;
-    double      center_x;
-    double      center_y;
     double      zoom;
     double      lum;
     triangle_t  *ptr_tri;
@@ -143,6 +143,10 @@ typedef struct  my_game_s
     sfSprite        *sp_button;
     sfIntRect       rect_button;
     sfVector3f      *select;
+    sfText          *txt;
+    char            text[50];
+    char            last_input;
+    int             text_nb;
     int             save_fg;
     int             load_fg;
     int             point_or_face_fg;
@@ -206,6 +210,12 @@ void    point_or_face(my_game_t *game);
 void    action_on_obj(my_game_t *game);
 void    set_value_game(my_game_t *game);
 void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color);
+void    save_file(my_game_t *game);
+int     init_all_game(char *str, my_game_t *game);
+void    get_name_file(my_game_t *game);
+void    write_one_face(triangle_t *tri, int fd);
+void    write_all_vertice_tex(my_game_t *game, int fd);
+void    write_all_vertice(my_game_t *game, int fd);
 
 #define WM 1920
 #define HM 1080

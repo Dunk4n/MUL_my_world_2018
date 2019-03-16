@@ -80,10 +80,13 @@ static void     set_triangle_tx(obj_t *obj, char **array, int nb)
         while (array[k + ((k > 1) ? nb : 0)][i] &&
 array[k + ((k > 1) ? nb : 0)][i] != '/')
             i++;
-        if (array[k + ((k > 1) ? nb : 0)][i] == '/')
+        if (array[k + ((k > 1) ? nb : 0)][i] == '/') {
             obj->triangle[obj->nb_tr].point_tx[k - 1] = ((my_getnbr(array[k +
 ((k > 1) ? nb : 0)] + i + 1) - 1 < 0)) ? NULL :
 &(obj->point_tx[(my_getnbr(array[k + ((k > 1) ? nb : 0)] + i + 1) - 1)]);
+            obj->triangle[obj->nb_tr].indice_texture[k - 1] =
+            my_getnbr(array[k + ((k > 1) ? nb : 0)] + i + 1);
+        }
         k++;
     }
     set_triangle_texture(obj, array, nb);
@@ -94,14 +97,17 @@ static void     set_triangle(obj_t *obj, char **array, int i)
 {
     obj->triangle[obj->nb_tr].point_3d[0] =
     &(obj->point_3d[my_getnbr(array[1]) - 1]);
+    obj->triangle[obj->nb_tr].indice_point[0] = my_getnbr(array[1]);
     obj->triangle[obj->nb_tr].point_2d[0] =
     &(obj->point_2d[my_getnbr(array[1]) - 1]);
     obj->triangle[obj->nb_tr].point_3d[1] =
     &(obj->point_3d[my_getnbr(array[2 + i]) - 1]);
+    obj->triangle[obj->nb_tr].indice_point[1] = my_getnbr(array[2 + i]);
     obj->triangle[obj->nb_tr].point_2d[1] =
     &(obj->point_2d[my_getnbr(array[2 + i]) - 1]);
     obj->triangle[obj->nb_tr].point_3d[2] =
     &(obj->point_3d[my_getnbr(array[3 + i]) - 1]);
+    obj->triangle[obj->nb_tr].indice_point[2] = my_getnbr(array[3 + i]);
     obj->triangle[obj->nb_tr].point_2d[2] =
     &(obj->point_2d[my_getnbr(array[3 + i]) - 1]);
     set_triangle_tx(obj, array, i);

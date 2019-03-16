@@ -27,5 +27,6 @@ void    update(my_game_t *game)
 WM, HM, 0, 0);
     sfRenderWindow_drawSprite(game->win->window, game->win->sprite, NULL);
     display_button(game);
+    sfRenderWindow_drawText(game->win->window, game->txt, NULL);
     sfRenderWindow_display(game->win->window);
 }

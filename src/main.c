@@ -11,7 +11,7 @@
 
 int     main(int ac, char **av)
 {
-    if (ac > 2)
+    if (ac == 1 || ac > 2)
         return (84);
     return (window(av[1]));
 }
