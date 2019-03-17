@@ -219,6 +219,7 @@ void    write_all_vertice_tex(my_game_t *game, int fd);
 void    write_all_vertice(my_game_t *game, int fd);
 void    set_triangle_tx(obj_t *obj, char **array, int nb);
 void    set_point(obj_t *obj, char **array);
+void    load_file(my_game_t *game);
 
 #define WM 1920
 #define HM 1080

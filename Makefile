@@ -39,6 +39,7 @@ SRC	=	$(D_SRC)main.c				\
 		$(D_SRC)get_text.c			\
 		$(D_SRC)save_write.c			\
 		$(D_SRC)set_triangle.c			\
+		$(D_SRC)load_file.c			\
 
 OBJ	=	$(SRC:%.c=$(BUILD_DIR)/%.o)
 

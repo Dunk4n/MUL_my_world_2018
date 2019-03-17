@@ -54,7 +54,7 @@ void    check(my_game_t *game)
         if (((game->win->event).type == sfEvtClosed) ||
 sfKeyboard_isKeyPressed(sfKeyEscape))
             sfRenderWindow_close(game->win->window);
-        if (game->save_fg == 1) {
+        if (game->load_fg == 1 || game->save_fg == 1) {
             get_name_file(game);
             return ;
         }
