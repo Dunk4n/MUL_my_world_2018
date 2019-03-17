@@ -35,7 +35,8 @@ void    save_file(my_game_t *game)
     game->text[game->text_nb + 2] = 'b';
     game->text[game->text_nb + 3] = 'j';
     game->text[game->text_nb + 4] = '\0';
-    if ((fd = open(game->text, O_CREAT | O_RDWR | O_TRUNC)) == -1)
+    if ((fd = open(game->text, O_WRONLY | O_CREAT | O_TRUNC,
+                    S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
         return ;
     write_on_file(game, fd);
 }
