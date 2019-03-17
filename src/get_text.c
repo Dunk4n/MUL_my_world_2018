@@ -7,17 +7,17 @@
 
 #include "world.h"
 
-const   int letter[28] = {sfKeyA, sfKeyB, sfKeyC, sfKeyD, sfKeyE, sfKeyF,
+const   int letter[29] = {sfKeyA, sfKeyB, sfKeyC, sfKeyD, sfKeyE, sfKeyF,
 sfKeyG, sfKeyH, sfKeyI, sfKeyJ, sfKeyK, sfKeyL, sfKeyM, sfKeyN, sfKeyO, sfKeyP,
 sfKeyQ, sfKeyR, sfKeyS, sfKeyT, sfKeyU, sfKeyV, sfKeyW, sfKeyX, sfKeyY, sfKeyZ,
-sfKeySlash, sfKeyPeriod};
-const char *list_letters = "abcdefghijklmnopqrstuvwxyz/.";
+sfKeySlash, sfKeyPeriod, sfKeyHyphen};
+const char *list_letters = "abcdefghijklmnopqrstuvwxyz/.-";
 
 void    write_on_txt(my_game_t *game)
 {
     int i = 0;
 
-    while (i < 28) {
+    while (i < 29) {
         if (sfKeyboard_isKeyPressed(letter[i]) &&
 (game->last_input != list_letters[i])) {
             game->text[game->text_nb] = list_letters[i];
