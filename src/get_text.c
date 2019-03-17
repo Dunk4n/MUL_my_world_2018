@@ -10,16 +10,16 @@
 const   int letter[40] = {sfKeyA, sfKeyB, sfKeyC, sfKeyD, sfKeyE, sfKeyF,
 sfKeyG, sfKeyH, sfKeyI, sfKeyJ, sfKeyK, sfKeyL, sfKeyM, sfKeyN, sfKeyO, sfKeyP,
 sfKeyQ, sfKeyR, sfKeyS, sfKeyT, sfKeyU, sfKeyV, sfKeyW, sfKeyX, sfKeyY, sfKeyZ,
-sfKeySlash, sfKeyPeriod, sfKeyHyphen, sfKeyNum0, sfKeyNum1, sfKeyNum2,
+sfKeySlash, sfKeyPeriod, sfKeyNum0, sfKeyNum1, sfKeyNum2,
 sfKeyNum3, sfKeyNum4, sfKeyNum5, sfKeyNum6, sfKeyNum7, sfKeyNum8, sfKeyNum9,
 sfKeyTilde};
-const char *list_letters = "abcdefghijklmnopqrstuvwxyz/.-0123456789~";
+const char *list_letters = "abcdefghijklmnopqrstuvwxyz/.0123456789~";
 
 void    write_on_txt(my_game_t *game)
 {
     int i = 0;
 
-    while (i < 40) {
+    while (i < 39) {
         if (sfKeyboard_isKeyPressed(letter[i]) &&
 (game->last_input != list_letters[i])) {
             game->text[game->text_nb] = list_letters[i];
