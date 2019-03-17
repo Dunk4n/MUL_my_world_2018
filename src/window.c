@@ -10,7 +10,7 @@
 #include "world.h"
 #include "my.h"
 
-void increment_variables(my_game_t *game) 
+void increment_variables(my_game_t *game)
 {
     game->map->roll += game->map->roll_fg;
     game->map->yaw += game->map->yaw_fg;

@@ -63,9 +63,9 @@ game->map->update = 1 : 0;
         if ((game->win->event).type == sfEvtMouseWheelScrolled) {
             game->map->update = 1;
             if (game->win->event.mouseWheelScroll.delta < 0)
-                game->map->zoom += 0.5;
+                game->map->zoom += 5;
             else
-                game->map->zoom -= 0.5;
+                game->map->zoom -= 5;
         }
         if (game->win->event.type == sfEvtMouseButtonPressed)
             check_button(game);

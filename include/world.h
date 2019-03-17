@@ -15,7 +15,7 @@
 #include <SFML/System/Time.h>
 #include <SFML/System/Types.h>
 
-const char      *img_name[11];
+const char      *img_name[13];
 const char      *img_button[13];
 const sfColor   color[10];
 
@@ -216,6 +216,8 @@ void    get_name_file(my_game_t *game);
 void    write_one_face(triangle_t *tri, int fd);
 void    write_all_vertice_tex(my_game_t *game, int fd);
 void    write_all_vertice(my_game_t *game, int fd);
+void    set_triangle_tx(obj_t *obj, char **array, int nb);
+void    set_point(obj_t *obj, char **array);
 
 #define WM 1920
 #define HM 1080

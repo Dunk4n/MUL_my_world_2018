@@ -8,16 +8,17 @@
 #include <stdlib.h>
 #include "world.h"
 
-const char      *img_name[11] = {"img/grass.png", "img/diamant.jpg",
+const char      *img_name[13] = {"img/grass.png", "img/diamant.jpg",
 "img/face1.jpg", "img/face2.jpg", "img/face3.jpg", "img/face4.jpg",
 "img/face5.jpg", "img/face6.jpg", "img/pine-tree-leaf.jpg",
-"img/pine-tree-bark.jpg", "img/ground.jpg"};
+"img/pine-tree-bark.jpg", "img/ground.jpg", "img/dragon1.jpg",
+"img/dragon2.jpg"};
 
 void    set_img(my_game_t *game)
 {
     int i = 0;
     game->nb_col_max = 10;
-    game->nb_img = 11;
+    game->nb_img = 13;
 
     if (game->nb_img < 1 ||
     !(game->img = malloc(sizeof(sfImage*) * game->nb_img)))

@@ -13,9 +13,11 @@ const char      *img_button[13] = {"button/save.png", "button/load.png",
 "button/arrow-turn-left.png", "button/arrow-right.png",
 "button/arrow-left.png", "button/arrow-up.png", "button/arrow-down.png",
 "button/button-color.png", "button/plus.png", "button/minus.png"};
+
 const int       pos[13][2] = {{10, 10}, {240, 10}, {1710, 10}, {1610, 970},
 {10, 810}, {70, 810}, {10, 900}, {70, 900}, {10, 990}, {70, 990}, {1810, 970},
 {10, 720}, {70, 720}};
+
 const int       rect[13][2] = {{200, 100}, {200, 100}, {200, 100}, {200, 100},
 {50, 80}, {50, 80}, {50, 80}, {50, 80}, {50, 80}, {50, 80}, {100, 100},
 {50, 50}, {50, 50}};

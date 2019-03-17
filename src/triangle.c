@@ -75,18 +75,15 @@ color);
 arr[4].x += pos[3].y, arr[3].x += pos[3].z)
             horz_line(game, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, nor,
 color);
+        return ;
     }
-    else {
-        for (; arr[4].y <= arr[1].y; arr[4].y++, arr[3].y++,
-arr[4].x += pos[3].x, arr[3].x += pos[3].y)
-            horz_line(game, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, nor,
-color);
-        arr[4] = arr[1];
-        for (; arr[4].y <= arr[2].y; arr[4].y++, arr[3].y++,
-arr[4].x += pos[3].z, arr[3].x += pos[3].y)
-            horz_line(game, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, nor,
-color);
-    }
+    for (; arr[4].y <= arr[1].y; arr[4].y++, arr[3].y++,
+            arr[4].x += pos[3].x, arr[3].x += pos[3].y)
+        horz_line(game, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, nor, color);
+    arr[4] = arr[1];
+    for (; arr[4].y <= arr[2].y; arr[4].y++, arr[3].y++,
+            arr[4].x += pos[3].z, arr[3].x += pos[3].y)
+        horz_line(game, (sfVector3f){arr[4].x, arr[3].x, arr[4].y}, nor, color);
 }
 
 void    draw_triangle(my_game_t *game, sfVector3f *pos, sfColor color)
