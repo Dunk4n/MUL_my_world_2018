@@ -52,9 +52,9 @@ int     alloc_obj(obj_t *obj)
 
 obj_t   *open_file_obj(char *name)
 {
-    obj_t *obj = init_obj();
+    obj_t *obj;
 
-    if (!obj)
+    if (!(obj = init_obj()))
         return (NULL);
     if (!get_nbr_arg(obj, name)) {
         free(obj);

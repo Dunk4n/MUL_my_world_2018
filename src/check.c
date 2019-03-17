@@ -58,9 +58,9 @@ sfKeyboard_isKeyPressed(sfKeyEscape))
             get_name_file(game);
             return ;
         }
-        ((game->win->event).type == sfEvtKeyPressed) ?
+        (game->obj && (game->win->event).type == sfEvtKeyPressed) ?
 game->map->update = 1 : 0;
-        if ((game->win->event).type == sfEvtMouseWheelScrolled) {
+        if (game->obj && (game->win->event).type == sfEvtMouseWheelScrolled) {
             game->map->update = 1;
             if (game->win->event.mouseWheelScroll.delta < 0)
                 game->map->zoom += 5;
@@ -69,6 +69,6 @@ game->map->update = 1 : 0;
         }
         if (game->win->event.type == sfEvtMouseButtonPressed)
             check_button(game);
-        check_key(game);
+        (game->obj) ? check_key(game) : 0;
     }
 }

@@ -26,10 +26,10 @@ int     init_all_game(char *str, my_game_t *game)
     game->text_nb = 0;
     game->text[0] = '\0';
     set_value_game(game);
-    if (!str)
-        return (84);
-    if (!(game->map->obj = open_file_obj(str)))
-        return (84);
+    game->obj = (!str) ? 0 : 1;
+    if (game->obj)
+        if (!(game->map->obj = open_file_obj(str)))
+            return (84);
     set_img(game);
     init_button(game);
     set_txt(game);

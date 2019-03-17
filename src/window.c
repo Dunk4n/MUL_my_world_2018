@@ -37,7 +37,7 @@ int     window(char *str)
     if (!(game = set_game(str)))
         return (84);
     while (sfRenderWindow_isOpen(game->win->window)) {
-        if (game->map->update == 1) {
+        if (game->obj && game->map->update == 1) {
             game->map->update = 0;
             clear_z_buff(game->win->z_buff);
             clear_t_buff(game->win->t_buff);

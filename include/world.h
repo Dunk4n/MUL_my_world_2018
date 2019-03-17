@@ -146,6 +146,7 @@ typedef struct  my_game_s
     sfText          *txt;
     char            text[50];
     char            last_input;
+    int             obj;
     int             text_nb;
     int             save_fg;
     int             load_fg;
