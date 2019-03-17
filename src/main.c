@@ -10,9 +10,10 @@
 
 int     display_usage(const char *av)
 {
-    my_printf("USAGE\n %s\tmap\n map\t\tobject file to load in game\n\n", av);
+    my_printf("USAGE\n %s\t[map]\n map\t\tobject file to load in game\n\n", av);
     my_printf("USER INTERACTION\nbuttons to zoom, move, rotate the object\n");
-    my_printf("load file, save current object, change texture/color\n");
+    my_printf("load file, save current object, change texture/color\n\n");
+    my_printf("filename must be composed of letters and numbers\n");
     return 0;
 }
 
