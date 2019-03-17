@@ -25,4 +25,3 @@ double  my_getfloat(char *str)
     nb1 += nb2 / my_pow(10, n);
     return (nb1);
 }
-

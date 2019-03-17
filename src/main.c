@@ -11,8 +11,8 @@
 int     display_usage(const char *av)
 {
     my_printf("USAGE\n %s\t[map]\n map\t\tobject file to load in game\n\n", av);
-    my_printf("USER INTERACTION\n buttons to zoom\t\t'q'/'e'\n buttons to size");
-    my_printf(" up\t'z'/'x'\n move\t\t\t'arrow'/'up key'/'down key'");
+    my_printf("USER INTERACTION\n buttons to zoom\t'q'/'e'\n buttons to ");
+    my_printf("size up\t'z'/'x'\n move\t\t\t'arrow'/'up key'/'down key'");
     my_printf("\n\nrotate the object:\n ROLL\t'j'/'u'\n YAW\t'k'/'i'\n");
     my_printf(" PITCH\t'l'/'o'\n\n");
     my_printf("load file, save current object, change texture/color\n");
