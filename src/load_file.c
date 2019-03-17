@@ -22,5 +22,6 @@ void    load_file(my_game_t *game)
         game->obj = 0;
     else
         game->obj = 1;
+    clear_buff(game->win->framebuff);
     game->map->update = 1;
 }
