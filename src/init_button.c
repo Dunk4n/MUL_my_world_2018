@@ -65,18 +65,18 @@ sfTexture_createFromFile("button/button-color.png", NULL);
 void    make_button(my_game_t *game, int i)
 {
     (game->obj && i == 0) ? game->save_fg = 1 : 0;
-    (game->obj && i == 1) ? game->load_fg = 1 : 0;
-    (i == 2) ? point_or_face(game) : 0;
-    (i == 3) ? make_button_texture(game) : 0;
-    (i == 4) ? game->map->pitch_fg = -4 : 0;
-    (i == 5) ? game->map->pitch_fg = 4 : 0;
-    (i == 6) ? game->map->yaw_fg = -4 : 0;
-    (i == 7) ? game->map->yaw_fg = 4 : 0;
-    (i == 8) ? game->map->roll_fg = 4 : 0;
-    (i == 9) ? game->map->roll_fg = -4 : 0;
-    (i == 10) ? make_button_texture_color(game) : 0;
-    (i == 11) ? game->map->zoom -= 1 : 0;
-    (i == 12) ? game->map->zoom += 1 : 0;
+    (i == 1) ? game->load_fg = 1 : 0;
+    (game->obj && i == 2) ? point_or_face(game) : 0;
+    (game->obj && i == 3) ? make_button_texture(game) : 0;
+    (game->obj && i == 4) ? game->map->pitch_fg = -4 : 0;
+    (game->obj && i == 5) ? game->map->pitch_fg = 4 : 0;
+    (game->obj && i == 6) ? game->map->yaw_fg = -4 : 0;
+    (game->obj && i == 7) ? game->map->yaw_fg = 4 : 0;
+    (game->obj && i == 8) ? game->map->roll_fg = 4 : 0;
+    (game->obj && i == 9) ? game->map->roll_fg = -4 : 0;
+    (game->obj && i == 10) ? make_button_texture_color(game) : 0;
+    (game->obj && i == 11) ? game->map->zoom -= 1 : 0;
+    (game->obj && i == 12) ? game->map->zoom += 1 : 0;
 }
 
 void    check_button(my_game_t *game)
