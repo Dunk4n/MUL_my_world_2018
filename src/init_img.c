@@ -31,8 +31,6 @@ void    set_img(my_game_t *game)
 
 void    set_value_game(my_game_t *game)
 {
-    game->map->map_2d = NULL;
-    game->map->triangle = NULL;
     game->map->obj = NULL;
     game->select = NULL;
     game->save_fg = 0;

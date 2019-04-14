@@ -5,23 +5,44 @@
 ** fireplace 4k
 */
 
-#include <stdlib.h> /* for free */
+#include <stdlib.h>
 #include "world.h"
+
+void    load_more_file(my_game_t *game)
+{
+    int i = 0;
+    obj_t **new;
+
+    if (!(new = malloc(sizeof(obj_t*) * (game->obj + 1))))
+        return ;
+    while (i < game->obj) {
+        new[i] = game->map->obj[i];
+        i++;
+    }
+    new[i] = NULL;
+    if (!(new[i] = open_file_obj(game->text))) {
+        free(new);
+        return ;
+    }
+    free(game->map->obj);
+    game->map->obj = new;
+    game->obj++;
+}
 
 void    load_file(my_game_t *game)
 {
-    if (game->obj) {
-        (game->map->obj->point_3d) ? free(game->map->obj->point_3d) : 0;
-        (game->map->obj->point_2d) ? free(game->map->obj->point_2d) : 0;
-        (game->map->obj->point_tx) ? free(game->map->obj->point_tx) : 0;
-        (game->map->obj->triangle) ? free(game->map->obj->triangle) : 0;
-        (game->map->obj) ? free(game->map->obj) : 0;
-        game->obj = 0;
-    }
-    if (!(game->map->obj = open_file_obj(game->text)))
-        game->obj = 0;
-    else
+    if (!game->obj) {
+        if (!(game->map->obj = malloc(sizeof(obj_t*) * (game->obj + 1))))
+            return ;
         game->obj = 1;
+        if (!(game->map->obj[0] = open_file_obj(game->text))) {
+            free(game->map->obj);
+            game->obj = 0;
+        }
+        game->select_obj = game->map->obj[0];
+    }
+    else
+        load_more_file(game);
     clear_buff(game->win->framebuff);
     game->map->update = 1;
 }

@@ -9,21 +9,21 @@
 #include <fcntl.h>
 #include "world.h"
 
-void    write_all_face(my_game_t *game, int fd)
+void    write_all_face(obj_t *obj, int fd)
 {
     int i = 0;
 
-    while (i < game->map->obj->nb_tr) {
-        write_one_face(&(game->map->obj->triangle[i]), fd);
+    while (i < obj->nb_tr) {
+        write_one_face(&(obj->triangle[i]), fd);
         i++;
     }
 }
 
-void    write_on_file(my_game_t *game, int fd)
+void    write_on_file(obj_t *obj, int fd)
 {
-    write_all_vertice(game, fd);
-    write_all_vertice_tex(game, fd);
-    write_all_face(game, fd);
+    write_all_vertice(obj, fd);
+    write_all_vertice_tex(obj, fd);
+    write_all_face(obj, fd);
 }
 
 void    save_file(my_game_t *game)
@@ -36,7 +36,7 @@ void    save_file(my_game_t *game)
     game->text[game->text_nb + 3] = 'j';
     game->text[game->text_nb + 4] = '\0';
     if ((fd = open(game->text, O_WRONLY | O_CREAT | O_TRUNC,
-                    S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
         return ;
-    write_on_file(game, fd);
+    write_on_file(game->select_obj, fd);
 }

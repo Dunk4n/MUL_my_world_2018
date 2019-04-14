@@ -68,13 +68,16 @@ typedef struct  my_framebuff_s
     sfUint8     *pixels;
 }               my_framebuff_t;
 
+typedef struct  obj_s obj_t;
+
 typedef struct  triangle_s
 {
-    int         texture;
+    obj_t       *obj;
     sfVector3f  *point_3d[3];
     sfVector3f  *point_2d[3];
     sfVector3f  *point_tx[3];
     sfColor     color;
+    int         texture;
     int         indice_point[3];
     int         indice_texture[3];
     void        *square_part;
@@ -119,10 +122,7 @@ typedef struct  map_s
     double      zoom;
     double      lum;
     triangle_t  *ptr_tri;
-    sfVector3f  *map_3d;
-    sfVector3f  *map_2d;
-    triangle_t  *triangle;
-    obj_t       *obj;
+    obj_t       **obj;
 }               map_t;
 
 typedef struct  button_s
@@ -143,6 +143,7 @@ typedef struct  my_game_s
     sfSprite        *sp_button;
     sfIntRect       rect_button;
     sfVector3f      *select;
+    obj_t           *select_obj;
     sfText          *txt;
     char            text[50];
     char            last_input;
@@ -176,9 +177,9 @@ void    clear_t_buff(triangle_t **t_buff);
 sfVector3f      pube_to_screen(const sfVector3f vec);
 void    transform_to_2d(map_t *map);
 void    display(my_game_t *game);
-void    rotation(map_t *map);
+void    rotation(map_t *map, obj_t *obj);
 void    to_2d(my_game_t *game);
-void    transform_move(my_game_t *game);
+void    transform_move(my_game_t *game, obj_t *obj);
 sfVector3f      normal_vec(sfVector3f a, sfVector3f b, sfVector3f c);
 void    set_map(map_t **map);
 obj_t   *open_file_obj(char *name);
@@ -191,7 +192,7 @@ void    set_img(my_game_t *game);
 void    set_point_tx(obj_t *obj, char **array);
 void    horz_line_tx(my_game_t *game, sfVector3f pos, vector4f_t nor,
 sfColor color);
-void    transform_lower(my_game_t *game);
+void    transform_lower(my_game_t *game, obj_t *obj);
 double  magnitude(sfVector3f v);
 sfVector3f      cross_product(sfVector3f a, sfVector3f b);
 void    draw_poly(my_game_t *game, triangle_t *tri);
@@ -215,11 +216,11 @@ void    save_file(my_game_t *game);
 int     init_all_game(char *str, my_game_t *game);
 void    get_name_file(my_game_t *game);
 void    write_one_face(triangle_t *tri, int fd);
-void    write_all_vertice_tex(my_game_t *game, int fd);
-void    write_all_vertice(my_game_t *game, int fd);
 void    set_triangle_tx(obj_t *obj, char **array, int nb);
 void    set_point(obj_t *obj, char **array);
 void    load_file(my_game_t *game);
+void    write_all_vertice_tex(obj_t *obj, int fd);
+void    write_all_vertice(obj_t *obj, int fd);
 
 #define WM 1920
 #define HM 1080

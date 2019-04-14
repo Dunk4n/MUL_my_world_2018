@@ -19,6 +19,7 @@ const sfColor   color[10] =
 
 static void     set_triangle(obj_t *obj, char **array, int i)
 {
+    obj->triangle[obj->nb_tr].obj = obj;
     obj->triangle[obj->nb_tr].point_3d[0] =
     &(obj->point_3d[my_getnbr(array[1]) - 1]);
     obj->triangle[obj->nb_tr].indice_point[0] = my_getnbr(array[1]);

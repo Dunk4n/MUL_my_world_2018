@@ -69,7 +69,6 @@ void            set_map(map_t **map)
     (*map)->zoom = 10;
     (*map)->lum = 0;
     (*map)->ptr_tri = NULL;
-    (*map)->map_3d = NULL;
 }
 
 my_game_t        *set_game(char *str)

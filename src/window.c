@@ -30,6 +30,20 @@ void increment_variables(my_game_t *game)
     game->map->enlargement = 1;
 }
 
+void    update_obj(my_game_t *game)
+{
+    game->map->update = 0;
+    clear_z_buff(game->win->z_buff);
+    clear_t_buff(game->win->t_buff);
+    clear_buff(game->win->framebuff);
+    transform_move(game, game->select_obj);
+    transform_lower(game, game->select_obj);
+    rotation(game->map, game->select_obj);
+    increment_variables(game);
+    to_2d(game);
+    display(game);
+}
+
 int     window(char *str)
 {
     my_game_t    *game = NULL;
@@ -37,18 +51,8 @@ int     window(char *str)
     if (!(game = set_game(str)))
         return (84);
     while (sfRenderWindow_isOpen(game->win->window)) {
-        if (game->obj && game->map->update == 1) {
-            game->map->update = 0;
-            clear_z_buff(game->win->z_buff);
-            clear_t_buff(game->win->t_buff);
-            clear_buff(game->win->framebuff);
-            transform_move(game);
-            transform_lower(game);
-            rotation(game->map);
-            increment_variables(game);
-            to_2d(game);
-            display(game);
-        }
+        if (game->obj && game->map->update == 1)
+            update_obj(game);
         update(game);
         check(game);
     }

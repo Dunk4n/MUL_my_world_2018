@@ -40,40 +40,40 @@ void    my_put_float(double nb, int fd)
     }
 }
 
-void    write_all_vertice(my_game_t *game, int fd)
+void    write_all_vertice(obj_t *obj, int fd)
 {
     int i = 0;
 
-    while (i < game->map->obj->nb_point) {
+    while (i < obj->nb_point) {
         write(fd, "v ", 2);
-        (game->map->obj->point_3d[i].x < 0) ? write(fd, "-", 1) : 0;
-        my_put_float(game->map->obj->point_3d[i].x, fd);
+        (obj->point_3d[i].x < 0) ? write(fd, "-", 1) : 0;
+        my_put_float(obj->point_3d[i].x, fd);
         write(fd, " ", 1);
-        (game->map->obj->point_3d[i].y < 0) ? write(fd, "-", 1) : 0;
-        my_put_float(game->map->obj->point_3d[i].y, fd);
+        (obj->point_3d[i].y < 0) ? write(fd, "-", 1) : 0;
+        my_put_float(obj->point_3d[i].y, fd);
         write(fd, " ", 1);
-        (game->map->obj->point_3d[i].z < 0) ? write(fd, "-", 1) : 0;
-        my_put_float(game->map->obj->point_3d[i].z, fd);
+        (obj->point_3d[i].z < 0) ? write(fd, "-", 1) : 0;
+        my_put_float(obj->point_3d[i].z, fd);
         write(fd, "\n", 1);
         i++;
     }
     write(fd, "\n", 1);
 }
 
-void    write_all_vertice_tex(my_game_t *game, int fd)
+void    write_all_vertice_tex(obj_t *obj, int fd)
 {
     int i = 0;
 
-    while (i < game->map->obj->nb_tx) {
+    while (i < obj->nb_tx) {
         write(fd, "vt ", 3);
-        (game->map->obj->point_tx[i].x < 0) ? write(fd, "-", 1) : 0;
-        my_put_float(game->map->obj->point_tx[i].x, fd);
+        (obj->point_tx[i].x < 0) ? write(fd, "-", 1) : 0;
+        my_put_float(obj->point_tx[i].x, fd);
         write(fd, " ", 1);
-        (game->map->obj->point_tx[i].y < 0) ? write(fd, "-", 1) : 0;
-        my_put_float(game->map->obj->point_tx[i].y, fd);
+        (obj->point_tx[i].y < 0) ? write(fd, "-", 1) : 0;
+        my_put_float(obj->point_tx[i].y, fd);
         write(fd, " ", 1);
-        (game->map->obj->point_tx[i].z < 0) ? write(fd, "-", 1) : 0;
-        my_put_float(game->map->obj->point_tx[i].z, fd);
+        (obj->point_tx[i].z < 0) ? write(fd, "-", 1) : 0;
+        my_put_float(obj->point_tx[i].z, fd);
         write(fd, "\n", 1);
         i++;
     }

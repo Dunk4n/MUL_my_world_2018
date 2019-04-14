@@ -32,6 +32,13 @@ sfSprite_setTexture(game->button[2].sp, game->button[2].tx, sfTrue);
         game->point_or_face_fg = 1;
         return ;
     }
+    if (game->point_or_face_fg == 1) {
+        game->button[2].tx =
+sfTexture_createFromFile("button/select-obj.png", NULL);
+        sfSprite_setTexture(game->button[2].sp, game->button[2].tx, sfTrue);
+        game->point_or_face_fg = 2;
+        return ;
+    }
     game->button[2].tx =
 sfTexture_createFromFile("button/select-point.png", NULL);
     sfSprite_setTexture(game->button[2].sp, game->button[2].tx, sfTrue);

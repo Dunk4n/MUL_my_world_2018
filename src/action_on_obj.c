@@ -38,6 +38,10 @@ game->win->event.mouseButton.x] == NULL)
         return ;
     tri = game->win->t_buff[WM * game->win->event.mouseButton.y +
 game->win->event.mouseButton.x];
+    if (game->point_or_face_fg == 2) {
+        game->select_obj = tri->obj;
+        return ;
+    }
     if (game->point_or_face_fg == 0) {
         game->select = get_nearest_point(game, tri);
         return ;
